@@ -1,0 +1,49 @@
+.wrapper {
+    padding: 16px 24px;
+    width: 1232px;
+    height: 168px;
+    background-color: #f0f5ff;
+}
+
+.mainButton {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #262626;
+    border: none;
+    background-color: transparent;
+}
+
+.title {
+    padding-top: 8px;
+    height: 118px;
+
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.title h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    line-height: 130%;
+}
+
+.settingsButton {
+    display: flex;
+    width: 129px;
+    height: 32px;
+    padding: 4px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: #262626;
+    border: none;
+    background-color: transparent;
+}
+
+.icon {
+    margin-right: 8px;
+}

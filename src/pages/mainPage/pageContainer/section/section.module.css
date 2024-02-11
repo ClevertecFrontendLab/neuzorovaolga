@@ -1,0 +1,10 @@
+.wrapper {
+    background-image: url('./../../../../assets/img/Page_light.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 1232px;
+    height: 856px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

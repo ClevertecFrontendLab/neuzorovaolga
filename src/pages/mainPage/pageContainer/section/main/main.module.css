@@ -1,0 +1,35 @@
+.wrapper {
+    padding-top: 24px;
+    padding-left: 24px;
+}
+.about {
+    padding: 24px;
+    width: 752px;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #061178;
+    margin-bottom: 24px;
+}
+
+.card {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 1px;
+    color: #262626;
+    padding: 24px;
+    width: 752px;
+    height: 126px;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.cardsActionWrapper {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
