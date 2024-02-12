@@ -48,6 +48,14 @@
     margin-right: 8px;
 }
 
+.settingsButtonMobile {
+    font-size: 14px;
+    border: 1px solid #d9d9d9;
+    border-radius: 100px;
+    width: 32px;
+    height: 32px;
+}
+
 @media (max-width: 1439px) {
     .wrapper {
         height: 194px;
@@ -59,5 +67,19 @@
     }
     .title {
         height: 124px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        height: 166px;
+    }
+    .title h1 {
+        max-width: 280px;
+        font-size: 20px;
+    }
+    .title {
+        height: 124px;
+        padding-top: 2px;
     }
 }

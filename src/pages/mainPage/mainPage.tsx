@@ -26,7 +26,7 @@ export const MainPage: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <Layout className={styles.layout}>
-                <Sider trigger={null} collapsible collapsed={collapsed} theme='light' width='208px'>
+                {/* <Sider trigger={null} collapsible collapsed={collapsed} theme='light' width='208px'>
                     {!collapsed && <img className={styles.logoBig} src={FullLogoSrc} />}
                     {collapsed && <img className={styles.logoSmall} src={ShortLogoSrc} />}
                     <div className={styles.menuWrapper}>
@@ -80,7 +80,7 @@ export const MainPage: React.FC = () => {
                             ]}
                         />
                     </div>
-                </Sider>
+                </Sider> */}
                 <Layout className={styles.siteLayout}>
                     <Content
                         className={styles.siteLayoutBackground}

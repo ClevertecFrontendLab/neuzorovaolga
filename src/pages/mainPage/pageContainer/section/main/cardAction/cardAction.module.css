@@ -20,9 +20,20 @@
 @media (max-width: 1439px) {
     .wrapper {
         width: 182px;
-        height: 122px;
+        height: 101px;
     }
     .text {
         height: 66px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        margin-top: 7px;
+        width: 328px;
+        height: 101px;
+    }
+    .text {
+        height: 45px;
     }
 }

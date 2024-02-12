@@ -2,8 +2,10 @@
 
 .wrapper {
     width: 100vw;
+    max-width: 1440px;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .layout {
@@ -51,12 +53,21 @@
 }
 
 .siteLayout {
-    max-width: 1232px;
+    /* max-width: 1232px; */
     position: relative;
 }
 
 @media (max-width: 1439px) {
     .menuWrapper {
         height: 1100px;
+    }
+    .wrapper {
+        max-width: 834px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        max-width: 380px;
     }
 }

@@ -40,3 +40,33 @@
         margin-right: 24px;
     }
 }
+
+@media (max-width: 833px) {
+    .wrapper {
+        padding-left: 17px;
+    }
+    .about {
+        padding-left: 15px;
+        padding-top: 16px;
+        padding-right: 33px;
+        margin-right: 16px;
+        max-width: 328px;
+        height: 368px;
+    }
+    .card {
+        padding-top: 16px;
+        padding-left: 15px;
+        max-width: 328px;
+        height: 188px;
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 130%;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .cardsActionWrapper {
+        flex-direction: column;
+        gap: 1px;
+        margin-bottom: 24px;
+    }
+}
