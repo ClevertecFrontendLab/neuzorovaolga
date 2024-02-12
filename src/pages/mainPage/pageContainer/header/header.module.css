@@ -1,11 +1,12 @@
 .wrapper {
     padding: 16px 24px;
-    width: 1232px;
+    width: 100%;
     height: 168px;
     background-color: #f0f5ff;
 }
 
 .mainButton {
+    padding: 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
@@ -17,7 +18,6 @@
 .title {
     padding-top: 8px;
     height: 118px;
-
     display: flex;
     justify-content: space-between;
     font-size: 20px;
@@ -46,4 +46,18 @@
 
 .icon {
     margin-right: 8px;
+}
+
+@media (max-width: 1439px) {
+    .wrapper {
+        height: 194px;
+    }
+    .title h1 {
+        max-width: 473px;
+        font-weight: 500;
+        font-size: 24px;
+    }
+    .title {
+        height: 124px;
+    }
 }

@@ -7,7 +7,7 @@
 }
 
 .layout {
-    width: 1440px;
+    width: 100%;
     display: flex;
     justify-content: center;
     margin: '0px 0px';
@@ -25,7 +25,6 @@
     cursor: pointer;
     transition: color 0.3s;
     background-color: #fff;
-    box-shadow: 13px -1px 40px rgba(120, 120, 120, 0.95);
     border: 0;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .menuWrapper {
-    height: 935px;
+    height: 930px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,4 +53,10 @@
 .siteLayout {
     max-width: 1232px;
     position: relative;
+}
+
+@media (max-width: 1439px) {
+    .menuWrapper {
+        height: 1100px;
+    }
 }

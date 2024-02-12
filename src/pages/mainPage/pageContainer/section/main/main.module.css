@@ -4,7 +4,7 @@
 }
 .about {
     padding: 24px;
-    width: 752px;
+    max-width: 752px;
     border-radius: 2px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: #fff;
@@ -22,8 +22,8 @@
     letter-spacing: 1px;
     color: #262626;
     padding: 24px;
-    width: 752px;
-    height: 126px;
+    max-width: 752px;
+    /* height: 126px; */
     border-radius: 2px;
     background: #fff;
 }
@@ -32,4 +32,11 @@
     display: flex;
     gap: 16px;
     margin-bottom: 24px;
+}
+
+@media (max-width: 1439px) {
+    .about,
+    .card {
+        margin-right: 24px;
+    }
 }

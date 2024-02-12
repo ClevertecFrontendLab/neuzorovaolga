@@ -1,11 +1,16 @@
-import React from 'react';
+// import React from 'react';
 import styles from './pageContainer.module.css';
 import { Header } from './header';
 import { Section } from './section';
+// import classnames from 'classnames';
 
-export const PageContainer: React.FC = () => {
+interface Props {
+    collapsed: boolean;
+}
+
+export const PageContainer = ({ collapsed }: Props) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={!collapsed ? styles.wrapperFull : styles.wrapper}>
             <Header />
             <Section />
         </div>

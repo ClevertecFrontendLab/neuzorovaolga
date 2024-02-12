@@ -15,10 +15,12 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { PageContainer } from './pageContainer';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const { Sider, Content } = Layout;
 
 export const MainPage: React.FC = () => {
+    const width = useWindowDimensions();
     const [collapsed, setCollapsed] = useState(false);
 
     return (
@@ -96,7 +98,7 @@ export const MainPage: React.FC = () => {
                             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                         </button>
 
-                        <PageContainer />
+                        <PageContainer collapsed={!!collapsed} />
                     </Content>
                 </Layout>
             </Layout>
