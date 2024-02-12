@@ -1,6 +1,6 @@
 .wrapper {
     background-image: url('./../../../../assets/img/Page_light.png');
-    background-size: cover;
+    background-position: bottom 0 right;
     background-repeat: no-repeat;
     width: 1232px;
     height: 856px;

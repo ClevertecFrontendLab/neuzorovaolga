@@ -19,7 +19,7 @@
     top: 50%;
     transform: translateY(-50%);
     clip-path: polygon(0 0, 100% 10px, 100% calc(100% - 10px), 0 100%);
-    padding: 10px 3px;
+    padding: 5px 3px;
     font-size: 14px;
     line-height: 64px;
     cursor: pointer;
@@ -38,6 +38,13 @@
 }
 .menu {
     margin-top: 30px;
+}
+
+.menuWrapper {
+    height: 935px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .siteLayout .siteLayoutBackground {

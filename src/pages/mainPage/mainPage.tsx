@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FullLogoSrc from './../../assets/img/Logo.png';
+import Exit from './../../assets/img/Vector.png';
 import ShortLogoSrc from './../../assets/img/ShortLogo.png';
 import styles from './mainPage.module.css';
 import 'antd/dist/antd.css';
@@ -26,35 +27,57 @@ export const MainPage: React.FC = () => {
                 <Sider trigger={null} collapsible collapsed={collapsed} theme='light' width='208px'>
                     {!collapsed && <img className={styles.logoBig} src={FullLogoSrc} />}
                     {collapsed && <img className={styles.logoSmall} src={ShortLogoSrc} />}
-                    <Menu
-                        style={{
-                            marginTop: '50px',
-                        }}
-                        theme='light'
-                        defaultSelectedKeys={['1']}
-                        items={[
-                            {
-                                key: '1',
-                                icon: <CalendarTwoTone twoToneColor='#061178' />,
-                                label: 'Календарь',
-                            },
-                            {
-                                key: '2',
-                                icon: <HeartFilled color='#061178' />,
-                                label: 'Тренировки',
-                            },
-                            {
-                                key: '3',
-                                icon: <TrophyFilled color='link' />,
-                                label: 'Достижения',
-                            },
-                            {
-                                key: '4',
-                                icon: <SolutionOutlined />,
-                                label: 'Профиль',
-                            },
-                        ]}
-                    />
+                    <div className={styles.menuWrapper}>
+                        <Menu
+                            style={{
+                                marginTop: '50px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '2px',
+                            }}
+                            theme='light'
+                            defaultSelectedKeys={['0']}
+                            items={[
+                                {
+                                    key: '1',
+                                    icon: <CalendarTwoTone twoToneColor='#061178' />,
+                                    label: 'Календарь',
+                                },
+                                {
+                                    key: '2',
+                                    icon: <HeartFilled color='#061178' />,
+                                    label: 'Тренировки',
+                                },
+                                {
+                                    key: '3',
+                                    icon: <TrophyFilled color='link' />,
+                                    label: 'Достижения',
+                                },
+                                {
+                                    key: '4',
+                                    icon: <SolutionOutlined />,
+                                    label: 'Профиль',
+                                },
+                            ]}
+                        />
+                        <Menu
+                            style={{
+                                marginTop: '50px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '2px',
+                                borderTop: '1px solid #f0f0f0',
+                            }}
+                            theme='light'
+                            items={[
+                                {
+                                    key: '5',
+                                    icon: <img src={Exit} />,
+                                    label: 'Выход',
+                                },
+                            ]}
+                        />
+                    </div>
                 </Sider>
                 <Layout className={styles.siteLayout}>
                     <Content

@@ -8,7 +8,14 @@ export const Footer: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.linkButtonWrapper}>
-                <Button className={styles.linkButton} type='link' size='large'>
+                <Button
+                    className={styles.linkButton}
+                    style={{
+                        color: '#2f54eb',
+                    }}
+                    type='link'
+                    size='large'
+                >
                     Cмотреть отзывы
                 </Button>
             </div>
