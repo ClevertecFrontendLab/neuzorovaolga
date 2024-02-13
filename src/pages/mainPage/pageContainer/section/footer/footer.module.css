@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 42px;
+    margin-right: 24px;
+    margin-left: 24px;
+}
+
+.cardFooterWrapper {
+    width: 240px;
+    background-color: #fff;
+}
+
+.cardFooterText {
+    padding: 12px 0 0 24px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.blueText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #2f54eb;
+    margin: 0;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.lightText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: #8c8c8c;
+    margin: 0;
+    margin-bottom: 12px;
+}
+.OSButtons {
+    display: flex;
+    padding: 12px 0;
+}
+.linkButtonWrapper {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 24px;
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-left: 15px;
+    }
+    .cardFooterWrapper {
+        width: 328px;
+        background-color: #fff;
+    }
+    .cardFooterText {
+        align-items: center;
+    }
+    .OSButtons {
+        justify-content: space-around;
+        margin-bottom: 24px;
+    }
+    .linkButtonWrapper {
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+    }
+}

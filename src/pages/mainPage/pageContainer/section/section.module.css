@@ -1,0 +1,34 @@
+.wrapper {
+    background-image: url('./../../../../assets/img/Page_light.png');
+    background-position: bottom 0 right;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 856px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width: 1439px) {
+    .wrapper {
+        height: 1000px;
+    }
+    .wrapperShort {
+        background-image: url('./../../../../assets/img/Page_light.png');
+        background-position: top 0 right;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #c8e6fb;
+        width: 100%;
+        height: 1062px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+@media (max-width: 833px) {
+    .wrapper {
+        height: 1196px;
+        background-size: cover;
+    }
+}

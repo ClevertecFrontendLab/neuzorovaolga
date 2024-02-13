@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+@media (max-width: 1439px) {
+    .wrapper {
+        max-width: 834px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        max-width: 360px;
+    }
+}
