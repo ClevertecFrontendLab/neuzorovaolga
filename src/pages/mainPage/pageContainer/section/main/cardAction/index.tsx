@@ -19,7 +19,14 @@ export const CardAction = ({ icon, iconTitle, title }: Props) => {
         <div className={collapsed && isTablet ? styles.wrapperShort : styles.wrapper}>
             <p className={collapsed && isTablet ? styles.textShort : styles.text}>{title}</p>
 
-            <Button className={collapsed && isTablet ? styles.button : ''} type='link' icon={icon}>
+            <Button
+                className={collapsed && isTablet ? styles.button : ''}
+                type='link'
+                icon={icon}
+                style={{
+                    color: '#2f54eb',
+                }}
+            >
                 {iconTitle}
             </Button>
         </div>

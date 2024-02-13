@@ -25,6 +25,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 .showLogo {
@@ -69,6 +70,7 @@
     transition: color 0.3s;
     background-color: #fff;
     border: 0;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 .tabs {
@@ -85,8 +87,12 @@
 }
 
 @media (max-width: 833px) {
+    .menu {
+        height: 100vh;
+    }
     .menuWrapper {
         position: fixed;
+        width: 100vh;
         left: 0;
         top: 0;
         z-index: 1;
@@ -96,11 +102,21 @@
         padding: 0;
     }
     .trigger {
-        top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -30px;
+        top: 25px;
+        width: 2rem;
+        height: 3rem;
         transform: none;
     }
     .showLogo {
+        margin-top: 10px;
         width: 106px;
+    }
+    .tabs {
+        padding-left: 10px;
     }
     .menuContent {
         width: 106px;
@@ -111,5 +127,9 @@
     .itemLabel {
         margin: 0;
         padding: 0;
+    }
+    .exitButtonWrapper {
+        padding-left: 25px;
+        padding-right: 0;
     }
 }

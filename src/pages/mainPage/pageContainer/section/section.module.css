@@ -16,6 +16,7 @@
     .wrapperShort {
         background-image: url('./../../../../assets/img/Page_light.png');
         background-position: top 0 right;
+        background-size: cover;
         background-repeat: no-repeat;
         background-color: #c8e6fb;
         width: 100%;
@@ -23,5 +24,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+}
+@media (max-width: 833px) {
+    .wrapper {
+        height: 1196px;
+        background-size: cover;
     }
 }

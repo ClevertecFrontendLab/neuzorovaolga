@@ -25,22 +25,47 @@ export const Menu: React.FC = () => {
     const actionButtons = [
         {
             key: '1',
-            icon: <CalendarTwoTone twoToneColor='#061178' />,
+            icon: (
+                <CalendarTwoTone
+                    twoToneColor='#061178'
+                    style={{
+                        color: '#061178',
+                    }}
+                />
+            ),
             label: 'Календарь',
         },
         {
             key: '2',
-            icon: <HeartFilled color='#061178' />,
+            icon: (
+                <HeartFilled
+                    style={{
+                        color: '#061178',
+                    }}
+                />
+            ),
             label: 'Тренировки',
         },
         {
             key: '3',
-            icon: <TrophyFilled color='link' />,
+            icon: (
+                <TrophyFilled
+                    style={{
+                        color: '#061178',
+                    }}
+                />
+            ),
             label: 'Достижения',
         },
         {
             key: '4',
-            icon: <SolutionOutlined />,
+            icon: (
+                <SolutionOutlined
+                    style={{
+                        color: '#061178',
+                    }}
+                />
+            ),
             label: 'Профиль',
         },
     ];
