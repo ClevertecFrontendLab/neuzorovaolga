@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import styles from './main.module.css';
 import { CardAction } from './cardAction';
 import { CalendarTwoTone, HeartFilled, SolutionOutlined } from '@ant-design/icons';
+import { GlobalStateContext } from './../../../../../context/GlobalStateProvider';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const cards = [
     {
@@ -19,6 +21,9 @@ const cards = [
 ];
 
 export const Main: React.FC = () => {
+    const { width } = useWindowDimensions();
+    const isTablet = width < 1440 && width > 833;
+    const { collapsed } = useContext(GlobalStateContext);
     return (
         <div className={styles.wrapper}>
             <div className={styles.about}>
@@ -31,7 +36,7 @@ export const Main: React.FC = () => {
                 <br />— выполнять расписанные тренировки для разных частей тела, следуя подробным
                 инструкциям и советам профессиональных тренеров.
             </div>
-            <div className={styles.card}>
+            <div className={isTablet && collapsed ? styles.cardShort : styles.card}>
                 CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не
                 откладывай на завтра — начни тренироваться уже сегодня!
             </div>

@@ -23,7 +23,6 @@
     color: #262626;
     padding: 24px;
     max-width: 752px;
-    /* height: 126px; */
     border-radius: 2px;
     background: #fff;
 }
@@ -39,6 +38,19 @@
     .card {
         margin-right: 24px;
     }
+    .cardShort {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 130%;
+        letter-spacing: 1px;
+        color: #262626;
+        padding: 24px;
+        max-width: 752px;
+        border-radius: 2px;
+        background: #fff;
+        margin-right: 24px;
+        margin-bottom: 11px;
+    }
 }
 
 @media (max-width: 833px) {
@@ -48,7 +60,7 @@
     .about {
         padding-left: 15px;
         padding-top: 16px;
-        padding-right: 33px;
+        padding-right: 34px;
         margin-right: 16px;
         max-width: 328px;
         height: 368px;

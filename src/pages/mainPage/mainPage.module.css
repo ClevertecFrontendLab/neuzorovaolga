@@ -1,66 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 .wrapper {
-    width: 100vw;
+    position: relative;
+    width: 100%;
     max-width: 1440px;
     display: flex;
     justify-content: center;
     margin: 0 auto;
 }
-
-.layout {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: '0px 0px';
-    padding: 0;
-}
-
-.trigger {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    clip-path: polygon(0 0, 100% 10px, 100% calc(100% - 10px), 0 100%);
-    padding: 5px 3px;
-    font-size: 14px;
-    line-height: 64px;
-    cursor: pointer;
-    transition: color 0.3s;
-    background-color: #fff;
-    border: 0;
-}
-
-.logoBig {
-    margin-top: 30px;
-}
-
-.logoSmall {
-    margin-top: 30px;
-}
-.menu {
-    margin-top: 30px;
-}
-
-.menuWrapper {
-    height: 930px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.siteLayout .siteLayoutBackground {
-    background-color: #fff;
-}
-
-.siteLayout {
-    /* max-width: 1232px; */
-    position: relative;
-}
-
 @media (max-width: 1439px) {
-    .menuWrapper {
-        height: 1100px;
-    }
     .wrapper {
         max-width: 834px;
     }
@@ -68,6 +16,6 @@
 
 @media (max-width: 833px) {
     .wrapper {
-        max-width: 380px;
+        max-width: 360px;
     }
 }
