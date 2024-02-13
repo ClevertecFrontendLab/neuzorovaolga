@@ -14,7 +14,7 @@ export const MenuItem = ({ icon, label, collapsed }: Props) => {
     return (
         <div className={collapsed ? styles.itemCollapsed : styles.item}>
             {!isMobile && icon}
-            <p className={collapsed ? styles.itemLabelCollapsed : styles.itemLabel}>{label}</p>
+            {!collapsed && <p className={styles.itemLabel}>{label}</p>}
         </div>
     );
 };

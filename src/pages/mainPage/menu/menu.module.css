@@ -8,14 +8,14 @@
     background: white;
     position: relative;
     width: 208px;
-    transition: all 1s;
+    transition: all 0.5s;
 }
 
 .menuContentCollapsed {
     position: relative;
     background: white;
     width: 64px;
-    transition: all 1s;
+    transition: all 0.5s;
 }
 
 .menu {
@@ -27,22 +27,28 @@
     align-items: center;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
 }
-
-.showLogo {
+.logoWrapper {
     margin-top: 30px;
-    height: auto;
-    width: auto;
-    opacity: 1;
-    transition: all 1.5s;
+    height: 64px;
     margin-bottom: 20px;
+    /* width: 100%; */
 }
 
-.hideLogo {
-    height: 0;
-    width: 0;
-    margin-top: 30px;
-    opacity: 0;
-    transition: all 1.5s;
+.logo {
+    height: auto;
+    animation-name: show;
+    animation-duration: 2.5s;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        /* width: 0; */
+    }
+    to {
+        opacity: 1;
+        /* width: auto; */
+    }
 }
 
 .exitWrapper {
@@ -111,7 +117,7 @@
         height: 3rem;
         transform: none;
     }
-    .showLogo {
+    .logo {
         margin-top: 10px;
         width: 106px;
     }

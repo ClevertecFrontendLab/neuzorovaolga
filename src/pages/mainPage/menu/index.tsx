@@ -74,18 +74,12 @@ export const Menu: React.FC = () => {
         <div className={styles.menuWrapper}>
             <div className={collapsed ? styles.menuContentCollapsed : styles.menuContent}>
                 <div className={styles.menu}>
-                    {!collapsed && (
-                        <img
-                            className={collapsed ? styles.hideLogo : styles.showLogo}
-                            src={FullLogoSrc}
-                        />
-                    )}
-                    {collapsed && (
-                        <img
-                            className={collapsed && !isMobile ? styles.showLogo : styles.hideLogo}
-                            src={ShortLogoSrc}
-                        />
-                    )}
+                    <div className={styles.logoWrapper}>
+                        {!collapsed && <img className={styles.logo} src={FullLogoSrc} />}
+                        {collapsed && !isMobile && (
+                            <img className={styles.logo} src={ShortLogoSrc} />
+                        )}
+                    </div>
                     <div className={styles.tabs}>
                         {actionButtons.map(({ icon, label }) => (
                             <MenuItem icon={icon} label={label} collapsed={collapsed} />

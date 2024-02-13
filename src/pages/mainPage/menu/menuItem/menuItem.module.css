@@ -7,7 +7,6 @@
     align-items: center;
     margin-bottom: 16px;
     margin-left: 0;
-    transition: all 0.5s;
     border-radius: 6px;
 }
 .item:hover {
@@ -23,24 +22,26 @@
     margin-bottom: 16px;
     transition: all 1s;
     border-radius: 6px;
-    padding: 0 6px 0 16px;
+    padding: 0 20px;
 }
 .itemCollapsed:hover {
     background-color: #e6f4ff;
 }
 
 .itemLabel {
-    opacity: 1;
     width: 100%;
     margin: 0 0 0 10px;
-    transition: all 0.5s;
+    animation-name: show;
+    animation-duration: 2.5s;
 }
 
-.itemLabelCollapsed {
-    opacity: 0;
-    width: 0;
-    margin: 0 0 0 10px;
-    transition: all 0.5s;
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 833px) {
