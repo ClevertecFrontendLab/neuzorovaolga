@@ -19,7 +19,7 @@ import { GlobalStateContext } from './../../../context/GlobalStateProvider';
 
 export const Menu: React.FC = () => {
     const { width } = useWindowDimensions();
-    const isMobile = width < 833;
+    const isMobile = width <= 833;
     const { collapsed, showMenu, hideMenu } = useContext(GlobalStateContext);
 
     const actionButtons = [

@@ -10,7 +10,7 @@ interface Props {
 
 export const MenuItem = ({ icon, label, collapsed }: Props) => {
     const { width } = useWindowDimensions();
-    const isMobile = width < 833;
+    const isMobile = width <= 833;
     return (
         <div className={collapsed ? styles.itemCollapsed : styles.item}>
             {!isMobile && icon}
