@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './menuItem.module.css';
+import styles from './menu-item.module.css';
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
 
 interface Props {

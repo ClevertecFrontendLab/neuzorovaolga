@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
 import styles from './main.module.css';
-import { CardAction } from './cardAction';
+import { CardAction } from './card-action/card-action';
 import { CalendarTwoTone, HeartFilled, SolutionOutlined } from '@ant-design/icons';
-import { GlobalStateContext } from './../../../../../context/GlobalStateProvider';
+import { GlobalStateContext } from '../../../../../context/GlobalStateProvider';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const cards = [

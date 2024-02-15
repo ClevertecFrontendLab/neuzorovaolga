@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Main } from './main/index';
+import { Main } from './main/main';
 import styles from './section.module.css';
-import { Footer } from './footer';
-import { GlobalStateContext } from './../../../../context/GlobalStateProvider';
+import { Footer } from './footer/footer';
+import { GlobalStateContext } from '../../../../context/GlobalStateProvider';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 export const Section: React.FC = () => {

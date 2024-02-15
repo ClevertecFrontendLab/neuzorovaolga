@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import styles from './cardAction.module.css';
+import styles from './card-action.module.css';
 
 import { Button } from 'antd';
-import { GlobalStateContext } from './../../../../../../context/GlobalStateProvider';
+import { GlobalStateContext } from '../../../../../../context/GlobalStateProvider';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 interface Props {

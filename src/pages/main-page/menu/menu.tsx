@@ -13,9 +13,9 @@ import {
     TrophyFilled,
 } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
-import { MenuItem } from '@pages/mainPage/menu/menuItem';
+import { MenuItem } from '@pages/main-page/menu/menu-item/menu-item';
 import ExitSrc from '../../../assets/img/Vector.png';
-import { GlobalStateContext } from './../../../context/GlobalStateProvider';
+import { GlobalStateContext } from '../../../context/GlobalStateProvider';
 
 export const Menu: React.FC = () => {
     const { width } = useWindowDimensions();

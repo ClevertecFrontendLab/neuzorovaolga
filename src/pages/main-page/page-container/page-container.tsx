@@ -1,7 +1,7 @@
-// import React from 'react';
-import styles from './pageContainer.module.css';
+import React from 'react';
+import styles from './page-container.module.css';
 import { Header } from './header';
-import { Section } from './section';
+import { Section } from './section/section';
 
 export const PageContainer = () => (
     <div className={styles.wrapper}>
