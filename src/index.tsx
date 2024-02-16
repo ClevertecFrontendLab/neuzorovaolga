@@ -15,6 +15,7 @@ import { ServerErrorPage } from '@pages/server-error-page/server-error-page';
 import { ErrorCheckEmailNoExistPage } from '@pages/error-check-email-no-exist-page/error-check-email-no-exist-page';
 import { ErrorChangePasswordPage } from '@pages/error-change-password-page/error-change-password-page';
 import { SuccessChangePasswordPage } from '@pages/success-change-password-page/success-change-password-page';
+import { LoginPage } from '@pages/login-page/login-page';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -42,6 +43,7 @@ root.render(
                         path='/result/success-change-password'
                         element={<SuccessChangePasswordPage />}
                     />
+                    <Route path='/auth' element={<LoginPage />} />
                     <Route path='/' element={<MainPage />} />
                 </Routes>
             </GlobalStateProvider>
