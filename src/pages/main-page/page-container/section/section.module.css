@@ -1,5 +1,5 @@
 .wrapper {
-    background-image: url('./../../../../assets/img/Page_light.png');
+    background-image: url('./../../../../assets/img/page-light.png');
     background-position: bottom 0 right;
     background-repeat: no-repeat;
     width: 100%;
@@ -14,7 +14,7 @@
         height: 1000px;
     }
     .wrapperShort {
-        background-image: url('./../../../../assets/img/Page_light.png');
+        background-image: url('./../../../../assets/img/page-light.png');
         background-position: top 0 right;
         background-size: cover;
         background-repeat: no-repeat;

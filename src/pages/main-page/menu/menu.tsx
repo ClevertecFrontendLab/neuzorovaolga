@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import FullLogoSrc from './../../../assets/img/Logo.png';
-import ShortLogoSrc from './../../../assets/img/ShortLogo.png';
+import FullLogoSrc from './../../../assets/img/logo.png';
+import ShortLogoSrc from './../../../assets/img/short-logo.png';
 import styles from './menu.module.css';
 import 'antd/dist/antd.css';
 
@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
 import { MenuItem } from '@pages/main-page/menu/menu-item/menu-item';
-import ExitSrc from '../../../assets/img/Vector.png';
+import ExitSrc from '../../../assets/img/vector.png';
 import { GlobalStateContext } from '../../../context/GlobalStateProvider';
 
 export const Menu: React.FC = () => {

@@ -2,9 +2,13 @@ import styles from './screen-wrapper.module.css';
 
 interface Props {
     children: React.ReactNode;
-    className: string;
 }
 
 export const ScreenWrapper = ({ children }: Props) => {
-    return <ScreenWrapper className={styles.wrapper}>{children}</ScreenWrapper>;
+    return (
+        <div className={styles.style}>
+            <div className={styles.background}></div>
+            <div className={styles.wrapper}>{children}</div>
+        </div>
+    );
 };

@@ -1,15 +1,16 @@
 .wrapper {
     width: 539px;
     border-radius: 2px;
-    padding: 70px 85px;
+    padding: 64px 85px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #fff;
+    z-index: 100;
 }
 
-.error {
+.title {
     margin-top: 25px;
     font-weight: 500;
     font-size: 24px;

@@ -1,3 +1,26 @@
+.style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .wrapper {
-    max-width: 100%;
+    width: 1440px;
+    height: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background {
+    width: 1440px;
+    height: 1024px;
+    background-image: url('./../../assets/img/enter-page-light.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-720px);
 }
