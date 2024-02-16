@@ -1,3 +1,13 @@
 #root {
     background-color: rgba(243, 243, 243, 0.75);
 }
+
+.ant-menu-horizontal > .ant-menu-item:after {
+    left: 0;
+    right: 0;
+}
+
+.ant-form-item-extra {
+    font-size: 12px;
+    width: 368px;
+}
