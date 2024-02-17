@@ -2,8 +2,17 @@ import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import EmailErrorIcon from './../../assets/img/email-error.png';
 import styles from './error-check-email.module.css';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './../../context/AuthContext';
 
 export const ErrorCheckEmailPage = () => {
+    const { changeRecheckEmail } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleButton = () => {
+        changeRecheckEmail(true);
+        navigate('/auth');
+    };
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
@@ -12,13 +21,7 @@ export const ErrorCheckEmailPage = () => {
                 <div className={styles.message}>
                     Произошла ошибка, попробуйте отправить форму еще раз
                 </div>
-                <Button
-                    type='primary'
-                    size='large'
-                    onClick={() => {
-                        return;
-                    }}
-                >
+                <Button type='primary' size='large' onClick={handleButton}>
                     Назад
                 </Button>
             </div>

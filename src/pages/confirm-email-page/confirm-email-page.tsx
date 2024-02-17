@@ -2,9 +2,11 @@ import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import InfoIcon from './../../assets/img/info-icon.png';
 import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './confirm-email-page.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export const ConfirmEmailPage = () => {
+    const { loginEmail } = useContext(AuthContext);
     const [email, setEmail] = useState('victorbyden@gmail.com');
     const secretCod = [
         {
@@ -41,8 +43,9 @@ export const ConfirmEmailPage = () => {
                     для восстановления аккаунта
                 </div>
                 <div className={styles.message}>
-                    {`Мы отправили вам на e-mail ${email}
-                    шестизначный код. Введите его в поле ниже.`}
+                    {`Мы отправили вам на e-mail ${loginEmail}`}
+                    <br />
+                    шестизначный код. Введите его в поле ниже.
                 </div>
                 <div className={styles.secretCod}>
                     {secretCod.map(({ key, number }) => (

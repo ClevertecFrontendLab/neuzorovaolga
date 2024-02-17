@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import styles from './login-page.module.css';
@@ -8,8 +8,9 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { loginRequest } from './../../api/auth';
+import { checkEmailRequest, loginRequest } from './../../api/auth';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './../../context/AuthContext';
 
 interface FormData {
     username: string;
@@ -18,7 +19,11 @@ interface FormData {
 }
 
 export const LoginPage: React.FC = () => {
+    const { loginEmail, changeLoginEmail, recheckEmail, changeRecheckEmail } =
+        useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState(loginEmail);
 
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
@@ -30,6 +35,31 @@ export const LoginPage: React.FC = () => {
             }
         },
     }));
+
+    const handleChangeEmail = (event: any) => {
+        setEmail(event?.target.value);
+    };
+
+    const handleForgotPassword = () => {
+        console.log('handleForgotPassword');
+        changeLoginEmail(email);
+        checkEmailRequest(email)
+            .then(() => navigate('/auth/confirm-email'))
+            .catch((error) => {
+                if (error.statusCode === 404 && error.message === 'Email не найден') {
+                    navigate('/result/error-check-email-no-exist');
+                } else {
+                    navigate('/result/error-check-email');
+                }
+            });
+    };
+
+    useEffect(() => {
+        if (recheckEmail) {
+            changeRecheckEmail(false);
+            handleForgotPassword();
+        }
+    }, [recheckEmail, handleForgotPassword]);
 
     const onFinish = ({ username, password }: FormData) => {
         loginRequest(username, password)
@@ -74,6 +104,7 @@ export const LoginPage: React.FC = () => {
                                 addonBefore='e-mail:'
                                 size='large'
                                 style={{ width: 368, marginBottom: 8 }}
+                                onChange={handleChangeEmail}
                             />
                         </Form.Item>
 
@@ -101,6 +132,7 @@ export const LoginPage: React.FC = () => {
                                     paddingRight: 0,
                                     fontSize: 16,
                                 }}
+                                onClick={handleForgotPassword}
                             >
                                 Забыли пароль?
                             </Button>

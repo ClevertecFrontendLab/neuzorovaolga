@@ -44,7 +44,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid #ff4d4f; */
+}
+
+.numberWrapperError {
+    border: 1px solid #ff4d4f;
 }
 
 .number {
