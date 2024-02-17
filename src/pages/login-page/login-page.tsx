@@ -8,28 +8,43 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { loginRequest } from './../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
-const onFinish = (values: any) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-};
-
-type FieldType = {
-    username?: string;
-    password?: string;
-    placeholder?: string;
-    remember?: string;
-};
+interface FormData {
+    username: string;
+    password: string;
+    remember: string;
+}
 
 export const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
+
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
         label: `${key}`,
         style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
+        onClick: () => {
+            if (key === 'Регистрация') {
+                navigate('/auth/registration');
+            }
+        },
     }));
+
+    const onFinish = ({ username, password }: FormData) => {
+        loginRequest(username, password)
+            .then((data) => {
+                console.log('data', data);
+                navigate('/main');
+            })
+            .catch(() => {
+                navigate('/result/error-login');
+            });
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
 
     return (
         <ScreenWrapper>
@@ -51,7 +66,7 @@ export const LoginPage: React.FC = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete='off'
                     >
-                        <Form.Item<FieldType>
+                        <Form.Item<FormData>
                             name='username'
                             rules={[{ required: true, message: 'Please input your username!' }]}
                         >
@@ -62,7 +77,7 @@ export const LoginPage: React.FC = () => {
                             />
                         </Form.Item>
 
-                        <Form.Item<FieldType>
+                        <Form.Item<FormData>
                             name='password'
                             rules={[{ required: true, message: 'Please input your password!' }]}
                         >
@@ -73,7 +88,7 @@ export const LoginPage: React.FC = () => {
                             />
                         </Form.Item>
                         <div className={styles.checkAndLink}>
-                            <Form.Item<FieldType>
+                            <Form.Item<FormData>
                                 name='remember'
                                 valuePropName='checked'
                                 wrapperCol={{ span: 40 }}

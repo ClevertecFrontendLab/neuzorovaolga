@@ -9,28 +9,46 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { checkEmailRequest, registrationRequest } from './../../api/auth';
 
-const onFinish = (values: any) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-};
-
-type FieldType = {
-    username?: string;
-    password?: string;
-    placeholder?: string;
-    remember?: string;
-};
+interface FormData {
+    username: string;
+    password: string;
+    confirmPassword?: string;
+}
 
 export const RegistrationPage: React.FC = () => {
+    const navigate = useNavigate();
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
         label: `${key}`,
         style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
+        onClick: () => {
+            if (key === 'Вход') {
+                navigate('/auth');
+            }
+        },
     }));
+
+    const onFinish = ({ username, password }: FormData) => {
+        registrationRequest(username, password)
+            .then(() => {
+                navigate('/result/success');
+            })
+            .catch((error) => {
+                if (error.statusCode === 409) {
+                    navigate('/result/error-user-exist');
+                } else {
+                    navigate('/result/error');
+                }
+                console.log('Handler', error);
+            });
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
 
     return (
         <ScreenWrapper>
@@ -39,7 +57,11 @@ export const RegistrationPage: React.FC = () => {
 
                 <div className={styles.form}>
                     <div className={styles.buttonWrapper}>
-                        <Menu mode='horizontal' defaultSelectedKeys={['Вход']} items={items1} />
+                        <Menu
+                            mode='horizontal'
+                            defaultSelectedKeys={['Регистрация']}
+                            items={items1}
+                        />
                     </div>
 
                     <Form
@@ -52,7 +74,7 @@ export const RegistrationPage: React.FC = () => {
                         onFinishFailed={onFinishFailed}
                         autoComplete='off'
                     >
-                        <Form.Item<FieldType>
+                        <Form.Item<FormData>
                             name='username'
                             rules={[{ required: true, message: 'Please input your username!' }]}
                         >
@@ -63,7 +85,7 @@ export const RegistrationPage: React.FC = () => {
                             />
                         </Form.Item>
 
-                        <Form.Item<FieldType>
+                        <Form.Item<FormData>
                             name='password'
                             rules={[{ required: true, message: 'Please input your password!' }]}
                             extra='Пароль не менее 8 символов, с заглавной буквой и цифрой'
@@ -75,8 +97,8 @@ export const RegistrationPage: React.FC = () => {
                             />
                         </Form.Item>
 
-                        <Form.Item<FieldType>
-                            name='password'
+                        <Form.Item<FormData>
+                            name='confirmPassword'
                             rules={[{ required: true, message: 'Please input your password!' }]}
                         >
                             <Input.Password
