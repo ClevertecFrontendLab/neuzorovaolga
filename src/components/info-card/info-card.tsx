@@ -5,7 +5,7 @@ import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './info-card.module.css';
 
 interface Props {
-    iconType: 'error' | 'success' | 'warning';
+    iconType: 'error' | 'success' | 'warning' | 'emailError';
     title: string;
     message: string;
     buttonText: string;

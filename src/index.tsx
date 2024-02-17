@@ -17,6 +17,9 @@ import { ErrorChangePasswordPage } from '@pages/error-change-password-page/error
 import { SuccessChangePasswordPage } from '@pages/success-change-password-page/success-change-password-page';
 import { LoginPage } from '@pages/login-page/login-page';
 import { RegistrationPage } from '@pages/registration-page/registration-page';
+import { ErrorCheckEmailPage } from '@pages/error-check-email/error-check-email';
+import { ConfirmEmailPage } from '@pages/confirm-email-page/confirm-email-page';
+import { ChangePasswordPage } from '@pages/change-password-page/change-password-page';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -39,11 +42,13 @@ root.render(
                         element={<ErrorChangePasswordPage />}
                     />
 
-                    {/* <Route path='/result/error-check-email' element={<ErrorCheckEmailPage />} /> */}
+                    <Route path='/result/error-check-email' element={<ErrorCheckEmailPage />} />
                     <Route
                         path='/result/success-change-password'
                         element={<SuccessChangePasswordPage />}
                     />
+                    <Route path='/auth/confirm-email' element={<ConfirmEmailPage />} />
+                    <Route path='/auth/change-password' element={<ChangePasswordPage />} />
                     <Route path='/auth' element={<LoginPage />} />
                     <Route path='/auth/registration' element={<RegistrationPage />} />
                     <Route path='/main' element={<MainPage />} />

@@ -1,0 +1,30 @@
+.wrapper {
+    width: 539px;
+    height: 550px;
+    border-radius: 2px;
+    padding: 64px 45px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.title {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #262626;
+}
+
+.message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: #8c8c8c;
+    margin-bottom: 23px;
+}

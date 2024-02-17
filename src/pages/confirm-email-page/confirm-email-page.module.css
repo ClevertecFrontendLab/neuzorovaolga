@@ -1,0 +1,55 @@
+.wrapper {
+    width: 539px;
+
+    border-radius: 2px;
+    padding: 64px 43px 56px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.title {
+    margin-top: 25px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #262626;
+}
+
+.message {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: #8c8c8c;
+}
+
+.secretCod {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 300px;
+    display: flex;
+    gap: 13px;
+}
+
+.numberWrapper {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid #ff4d4f; */
+}
+
+.number {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+}
