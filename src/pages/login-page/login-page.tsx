@@ -54,13 +54,6 @@ export const LoginPage: React.FC = () => {
             });
     };
 
-    useEffect(() => {
-        if (recheckEmail) {
-            changeRecheckEmail(false);
-            handleForgotPassword();
-        }
-    }, [recheckEmail, handleForgotPassword]);
-
     const onFinish = ({ username, password }: FormData) => {
         loginRequest(username, password)
             .then((data) => {
@@ -75,6 +68,13 @@ export const LoginPage: React.FC = () => {
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
+
+    useEffect(() => {
+        if (recheckEmail) {
+            changeRecheckEmail(false);
+            handleForgotPassword();
+        }
+    }, [recheckEmail, handleForgotPassword]);
 
     return (
         <ScreenWrapper>

@@ -1,22 +1,49 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import styles from './change-password-page.module.css';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+
+import { changePasswordRequest } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
+interface FormData {
+    password: string;
+    confirmPassword: string;
+}
 
 export const ChangePasswordPage = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const navigate = useNavigate();
+    const { rechangePassword, changeRechangePassword, password, changePassword } =
+        useContext(AuthContext);
+
+    const handleChangePassword = (password: string, confirmPassword: string) => {
+        changePasswordRequest(password, confirmPassword)
+            .then(() => {
+                navigate('/result/success-change-password');
+            })
+            .catch(() => {
+                navigate('/result/error-change-password');
+            });
+    };
+
+    const onFinish = ({ password, confirmPassword }: FormData) => {
+        changePassword(password);
+        handleChangePassword(password, confirmPassword);
     };
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
 
-    type FieldType = {
-        username?: string;
-        password?: string;
-        placeholder?: string;
-        remember?: string;
-    };
+    useEffect(() => {
+        console.log('useEffect', rechangePassword);
+        if (rechangePassword) {
+            changeRechangePassword(false);
+            handleChangePassword(password, password);
+        }
+    }, [rechangePassword, password]);
+
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
@@ -31,7 +58,7 @@ export const ChangePasswordPage = () => {
                     onFinishFailed={onFinishFailed}
                     autoComplete='off'
                 >
-                    <Form.Item<FieldType>
+                    <Form.Item<FormData>
                         name='password'
                         rules={[{ required: true, message: 'Please input your password!' }]}
                         extra='Пароль не менее 8 символов, с заглавной буквой и цифрой'
@@ -43,8 +70,8 @@ export const ChangePasswordPage = () => {
                         />
                     </Form.Item>
 
-                    <Form.Item<FieldType>
-                        name='password'
+                    <Form.Item<FormData>
+                        name='confirmPassword'
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password

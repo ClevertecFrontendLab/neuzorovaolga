@@ -4,40 +4,20 @@ import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './confirm-email-page.module.css';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import VerificationInput from 'react-verification-input';
+import { confirmEmailRequest } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const ConfirmEmailPage = () => {
     const { loginEmail } = useContext(AuthContext);
-    const [email, setEmail] = useState('victorbyden@gmail.com');
-    const secretCod = [
-        {
-            key: '1',
-            number: 1,
-        },
-        {
-            key: '2',
-            number: 2,
-        },
-        {
-            key: '3',
-            number: 3,
-        },
-        {
-            key: '4',
-            number: 4,
-        },
-        {
-            key: '5',
-            number: 5,
-        },
-        {
-            key: '6',
-            number: 6,
-        },
-    ];
+    const [errorStatus, setErrorStatus] = useState(false);
+    const [value, setValue] = useState('');
+    const navigate = useNavigate();
+
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
-                <img src={InfoIcon} />
+                {!errorStatus ? <img src={InfoIcon} /> : <img src={ErrorIcon} />}
                 <div className={styles.title}>
                     Введите код <br />
                     для восстановления аккаунта
@@ -47,13 +27,36 @@ export const ConfirmEmailPage = () => {
                     <br />
                     шестизначный код. Введите его в поле ниже.
                 </div>
-                <div className={styles.secretCod}>
-                    {secretCod.map(({ key, number }) => (
-                        <div className={styles.numberWrapper}>
-                            <div className={styles.number}>{number}</div>
-                        </div>
-                    ))}
-                </div>
+
+                <VerificationInput
+                    classNames={{
+                        container: `${styles.secretCod}`,
+                        character: `${
+                            !errorStatus ? styles.numberWrapper : styles.numberWrapperError
+                        }`,
+                        characterInactive: `${styles.number}`,
+                        characterSelected: `${styles.selected}`,
+                        characterFilled: `${styles.characterFilled}`,
+                    }}
+                    placeholder=''
+                    value={value}
+                    onChange={(data) => {
+                        setValue(data);
+                        console.log('data', data);
+                    }}
+                    onComplete={(code: string) => {
+                        confirmEmailRequest(loginEmail, code)
+                            .then(() => {
+                                navigate('/auth/change-password');
+                            })
+                            .catch((error) => {
+                                console.log('error', error);
+                                setValue('');
+                                setErrorStatus(true);
+                            });
+                    }}
+                />
+
                 <div className={styles.message}>Не пришло письмо? Проверьте папку Спам.</div>
             </div>
         </ScreenWrapper>

@@ -11,3 +11,13 @@
     font-size: 12px;
     width: 368px;
 }
+
+.vi__character {
+    font-size: 14px;
+}
+
+.vi__character--selected,
+.vi__character--inactive {
+    color: #262626;
+    background-color: transparent;
+}

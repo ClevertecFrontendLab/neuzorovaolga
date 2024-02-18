@@ -19,3 +19,25 @@ export const checkEmailRequest = (email: string) => {
         email: email,
     });
 };
+
+export const confirmEmailRequest = (email: string, code: string) => {
+    return instance.post(
+        '/auth/confirm-email',
+        {
+            email: email,
+            code: code,
+        },
+        { withCredentials: true },
+    );
+};
+
+export const changePasswordRequest = (password: string, confirmPassword: string) => {
+    return instance.post(
+        '/auth/change-password',
+        {
+            password: password,
+            confirmPassword: confirmPassword,
+        },
+        { withCredentials: true },
+    );
+};
