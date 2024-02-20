@@ -36,6 +36,12 @@ export const ChangePasswordPage = () => {
         console.log('Failed:', errorInfo);
     };
 
+    const regex = (value: string) => {
+        const regexValue = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g;
+        const result = regexValue.test(value);
+        return result;
+    };
+
     useEffect(() => {
         console.log('useEffect', rechangePassword);
         if (rechangePassword) {
@@ -60,10 +66,25 @@ export const ChangePasswordPage = () => {
                 >
                     <Form.Item<FormData>
                         name='password'
-                        rules={[{ required: true, message: 'Please input your password!' }]}
-                        extra='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                        rules={[
+                            {
+                                required: true,
+                                message: '',
+                            },
+
+                            {
+                                validator: (_, value) =>
+                                    value && regex(value)
+                                        ? Promise.resolve()
+                                        : Promise.reject(
+                                              'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                          ),
+                            },
+                        ]}
+                        help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                     >
                         <Input.Password
+                            data-test-id='change-password'
                             placeholder='Новый пароль'
                             size='large'
                             style={{ width: 368, fontSize: '15px' }}
@@ -72,9 +93,21 @@ export const ChangePasswordPage = () => {
 
                     <Form.Item<FormData>
                         name='confirmPassword'
-                        rules={[{ required: true, message: 'Please input your password!' }]}
+                        dependencies={['password']}
+                        rules={[
+                            { required: true, message: '' },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject('Пароли не совпадают');
+                                },
+                            }),
+                        ]}
                     >
                         <Input.Password
+                            data-test-id='change-confirm-password'
                             placeholder='Повторите пароль'
                             size='large'
                             style={{ width: 368, fontSize: '15px' }}
@@ -82,6 +115,7 @@ export const ChangePasswordPage = () => {
                     </Form.Item>
                     <Form.Item wrapperCol={{ span: 360 }}>
                         <Button
+                            data-test-id='change-submit-button'
                             type='primary'
                             htmlType='submit'
                             block

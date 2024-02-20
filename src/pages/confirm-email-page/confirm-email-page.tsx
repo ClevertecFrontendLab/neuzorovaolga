@@ -29,6 +29,7 @@ export const ConfirmEmailPage = () => {
                 </div>
 
                 <VerificationInput
+                    data-test-id='verification-input'
                     classNames={{
                         container: `${styles.secretCod}`,
                         character: `${

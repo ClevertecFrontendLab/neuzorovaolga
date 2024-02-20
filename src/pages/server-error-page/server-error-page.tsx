@@ -7,7 +7,7 @@ export const ServerErrorPage = () => {
             <InfoCard
                 iconType='error'
                 title='Данные не сохранились'
-                message='Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.'
+                message='Что-то пошло не так и ваша  регистрация не завершилась. Попробуйте ещё раз.'
                 buttonText='Повторить'
                 handleButton={() => {
                     return;

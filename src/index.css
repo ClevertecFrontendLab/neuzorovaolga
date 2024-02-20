@@ -3,13 +3,22 @@
 }
 
 .ant-menu-horizontal > .ant-menu-item:after {
-    left: 0;
-    right: 0;
+    left: 0 !important;
+    right: 0 !important;
+}
+.ant-input-group-addon {
+    color: #262626 !important;
 }
 
+.ant-form-item-explain-error,
 .ant-form-item-extra {
-    font-size: 12px;
-    width: 368px;
+    font-size: 12px !important;
+    width: 368px !important;
+}
+
+.ant-form-item-explain > div {
+    font-size: 12px !important;
+    width: 368px !important;
 }
 
 .vi__character {

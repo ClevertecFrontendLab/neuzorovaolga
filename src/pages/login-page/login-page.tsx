@@ -98,9 +98,13 @@ export const LoginPage: React.FC = () => {
                     >
                         <Form.Item<FormData>
                             name='username'
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            rules={[
+                                { required: true, message: '' },
+                                { type: 'email', message: '' },
+                            ]}
                         >
                             <Input
+                                data-test-id='login-email'
                                 addonBefore='e-mail:'
                                 size='large'
                                 style={{ width: 368, marginBottom: 8 }}
@@ -110,9 +114,13 @@ export const LoginPage: React.FC = () => {
 
                         <Form.Item<FormData>
                             name='password'
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            rules={[
+                                { required: true, message: '' },
+                                { min: 8, message: '' },
+                            ]}
                         >
                             <Input.Password
+                                data-test-id='login-password'
                                 placeholder='Пароль'
                                 size='large'
                                 style={{ width: 368 }}
@@ -124,9 +132,10 @@ export const LoginPage: React.FC = () => {
                                 valuePropName='checked'
                                 wrapperCol={{ span: 40 }}
                             >
-                                <Checkbox>Запомнить меня</Checkbox>
+                                <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                             </Form.Item>
                             <Button
+                                data-test-id='login-forgot-button'
                                 type='link'
                                 style={{
                                     paddingRight: 0,
@@ -138,7 +147,13 @@ export const LoginPage: React.FC = () => {
                             </Button>
                         </div>
                         <Form.Item wrapperCol={{ span: 360 }}>
-                            <Button type='primary' htmlType='submit' block size='large'>
+                            <Button
+                                data-test-id='login-submit-button'
+                                type='primary'
+                                htmlType='submit'
+                                block
+                                size='large'
+                            >
                                 Войти
                             </Button>
                         </Form.Item>

@@ -4,13 +4,13 @@ import styles from './registration-page.module.css';
 import 'antd/dist/antd.css';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { checkEmailRequest, registrationRequest } from './../../api/auth';
+import { registrationRequest } from './../../api/auth';
 
 interface FormData {
     username: string;
@@ -50,6 +50,12 @@ export const RegistrationPage: React.FC = () => {
         console.log('Failed:', errorInfo);
     };
 
+    const regex = (value: string) => {
+        const regexValue = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g;
+        const result = regexValue.test(value);
+        return result;
+    };
+
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
@@ -68,7 +74,7 @@ export const RegistrationPage: React.FC = () => {
                         name='basic'
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
-                        style={{ width: '100%', height: 320 }}
+                        style={{ width: '100%', height: 319 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
@@ -76,9 +82,13 @@ export const RegistrationPage: React.FC = () => {
                     >
                         <Form.Item<FormData>
                             name='username'
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            rules={[
+                                { required: true, message: '' },
+                                { type: 'email', message: '' },
+                            ]}
                         >
                             <Input
+                                data-test-id='registration-email'
                                 addonBefore='e-mail:'
                                 size='large'
                                 style={{ width: 368, marginBottom: 8 }}
@@ -87,10 +97,25 @@ export const RegistrationPage: React.FC = () => {
 
                         <Form.Item<FormData>
                             name='password'
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                            extra='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '',
+                                },
+
+                                {
+                                    validator: (_, value) =>
+                                        value && regex(value)
+                                            ? Promise.resolve()
+                                            : Promise.reject(
+                                                  'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                              ),
+                                },
+                            ]}
+                            help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                         >
                             <Input.Password
+                                data-test-id='registration-password'
                                 placeholder='Пароль'
                                 size='large'
                                 style={{ width: 368 }}
@@ -99,16 +124,29 @@ export const RegistrationPage: React.FC = () => {
 
                         <Form.Item<FormData>
                             name='confirmPassword'
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            dependencies={['password']}
+                            rules={[
+                                { required: true, message: '' },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject('Пароли не совпадают');
+                                    },
+                                }),
+                            ]}
                         >
                             <Input.Password
+                                data-test-id='registration-confirm-password'
                                 placeholder='Повторите пароль'
                                 size='large'
-                                style={{ width: 368 }}
+                                style={{ width: 368, marginTop: 25 }}
                             />
                         </Form.Item>
                         <Form.Item wrapperCol={{ span: 360 }}>
                             <Button
+                                data-test-id='registration-submit-button'
                                 type='primary'
                                 htmlType='submit'
                                 block

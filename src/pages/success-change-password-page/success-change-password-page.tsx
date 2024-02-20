@@ -10,7 +10,7 @@ export const SuccessChangePasswordPage = () => {
                 iconType='success'
                 title='Пароль успешно изменен'
                 message='Теперь можно войти в аккаунт, используя свой логин и новый пароль'
-                buttonText='Войти'
+                buttonText='Вход'
                 handleButton={() => {
                     navigate('/auth');
                 }}
