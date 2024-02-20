@@ -6,11 +6,11 @@ import { AuthContext } from '../../context/AuthContext';
 
 export const ErrorChangePasswordPage = () => {
     const navigate = useNavigate();
-    const { changeRechangePassword } = useContext(AuthContext);
+    const { changeRepeatedRequest } = useContext(AuthContext);
 
     const handleButton = () => {
         navigate('/auth/change-password');
-        changeRechangePassword(true);
+        changeRepeatedRequest(true);
     };
     return (
         <ScreenWrapper>

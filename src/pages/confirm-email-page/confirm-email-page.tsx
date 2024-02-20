@@ -9,7 +9,7 @@ import { confirmEmailRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 
 export const ConfirmEmailPage = () => {
-    const { loginEmail } = useContext(AuthContext);
+    const { email } = useContext(AuthContext);
     const [errorStatus, setErrorStatus] = useState(false);
     const [value, setValue] = useState('');
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const ConfirmEmailPage = () => {
                     для восстановления аккаунта
                 </div>
                 <div className={styles.message}>
-                    {`Мы отправили вам на e-mail ${loginEmail}`}
+                    {`Мы отправили вам на e-mail ${email}`}
                     <br />
                     шестизначный код. Введите его в поле ниже.
                 </div>
@@ -46,7 +46,7 @@ export const ConfirmEmailPage = () => {
                         console.log('data', data);
                     }}
                     onComplete={(code: string) => {
-                        confirmEmailRequest(loginEmail, code)
+                        confirmEmailRequest(email, code)
                             .then(() => {
                                 navigate('/auth/change-password');
                             })

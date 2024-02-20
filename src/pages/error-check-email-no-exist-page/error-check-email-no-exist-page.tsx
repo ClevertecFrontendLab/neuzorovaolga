@@ -6,10 +6,10 @@ import { AuthContext } from '../../context/AuthContext';
 
 export const ErrorCheckEmailNoExistPage = () => {
     const navigate = useNavigate();
-    const { changeLoginEmail } = useContext(AuthContext);
+    const { changeEmail } = useContext(AuthContext);
 
     const handleButton = () => {
-        changeLoginEmail('');
+        changeEmail('');
         navigate('/auth');
     };
     return (

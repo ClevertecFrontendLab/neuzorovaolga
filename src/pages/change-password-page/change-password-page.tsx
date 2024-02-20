@@ -14,7 +14,7 @@ interface FormData {
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();
-    const { rechangePassword, changeRechangePassword, password, changePassword } =
+    const { repeatedRequest, changeRepeatedRequest, password, changePassword } =
         useContext(AuthContext);
 
     const handleChangePassword = (password: string, confirmPassword: string) => {
@@ -43,12 +43,11 @@ export const ChangePasswordPage = () => {
     };
 
     useEffect(() => {
-        console.log('useEffect', rechangePassword);
-        if (rechangePassword) {
-            changeRechangePassword(false);
+        if (repeatedRequest) {
+            changeRepeatedRequest(false);
             handleChangePassword(password, password);
         }
-    }, [rechangePassword, password]);
+    }, [repeatedRequest, password]);
 
     return (
         <ScreenWrapper>

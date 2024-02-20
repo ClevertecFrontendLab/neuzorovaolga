@@ -1,71 +1,58 @@
 import React, { createContext, useState } from 'react';
 
 export interface IAuthContext {
-    loginEmail: string;
-    changeLoginEmail: (email: string) => void;
+    email: string;
+    changeEmail: (email: string) => void;
     password: string;
     changePassword: (email: string) => void;
-    recheckEmail: boolean;
-    changeRecheckEmail: (status: boolean) => void;
-    rechangePassword: boolean;
-    changeRechangePassword: (status: boolean) => void;
+    repeatedRequest: boolean;
+    changeRepeatedRequest: (status: boolean) => void;
 }
 interface Props {
     children: React.ReactNode;
 }
 
 export const AuthContext = createContext<IAuthContext>({
-    loginEmail: '',
-    changeLoginEmail: () => {
+    email: '',
+    changeEmail: () => {
         return;
     },
     password: '',
     changePassword: () => {
         return;
     },
-    recheckEmail: false,
-    changeRecheckEmail: () => {
-        return;
-    },
-    rechangePassword: false,
-    changeRechangePassword: () => {
+    repeatedRequest: false,
+    changeRepeatedRequest: () => {
         return;
     },
 });
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-    const [loginEmail, setLoginEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [recheckEmail, setRecheckEmail] = useState(false);
-    const [rechangePassword, setRechangePassword] = useState(false);
+    const [repeatedRequest, setRepeatedRequest] = useState(false);
 
-    const changeLoginEmail = (email: string) => {
-        setLoginEmail(email);
+    const changeEmail = (email: string) => {
+        setEmail(email);
     };
 
     const changePassword = (password: string) => {
         setPassword(password);
     };
 
-    const changeRecheckEmail = (status: boolean) => {
-        setRecheckEmail(status);
-    };
-
-    const changeRechangePassword = (status: boolean) => {
-        setRechangePassword(status);
+    const changeRepeatedRequest = (status: boolean) => {
+        setRepeatedRequest(status);
     };
 
     return (
         <AuthContext.Provider
             value={{
-                loginEmail,
-                changeLoginEmail,
+                email,
+                changeEmail,
                 password,
                 changePassword,
-                recheckEmail,
-                changeRecheckEmail,
-                rechangePassword,
-                changeRechangePassword,
+                repeatedRequest,
+                changeRepeatedRequest,
             }}
         >
             {children}

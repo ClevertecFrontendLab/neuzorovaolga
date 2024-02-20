@@ -7,10 +7,10 @@ import { useContext } from 'react';
 import { AuthContext } from './../../context/AuthContext';
 
 export const ErrorCheckEmailPage = () => {
-    const { changeRecheckEmail } = useContext(AuthContext);
+    const { changeRepeatedRequest } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleButton = () => {
-        changeRecheckEmail(true);
+        changeRepeatedRequest(true);
         navigate('/auth');
     };
     return (

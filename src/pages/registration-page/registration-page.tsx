@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
 import styles from './registration-page.module.css';
 import 'antd/dist/antd.css';
@@ -11,6 +11,7 @@ import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { registrationRequest } from './../../api/auth';
+import { AuthContext } from '../../context/AuthContext';
 
 interface FormData {
     username: string;
@@ -19,6 +20,8 @@ interface FormData {
 }
 
 export const RegistrationPage: React.FC = () => {
+    const { email, changeEmail, password, changePassword, repeatedRequest, changeRepeatedRequest } =
+        useContext(AuthContext);
     const navigate = useNavigate();
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
@@ -31,7 +34,7 @@ export const RegistrationPage: React.FC = () => {
         },
     }));
 
-    const onFinish = ({ username, password }: FormData) => {
+    const handleRegistration = (username: string, password: string) => {
         registrationRequest(username, password)
             .then(() => {
                 navigate('/result/success');
@@ -46,6 +49,12 @@ export const RegistrationPage: React.FC = () => {
             });
     };
 
+    const onFinish = ({ username, password }: FormData) => {
+        changeEmail(username);
+        changePassword(password);
+        handleRegistration(username, password);
+    };
+
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
@@ -55,6 +64,13 @@ export const RegistrationPage: React.FC = () => {
         const result = regexValue.test(value);
         return result;
     };
+
+    useEffect(() => {
+        if (repeatedRequest) {
+            changeRepeatedRequest(false);
+            handleRegistration(email, password);
+        }
+    }, [repeatedRequest, handleRegistration, email, password]);
 
     return (
         <ScreenWrapper>

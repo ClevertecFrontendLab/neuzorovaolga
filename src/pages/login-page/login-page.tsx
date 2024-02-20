@@ -19,11 +19,10 @@ interface FormData {
 }
 
 export const LoginPage: React.FC = () => {
-    const { loginEmail, changeLoginEmail, recheckEmail, changeRecheckEmail } =
-        useContext(AuthContext);
+    const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState(loginEmail);
+    const [emailValue, setEmailValue] = useState(email);
 
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
@@ -37,13 +36,13 @@ export const LoginPage: React.FC = () => {
     }));
 
     const handleChangeEmail = (event: any) => {
-        setEmail(event?.target.value);
+        setEmailValue(event?.target.value);
     };
 
     const handleForgotPassword = () => {
         console.log('handleForgotPassword');
-        changeLoginEmail(email);
-        checkEmailRequest(email)
+        changeEmail(emailValue);
+        checkEmailRequest(emailValue)
             .then(() => navigate('/auth/confirm-email'))
             .catch((error) => {
                 if (error.statusCode === 404 && error.message === 'Email не найден') {
@@ -70,11 +69,11 @@ export const LoginPage: React.FC = () => {
     };
 
     useEffect(() => {
-        if (recheckEmail) {
-            changeRecheckEmail(false);
+        if (repeatedRequest) {
+            changeRepeatedRequest(false);
             handleForgotPassword();
         }
-    }, [recheckEmail, handleForgotPassword]);
+    }, [repeatedRequest, handleForgotPassword]);
 
     return (
         <ScreenWrapper>

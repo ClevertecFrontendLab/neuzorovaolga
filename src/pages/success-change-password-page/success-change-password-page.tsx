@@ -9,7 +9,8 @@ export const SuccessChangePasswordPage = () => {
             <InfoCard
                 iconType='success'
                 title='Пароль успешно изменен'
-                message='Теперь можно войти в аккаунт, используя свой логин и новый пароль'
+                message={`Теперь можно войти в аккаунт, используя
+                свой логин и новый пароль`}
                 buttonText='Вход'
                 handleButton={() => {
                     navigate('/auth');
