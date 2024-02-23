@@ -20,6 +20,7 @@ export const ErrorCheckEmailNoExistPage = () => {
                 message='Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail'
                 buttonText='Попробовать снова'
                 handleButton={handleButton}
+                dataTestId='check-retry-button'
             />
         </ScreenWrapper>
     );

@@ -21,6 +21,7 @@ export const ServerErrorPage = () => {
                 не завершилась. Попробуйте ещё раз.`}
                 buttonText='Повторить'
                 handleButton={handleButton}
+                dataTestId='registration-retry-button'
             />
         </ScreenWrapper>
     );

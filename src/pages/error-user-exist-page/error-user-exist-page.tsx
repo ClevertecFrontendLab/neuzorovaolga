@@ -16,6 +16,7 @@ export const ErrorUserExistPage = () => {
                 message='Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.'
                 buttonText='Назад к регистрации'
                 handleButton={handleButton}
+                dataTestId='registration-back-button'
             />
         </ScreenWrapper>
     );

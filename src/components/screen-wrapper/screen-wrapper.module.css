@@ -10,8 +10,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('./../../assets/img/enter-page-light.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
+/*
 .background {
     width: 1440px;
     height: 1024px;
@@ -23,4 +26,5 @@
     top: 0;
     left: 50%;
     transform: translateX(-720px);
-}
+    z-index: ;
+} */

@@ -12,6 +12,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { registrationRequest } from './../../api/auth';
 import { AuthContext } from '../../context/AuthContext';
+import { LoaderContext } from '../../context/LoaderContext';
 
 interface FormData {
     username: string;
@@ -22,6 +23,7 @@ interface FormData {
 export const RegistrationPage: React.FC = () => {
     const { email, changeEmail, password, changePassword, repeatedRequest, changeRepeatedRequest } =
         useContext(AuthContext);
+    const { showLoader, hideLoader } = useContext(LoaderContext);
     const navigate = useNavigate();
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
@@ -35,6 +37,7 @@ export const RegistrationPage: React.FC = () => {
     }));
 
     const handleRegistration = (username: string, password: string) => {
+        showLoader();
         registrationRequest(username, password)
             .then(() => {
                 navigate('/result/success');
@@ -46,7 +49,8 @@ export const RegistrationPage: React.FC = () => {
                     navigate('/result/error');
                 }
                 console.log('Handler', error);
-            });
+            })
+            .finally(hideLoader);
     };
 
     const onFinish = ({ username, password }: FormData) => {

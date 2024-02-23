@@ -6,16 +6,19 @@ import './index.css';
 import { GlobalStateProvider } from './context/GlobalStateProvider';
 import { Router } from './router';
 import { AuthProvider } from './context/AuthContext';
+import { LoaderProvider } from './context/LoaderContext';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 root.render(
     <React.StrictMode>
-        <GlobalStateProvider>
-            <AuthProvider>
-                <Router />
-            </AuthProvider>
-        </GlobalStateProvider>
+        <LoaderProvider>
+            <GlobalStateProvider>
+                <AuthProvider>
+                    <Router />
+                </AuthProvider>
+            </GlobalStateProvider>
+        </LoaderProvider>
     </React.StrictMode>,
 );

@@ -15,6 +15,7 @@ export const ErrorLoginPage = () => {
                 message='Что-то пошло не так. Попробуйте еще раз'
                 buttonText='Повторить'
                 handleButton={handleButton}
+                dataTestId='login-retry-button'
             />
         </ScreenWrapper>
     );

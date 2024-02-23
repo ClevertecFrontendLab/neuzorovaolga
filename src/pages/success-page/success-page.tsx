@@ -15,6 +15,7 @@ export const SuccessPage = () => {
                 message='Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль'
                 buttonText='Войти'
                 handleButton={handleButton}
+                dataTestId='registration-enter-button'
             />
         </ScreenWrapper>
     );

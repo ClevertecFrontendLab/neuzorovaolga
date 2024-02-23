@@ -6,6 +6,7 @@ import { changePasswordRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { LoaderContext } from '../../context/LoaderContext';
 
 interface FormData {
     password: string;
@@ -16,15 +17,18 @@ export const ChangePasswordPage = () => {
     const navigate = useNavigate();
     const { repeatedRequest, changeRepeatedRequest, password, changePassword } =
         useContext(AuthContext);
+    const { showLoader, hideLoader } = useContext(LoaderContext);
 
     const handleChangePassword = (password: string, confirmPassword: string) => {
+        showLoader();
         changePasswordRequest(password, confirmPassword)
             .then(() => {
                 navigate('/result/success-change-password');
             })
             .catch(() => {
                 navigate('/result/error-change-password');
-            });
+            })
+            .finally(hideLoader);
     };
 
     const onFinish = ({ password, confirmPassword }: FormData) => {

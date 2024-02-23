@@ -5,14 +5,22 @@ import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './info-card.module.css';
 
 interface Props {
-    iconType: 'error' | 'success' | 'warning' | 'emailError';
+    iconType: 'error' | 'success' | 'warning';
     title: string;
     message: string;
     buttonText: string;
     handleButton: () => void;
+    dataTestId: string;
 }
 
-export const InfoCard = ({ iconType, title, message, buttonText, handleButton }: Props) => {
+export const InfoCard = ({
+    iconType,
+    title,
+    message,
+    buttonText,
+    handleButton,
+    dataTestId,
+}: Props) => {
     return (
         <div className={styles.wrapper}>
             {iconType === 'error' && <img className={styles.errorIcon} src={ErrorIcon} />}
@@ -22,7 +30,13 @@ export const InfoCard = ({ iconType, title, message, buttonText, handleButton }:
             {iconType === 'warning' && <img className={styles.warningIcon} src={WarningIcon} />}
             <div className={styles.title}>{title}</div>
             <div className={styles.message}>{message}</div>
-            <Button type='primary' block size='large' onClick={handleButton}>
+            <Button
+                type='primary'
+                block
+                size='large'
+                onClick={handleButton}
+                data-test-id={dataTestId}
+            >
                 {buttonText}
             </Button>
         </div>

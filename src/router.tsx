@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { MainPage } from './pages';
 
@@ -37,6 +37,7 @@ export const Router: React.FC = () => (
             <Route path='/auth' element={<LoginPage />} />
             <Route path='/auth/registration' element={<RegistrationPage />} />
             <Route path='/main' element={<MainPage />} />
+            <Route path='*' element={<Navigate to='/auth' replace />} />
         </Routes>
     </BrowserRouter>
 );

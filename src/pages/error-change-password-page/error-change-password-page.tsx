@@ -20,6 +20,7 @@ export const ErrorChangePasswordPage = () => {
                 message='Что-то пошло не так. Попробуйте ещё раз.'
                 buttonText='Повторить'
                 handleButton={handleButton}
+                dataTestId={'change-retry-button'}
             />
         </ScreenWrapper>
     );

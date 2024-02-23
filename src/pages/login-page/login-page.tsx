@@ -11,6 +11,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { checkEmailRequest, loginRequest } from './../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthContext';
+import { LoaderContext } from '../../context/LoaderContext';
 
 interface FormData {
     username: string;
@@ -20,6 +21,7 @@ interface FormData {
 
 export const LoginPage: React.FC = () => {
     const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
+    const { showLoader, hideLoader } = useContext(LoaderContext);
     const navigate = useNavigate();
 
     const [emailValue, setEmailValue] = useState(email);
@@ -40,8 +42,8 @@ export const LoginPage: React.FC = () => {
     };
 
     const handleForgotPassword = () => {
-        console.log('handleForgotPassword');
         changeEmail(emailValue);
+        showLoader();
         checkEmailRequest(emailValue)
             .then(() => navigate('/auth/confirm-email'))
             .catch((error) => {
@@ -50,10 +52,12 @@ export const LoginPage: React.FC = () => {
                 } else {
                     navigate('/result/error-check-email');
                 }
-            });
+            })
+            .finally(hideLoader);
     };
 
     const onFinish = ({ username, password }: FormData) => {
+        showLoader();
         loginRequest(username, password)
             .then((data) => {
                 console.log('data', data);
@@ -61,7 +65,8 @@ export const LoginPage: React.FC = () => {
             })
             .catch(() => {
                 navigate('/result/error-login');
-            });
+            })
+            .finally(hideLoader);
     };
 
     const onFinishFailed = (errorInfo: any) => {

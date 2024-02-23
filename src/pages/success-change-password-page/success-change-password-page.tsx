@@ -15,6 +15,7 @@ export const SuccessChangePasswordPage = () => {
                 handleButton={() => {
                     navigate('/auth');
                 }}
+                dataTestId={'change-entry-button'}
             />
         </ScreenWrapper>
     );
