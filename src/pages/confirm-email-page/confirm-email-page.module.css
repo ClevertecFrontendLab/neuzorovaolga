@@ -20,7 +20,8 @@
     color: #262626;
 }
 
-.message {
+.message,
+.text {
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
@@ -68,4 +69,23 @@
 
 .selected {
     outline: none;
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 328px;
+        height: 457px;
+        padding: 32px 11px 14px;
+    }
+    .secretCod {
+        width: 280px;
+        margin-top: 22px;
+        margin-bottom: 15px;
+    }
+    .message {
+        padding: 0 19px;
+    }
+    .text {
+        padding: 0 31px;
+    }
 }

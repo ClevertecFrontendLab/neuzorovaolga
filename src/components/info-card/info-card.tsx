@@ -36,6 +36,9 @@ export const InfoCard = ({
                 size='large'
                 onClick={handleButton}
                 data-test-id={dataTestId}
+                style={{
+                    backgroundColor: '#2f54eb',
+                }}
             >
                 {buttonText}
             </Button>

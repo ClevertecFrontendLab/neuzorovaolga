@@ -13,7 +13,8 @@ export const SuccessPage = () => {
             <InfoCard
                 iconType='success'
                 title='Регистрация успешна'
-                message='Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль'
+                message='Регистрация прошла успешно. Зайдите
+                в приложение, используя свои e-mail и пароль'
                 buttonText='Войти'
                 handleButton={handleButton}
                 dataTestId='registration-enter-button'

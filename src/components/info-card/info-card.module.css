@@ -29,3 +29,10 @@
     margin-bottom: 23px;
     white-space: pre-line;
 }
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 328px;
+        padding: 32px 17px;
+    }
+}

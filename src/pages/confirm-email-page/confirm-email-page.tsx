@@ -65,7 +65,7 @@ export const ConfirmEmailPage = () => {
                     }}
                 />
 
-                <div className={styles.message}>Не пришло письмо? Проверьте папку Спам.</div>
+                <div className={styles.text}>Не пришло письмо? Проверьте папку Спам.</div>
             </div>
         </ScreenWrapper>
     );

@@ -28,3 +28,11 @@
     color: #8c8c8c;
     margin-bottom: 23px;
 }
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 328px;
+        height: 568px;
+        padding: 64px 39px;
+    }
+}
