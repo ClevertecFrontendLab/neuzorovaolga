@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
+import MobileLogo from './../../assets/img/mobile-logo.png';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import styles from './login-page.module.css';
 
@@ -14,6 +15,7 @@ import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
 import { GlobalContext } from '../../context/GlobalContext';
 import { saveTokenHelper } from '@utils/storage';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 interface FormData {
     username: string;
@@ -24,6 +26,8 @@ interface FormData {
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
     const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { logIn } = useContext(GlobalContext);
@@ -32,7 +36,12 @@ export const LoginPage: React.FC = () => {
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
         label: `${key}`,
-        style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
+        style: {
+            width: `${!isMobile ? '184px' : '148px'}`,
+            textAlign: 'center',
+            fontSize: `${!isMobile ? '16px' : '14px'}`,
+            padding: 0,
+        },
         onClick: () => {
             if (key === 'Регистрация') {
                 navigate(PATH.REGISTRATION);
@@ -94,8 +103,8 @@ export const LoginPage: React.FC = () => {
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
-                <img className={styles.logo} src={Logo} />
-
+                {!isMobile && <img className={styles.logo} src={Logo} />}
+                {isMobile && <img className={styles.logo} src={MobileLogo} />}
                 <div className={styles.form}>
                     <div className={styles.buttonWrapper}>
                         <Menu mode='horizontal' defaultSelectedKeys={['Вход']} items={items1} />
@@ -123,7 +132,11 @@ export const LoginPage: React.FC = () => {
                                 data-test-id='login-email'
                                 addonBefore='e-mail:'
                                 size='large'
-                                style={{ width: 368, marginBottom: 8 }}
+                                style={
+                                    !isMobile
+                                        ? { width: 368, marginBottom: 8 }
+                                        : { width: 296, marginBottom: 8 }
+                                }
                                 onChange={handleChangeEmail}
                             />
                         </Form.Item>
@@ -139,7 +152,7 @@ export const LoginPage: React.FC = () => {
                                 data-test-id='login-password'
                                 placeholder='Пароль'
                                 size='large'
-                                style={{ width: 368 }}
+                                style={!isMobile ? { width: 368 } : { width: 296, fontSize: 14 }}
                             />
                         </Form.Item>
                         <div className={styles.checkAndLink}>
@@ -153,10 +166,20 @@ export const LoginPage: React.FC = () => {
                             <Button
                                 data-test-id='login-forgot-button'
                                 type='link'
-                                style={{
-                                    paddingRight: 0,
-                                    fontSize: 16,
-                                }}
+                                style={
+                                    !isMobile
+                                        ? {
+                                              paddingRight: 0,
+                                              fontSize: 16,
+                                              color: '#2f54eb',
+                                          }
+                                        : {
+                                              paddingRight: 0,
+                                              fontSize: 14,
+                                              marginRight: 5,
+                                              color: '#2f54eb',
+                                          }
+                                }
                                 onClick={handleForgotPassword}
                             >
                                 Забыли пароль?
@@ -169,12 +192,21 @@ export const LoginPage: React.FC = () => {
                                 htmlType='submit'
                                 block
                                 size='large'
+                                style={{
+                                    backgroundColor: '#2f54eb',
+                                }}
                             >
                                 Войти
                             </Button>
                         </Form.Item>
                     </Form>
-                    <Button type='default' block size='large' icon={<GooglePlusOutlined />}>
+                    <Button
+                        className={styles.googleButton}
+                        type='default'
+                        block
+                        size='large'
+                        icon={!isMobile && <GooglePlusOutlined />}
+                    >
                         Войти через Google
                     </Button>
                 </div>

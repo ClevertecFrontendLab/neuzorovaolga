@@ -20,3 +20,10 @@
     width: 150px;
     height: 150px;
 }
+
+@media (max-width: 1439px) {
+    .lottie {
+        width: 100px;
+        height: 100px;
+    }
+}

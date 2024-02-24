@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
+import MobileLogo from './../../assets/img/mobile-logo.png';
 import styles from './registration-page.module.css';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 
@@ -13,6 +14,7 @@ import { registrationRequest } from './../../api/auth';
 import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 interface FormData {
     username: string;
@@ -22,13 +24,20 @@ interface FormData {
 
 export const RegistrationPage: React.FC = () => {
     const navigate = useNavigate();
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
     const { email, changeEmail, password, changePassword, repeatedRequest, changeRepeatedRequest } =
         useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
         label: `${key}`,
-        style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
+        style: {
+            width: `${!isMobile ? '184px' : '148px'}`,
+            textAlign: 'center',
+            fontSize: `${!isMobile ? '16px' : '14px'}`,
+            padding: 0,
+        },
         onClick: () => {
             if (key === 'Вход') {
                 navigate(PATH.AUTH);
@@ -78,7 +87,8 @@ export const RegistrationPage: React.FC = () => {
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
-                <img className={styles.logo} src={Logo} />
+                {!isMobile && <img className={styles.logo} src={Logo} />}
+                {isMobile && <img className={styles.logo} src={MobileLogo} />}
 
                 <div className={styles.form}>
                     <div className={styles.buttonWrapper}>
@@ -93,7 +103,11 @@ export const RegistrationPage: React.FC = () => {
                         name='basic'
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
-                        style={{ width: '100%', height: 319 }}
+                        style={
+                            !isMobile
+                                ? { width: '100%', height: 319 }
+                                : { width: '100%', height: 308 }
+                        }
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
@@ -110,7 +124,11 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-email'
                                 addonBefore='e-mail:'
                                 size='large'
-                                style={{ width: 368, marginBottom: 8 }}
+                                style={
+                                    !isMobile
+                                        ? { width: 368, marginBottom: 8 }
+                                        : { width: 296, marginBottom: 8 }
+                                }
                             />
                         </Form.Item>
 
@@ -137,7 +155,9 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-password'
                                 placeholder='Пароль'
                                 size='large'
-                                style={{ width: 368 }}
+                                style={
+                                    !isMobile ? { width: 368 } : { width: 296, fontSize: '14px' }
+                                }
                             />
                         </Form.Item>
 
@@ -160,7 +180,11 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-confirm-password'
                                 placeholder='Повторите пароль'
                                 size='large'
-                                style={{ width: 368, marginTop: 25 }}
+                                style={
+                                    !isMobile
+                                        ? { width: 368, marginTop: 25 }
+                                        : { width: 296, fontSize: 14, marginTop: 13 }
+                                }
                             />
                         </Form.Item>
                         <Form.Item wrapperCol={{ span: 360 }}>
@@ -170,13 +194,23 @@ export const RegistrationPage: React.FC = () => {
                                 htmlType='submit'
                                 block
                                 size='large'
-                                style={{ marginTop: 36 }}
+                                style={
+                                    !isMobile
+                                        ? { marginTop: 36, backgroundColor: '#2f54eb' }
+                                        : { marginTop: 31, backgroundColor: '#2f54eb' }
+                                }
                             >
                                 Войти
                             </Button>
                         </Form.Item>
                     </Form>
-                    <Button type='default' block size='large' icon={<GooglePlusOutlined />}>
+                    <Button
+                        className={styles.googleButton}
+                        type='default'
+                        block
+                        size='large'
+                        icon={!isMobile && <GooglePlusOutlined />}
+                    >
                         Регистрация через Google
                     </Button>
                 </div>

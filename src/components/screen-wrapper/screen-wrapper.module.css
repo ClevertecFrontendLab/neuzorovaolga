@@ -28,3 +28,17 @@
     transform: translateX(-720px);
     z-index: ;
 } */
+
+@media (max-width: 1439px) {
+    .wrapper {
+        width: 834px;
+        height: 1194px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 360px;
+        height: 800px;
+    }
+}

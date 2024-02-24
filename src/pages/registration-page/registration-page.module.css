@@ -22,3 +22,39 @@
     width: 100%;
     padding-bottom: 32px;
 }
+
+@media (max-width: 1439px) {
+    .wrapper {
+        width: 539px;
+        height: 686px;
+        position: relative;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 328px;
+        height: 564px;
+        bottom: 4px;
+        padding: 32px 16px;
+    }
+    .form {
+        width: 296px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        margin-bottom: 32px;
+    }
+    .checkAndLink {
+        height: 49px;
+    }
+    .googleButton {
+        font-size: 14px;
+    }
+    .buttonWrapper {
+        padding-bottom: 23px;
+    }
+}

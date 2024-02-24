@@ -6,6 +6,23 @@
     left: 0 !important;
     right: 0 !important;
 }
+
+.ant-menu-item-selected {
+    color: #2f54eb !important;
+}
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover {
+    color: #2f54eb !important;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected:after {
+    border-bottom: 2px solid #2f54eb;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #2f54eb;
+    border-color: #2f54eb;
+}
+
 .ant-input-group-addon {
     color: #262626 !important;
 }
@@ -19,6 +36,11 @@
 .ant-form-item-explain > div {
     font-size: 12px !important;
     width: 368px !important;
+}
+@media (max-width: 833px) {
+    .ant-form-item-explain > div {
+        width: 297px !important;
+    }
 }
 
 .vi__character {
