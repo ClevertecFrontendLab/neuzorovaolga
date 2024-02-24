@@ -23,7 +23,12 @@ export const ErrorCheckEmailPage = () => {
                 <div className={styles.message}>
                     Произошла ошибка, попробуйте отправить форму еще раз
                 </div>
-                <Button type='primary' size='large' onClick={handleButton}>
+                <Button
+                    type='primary'
+                    size='large'
+                    onClick={handleButton}
+                    data-test-id='check-back-button'
+                >
                     Назад
                 </Button>
             </div>

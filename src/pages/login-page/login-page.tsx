@@ -23,6 +23,7 @@ interface FormData {
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
+    const [form] = Form.useForm();
     const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { logIn } = useContext(GlobalContext);
@@ -43,7 +44,7 @@ export const LoginPage: React.FC = () => {
         setEmailValue(event?.target.value);
     };
 
-    const handleForgotPassword = () => {
+    const forgotPasswordFlow = () => {
         changeEmail(emailValue);
         showLoader();
         checkEmailRequest(emailValue)
@@ -57,6 +58,12 @@ export const LoginPage: React.FC = () => {
                 }
             })
             .finally(hideLoader);
+    };
+
+    const handleForgotPassword = () => {
+        if (!form.getFieldError('username').length && form.isFieldTouched('username')) {
+            forgotPasswordFlow();
+        }
     };
 
     const onFinish = ({ username, password, remember }: FormData) => {
@@ -80,9 +87,9 @@ export const LoginPage: React.FC = () => {
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
-            handleForgotPassword();
+            forgotPasswordFlow();
         }
-    }, [repeatedRequest, handleForgotPassword]);
+    }, [repeatedRequest, forgotPasswordFlow]);
 
     return (
         <ScreenWrapper>
@@ -103,6 +110,7 @@ export const LoginPage: React.FC = () => {
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete='off'
+                        form={form}
                     >
                         <Form.Item<FormData>
                             name='username'
