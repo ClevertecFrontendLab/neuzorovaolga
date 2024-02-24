@@ -1,12 +1,12 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import styles from './change-password-page.module.css';
 import { Button, Form, Input } from 'antd';
-
 import { changePasswordRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
+import { PATH } from '../../router';
 
 interface FormData {
     password: string;
@@ -15,6 +15,7 @@ interface FormData {
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();
+
     const { repeatedRequest, changeRepeatedRequest, password, changePassword } =
         useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -23,10 +24,10 @@ export const ChangePasswordPage = () => {
         showLoader();
         changePasswordRequest(password, confirmPassword)
             .then(() => {
-                navigate('/result/success-change-password');
+                navigate(PATH.SUCCESS_CHANGE_PASSWORD);
             })
             .catch(() => {
-                navigate('/result/error-change-password');
+                navigate(PATH.ERROR_CHANGE_PASSWORD);
             })
             .finally(hideLoader);
     };

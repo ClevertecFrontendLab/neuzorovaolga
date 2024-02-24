@@ -3,14 +3,16 @@ import { InfoCard } from '@components/info-card/info-card';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { PATH } from '../../router';
 
 export const ErrorCheckEmailNoExistPage = () => {
     const navigate = useNavigate();
+
     const { changeEmail } = useContext(AuthContext);
 
     const handleButton = () => {
         changeEmail('');
-        navigate('/auth');
+        navigate(PATH.AUTH);
     };
     return (
         <ScreenWrapper>

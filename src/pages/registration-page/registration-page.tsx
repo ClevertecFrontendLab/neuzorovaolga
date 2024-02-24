@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { registrationRequest } from './../../api/auth';
 import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
+import { PATH } from '../../router';
 
 interface FormData {
     username: string;
@@ -21,17 +22,17 @@ interface FormData {
 }
 
 export const RegistrationPage: React.FC = () => {
+    const navigate = useNavigate();
     const { email, changeEmail, password, changePassword, repeatedRequest, changeRepeatedRequest } =
         useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
-    const navigate = useNavigate();
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
         key,
         label: `${key}`,
         style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
         onClick: () => {
             if (key === 'Вход') {
-                navigate('/auth');
+                navigate(PATH.AUTH);
             }
         },
     }));
@@ -40,15 +41,14 @@ export const RegistrationPage: React.FC = () => {
         showLoader();
         registrationRequest(username, password)
             .then(() => {
-                navigate('/result/success');
+                navigate(PATH.SUCCESS);
             })
             .catch((error) => {
                 if (error.statusCode === 409) {
-                    navigate('/result/error-user-exist');
+                    navigate(PATH.ERROR_USER_EXIST);
                 } else {
-                    navigate('/result/error');
+                    navigate(PATH.ERROR);
                 }
-                console.log('Handler', error);
             })
             .finally(hideLoader);
     };

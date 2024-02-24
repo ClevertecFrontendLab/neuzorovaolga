@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
+import { PATH } from '../../router';
+
 export const ErrorChangePasswordPage = () => {
     const navigate = useNavigate();
+
     const { changeRepeatedRequest } = useContext(AuthContext);
 
     const handleButton = () => {
-        navigate('/auth/change-password');
+        navigate(PATH.CHANGE_PASSWORD);
         changeRepeatedRequest(true);
     };
     return (

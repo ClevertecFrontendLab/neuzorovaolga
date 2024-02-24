@@ -12,6 +12,9 @@ import { checkEmailRequest, loginRequest } from './../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
+import { useSelector } from 'react-redux';
+import { getRouterSelector } from '@redux/selector';
+import { PATH } from '../../router';
 
 interface FormData {
     username: string;
@@ -20,9 +23,12 @@ interface FormData {
 }
 
 export const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
+
+    const router = useSelector(getRouterSelector);
     const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
-    const navigate = useNavigate();
+    console.log(router);
 
     const [emailValue, setEmailValue] = useState(email);
 
@@ -32,7 +38,7 @@ export const LoginPage: React.FC = () => {
         style: { width: 184, textAlign: 'center', fontSize: 16, padding: 0 },
         onClick: () => {
             if (key === 'Регистрация') {
-                navigate('/auth/registration');
+                navigate(PATH.REGISTRATION);
             }
         },
     }));
@@ -45,12 +51,13 @@ export const LoginPage: React.FC = () => {
         changeEmail(emailValue);
         showLoader();
         checkEmailRequest(emailValue)
-            .then(() => navigate('/auth/confirm-email'))
+            .then(() => navigate(PATH.CONFIRM_EMAIL))
+
             .catch((error) => {
                 if (error.statusCode === 404 && error.message === 'Email не найден') {
-                    navigate('/result/error-check-email-no-exist');
+                    navigate(PATH.ERROR_CHECK_EMAIL_NO_EXIST);
                 } else {
-                    navigate('/result/error-check-email');
+                    navigate(PATH.ERROR_CHECK_EMAIL);
                 }
             })
             .finally(hideLoader);
@@ -61,10 +68,11 @@ export const LoginPage: React.FC = () => {
         loginRequest(username, password)
             .then((data) => {
                 console.log('data', data);
-                navigate('/main');
+
+                navigate(PATH.MAIN);
             })
             .catch(() => {
-                navigate('/result/error-login');
+                navigate(PATH.ERROR_LOGIN);
             })
             .finally(hideLoader);
     };

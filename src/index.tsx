@@ -1,5 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { HistoryRouter } from 'redux-first-history/rr6';
+import { store, history } from './redux/configure-store';
 
 import 'normalize.css';
 import './index.css';
@@ -16,7 +19,11 @@ root.render(
         <LoaderProvider>
             <GlobalStateProvider>
                 <AuthProvider>
-                    <Router />
+                    <Provider store={store}>
+                        <HistoryRouter history={history}>
+                            <Router />
+                        </HistoryRouter>
+                    </Provider>
                 </AuthProvider>
             </GlobalStateProvider>
         </LoaderProvider>

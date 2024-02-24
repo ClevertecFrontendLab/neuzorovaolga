@@ -1,11 +1,12 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import { InfoCard } from '@components/info-card/info-card';
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '../../router';
 
 export const ErrorUserExistPage = () => {
     const navigate = useNavigate();
     const handleButton = () => {
-        navigate('/auth/registration');
+        navigate(PATH.REGISTRATION);
     };
 
     return (

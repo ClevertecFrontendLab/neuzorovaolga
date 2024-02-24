@@ -4,13 +4,16 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+import { PATH } from '../../router';
+
 export const ServerErrorPage = () => {
-    const { changeRepeatedRequest } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const { changeRepeatedRequest } = useContext(AuthContext);
 
     const handleButton = () => {
         changeRepeatedRequest(true);
-        navigate('/auth/registration');
+        navigate(PATH.REGISTRATION);
     };
     return (
         <ScreenWrapper>

@@ -5,13 +5,15 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './../../context/AuthContext';
+import { PATH } from '../../router';
 
 export const ErrorCheckEmailPage = () => {
-    const { changeRepeatedRequest } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { changeRepeatedRequest } = useContext(AuthContext);
+
     const handleButton = () => {
         changeRepeatedRequest(true);
-        navigate('/auth');
+        navigate(PATH.AUTH);
     };
     return (
         <ScreenWrapper>

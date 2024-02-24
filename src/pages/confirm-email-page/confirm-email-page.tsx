@@ -8,13 +8,15 @@ import VerificationInput from 'react-verification-input';
 import { confirmEmailRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { LoaderContext } from '../../context/LoaderContext';
+import { PATH } from '../../router';
 
 export const ConfirmEmailPage = () => {
+    const navigate = useNavigate();
+
     const { email } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const [errorStatus, setErrorStatus] = useState(false);
     const [value, setValue] = useState('');
-    const navigate = useNavigate();
 
     return (
         <ScreenWrapper>
@@ -51,10 +53,9 @@ export const ConfirmEmailPage = () => {
                         showLoader();
                         confirmEmailRequest(email, code)
                             .then(() => {
-                                navigate('/auth/change-password');
+                                navigate(PATH.CHANGE_PASSWORD);
                             })
                             .catch((error) => {
-                                console.log('error', error);
                                 setValue('');
                                 setErrorStatus(true);
                             })

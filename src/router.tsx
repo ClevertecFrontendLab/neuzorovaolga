@@ -16,28 +16,70 @@ import { RegistrationPage } from '@pages/registration-page/registration-page';
 import { ErrorCheckEmailPage } from '@pages/error-check-email/error-check-email';
 import { ConfirmEmailPage } from '@pages/confirm-email-page/confirm-email-page';
 import { ChangePasswordPage } from '@pages/change-password-page/change-password-page';
+import { PrivateHistoryRoute } from '@components/private-history-route/private-history-route';
+
+export const PATH = {
+    ERROR_LOGIN: '/result/error-login',
+    SUCCESS: '/result/success',
+    ERROR_USER_EXIST: '/result/error-user-exist',
+    ERROR: '/result/error',
+    ERROR_CHECK_EMAIL_NO_EXIST: '/result/error-check-email-no-exist',
+    ERROR_CHANGE_PASSWORD: '/result/error-change-password',
+    ERROR_CHECK_EMAIL: '/result/error-check-email',
+    SUCCESS_CHANGE_PASSWORD: '/result/success-change-password',
+    CONFIRM_EMAIL: '/auth/confirm-email',
+    CHANGE_PASSWORD: '/auth/change-password',
+    AUTH: '/auth',
+    REGISTRATION: '/auth/registration',
+    MAIN: '/main',
+    DEFAULT: '*',
+};
 
 export const Router: React.FC = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/result/error-login' element={<ErrorLoginPage />} />
-            <Route path='/result/success' element={<SuccessPage />} />
-            <Route path='/result/error-user-exist' element={<ErrorUserExistPage />} />
-            <Route path='/result/error' element={<ServerErrorPage />} />
-            <Route
-                path='/result/error-check-email-no-exist'
-                element={<ErrorCheckEmailNoExistPage />}
-            />
-            <Route path='/result/error-change-password' element={<ErrorChangePasswordPage />} />
-
-            <Route path='/result/error-check-email' element={<ErrorCheckEmailPage />} />
-            <Route path='/result/success-change-password' element={<SuccessChangePasswordPage />} />
-            <Route path='/auth/confirm-email' element={<ConfirmEmailPage />} />
-            <Route path='/auth/change-password' element={<ChangePasswordPage />} />
-            <Route path='/auth' element={<LoginPage />} />
-            <Route path='/auth/registration' element={<RegistrationPage />} />
-            <Route path='/main' element={<MainPage />} />
-            <Route path='*' element={<Navigate to='/auth' replace />} />
-        </Routes>
-    </BrowserRouter>
+    <Routes>
+        <Route
+            path={PATH.ERROR_LOGIN}
+            element={<PrivateHistoryRoute component={<ErrorLoginPage />} />}
+        />
+        <Route path={PATH.SUCCESS} element={<PrivateHistoryRoute component={<SuccessPage />} />} />
+        <Route
+            path={PATH.ERROR_USER_EXIST}
+            element={<PrivateHistoryRoute component={<ErrorUserExistPage />} />}
+        />
+        <Route
+            path={PATH.ERROR}
+            element={<PrivateHistoryRoute component={<ServerErrorPage />} />}
+        />
+        <Route
+            path={PATH.ERROR_CHECK_EMAIL_NO_EXIST}
+            element={<PrivateHistoryRoute component={<ErrorCheckEmailNoExistPage />} />}
+        />
+        <Route
+            path={PATH.ERROR_CHANGE_PASSWORD}
+            element={<PrivateHistoryRoute component={<ErrorChangePasswordPage />} />}
+        />
+        <Route
+            path={PATH.ERROR_CHECK_EMAIL}
+            element={<PrivateHistoryRoute component={<ErrorCheckEmailPage />} />}
+        />
+        <Route
+            path={PATH.SUCCESS_CHANGE_PASSWORD}
+            element={<PrivateHistoryRoute component={<SuccessChangePasswordPage />} />}
+        />
+        <Route
+            path={PATH.CONFIRM_EMAIL}
+            element={<PrivateHistoryRoute component={<ConfirmEmailPage />} />}
+        />
+        <Route
+            path={PATH.CHANGE_PASSWORD}
+            element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
+        />
+        <Route
+            path={PATH.REGISTRATION}
+            element={<PrivateHistoryRoute component={<RegistrationPage />} />}
+        />
+        <Route path={PATH.AUTH} element={<LoginPage />} />
+        <Route path={PATH.MAIN} element={<MainPage />} />
+        <Route path={PATH.DEFAULT} element={<Navigate to={PATH.AUTH} replace />} />
+    </Routes>
 );
