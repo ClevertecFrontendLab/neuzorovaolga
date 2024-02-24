@@ -28,10 +28,9 @@ export const LoaderProvider: React.FC<Props> = ({ children }) => {
         setLoaderStatus(false);
     };
 
-    console.log(loaderStatus);
     return (
         <LoaderContext.Provider value={{ showLoader, hideLoader }}>
-            {loaderStatus && <Loader />}
+            <Loader loaderStatus={loaderStatus} />
             {children}
         </LoaderContext.Provider>
     );

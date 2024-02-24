@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './card-action.module.css';
 
 import { Button } from 'antd';
-import { GlobalStateContext } from '../../../../../../context/GlobalStateProvider';
+import { GlobalContext } from '../../../../../../context/GlobalContext';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 export const CardAction = ({ icon, iconTitle, title }: Props) => {
     const { width } = useWindowDimensions();
     const isTablet = width < 1440 && width > 833;
-    const { collapsed } = useContext(GlobalStateContext);
+    const { collapsed } = useContext(GlobalContext);
     return (
         <div className={collapsed && isTablet ? styles.wrapperShort : styles.wrapper}>
             <p className={collapsed && isTablet ? styles.textShort : styles.text}>{title}</p>

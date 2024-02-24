@@ -5,8 +5,9 @@ import { HistoryRouter } from 'redux-first-history/rr6';
 import { store, history } from './redux/configure-store';
 
 import 'normalize.css';
+import 'antd/dist/antd.css';
 import './index.css';
-import { GlobalStateProvider } from './context/GlobalStateProvider';
+import { GlobalProvider } from './context/GlobalContext';
 import { Router } from './router';
 import { AuthProvider } from './context/AuthContext';
 import { LoaderProvider } from './context/LoaderContext';
@@ -17,7 +18,7 @@ const root = createRoot(domNode);
 root.render(
     <React.StrictMode>
         <LoaderProvider>
-            <GlobalStateProvider>
+            <GlobalProvider>
                 <AuthProvider>
                     <Provider store={store}>
                         <HistoryRouter history={history}>
@@ -25,7 +26,7 @@ root.render(
                         </HistoryRouter>
                     </Provider>
                 </AuthProvider>
-            </GlobalStateProvider>
+            </GlobalProvider>
         </LoaderProvider>
     </React.StrictMode>,
 );

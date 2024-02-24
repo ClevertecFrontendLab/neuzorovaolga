@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { MainPage } from './pages';
 
@@ -17,6 +17,8 @@ import { ErrorCheckEmailPage } from '@pages/error-check-email/error-check-email'
 import { ConfirmEmailPage } from '@pages/confirm-email-page/confirm-email-page';
 import { ChangePasswordPage } from '@pages/change-password-page/change-password-page';
 import { PrivateHistoryRoute } from '@components/private-history-route/private-history-route';
+import { ProtectedAuthorizeRoute } from '@components/protected-authorized-route/protected-authorized-route';
+import { GlobalContext } from '@context/GlobalContext';
 
 export const PATH = {
     ERROR_LOGIN: '/result/error-login',
@@ -35,51 +37,67 @@ export const PATH = {
     DEFAULT: '*',
 };
 
-export const Router: React.FC = () => (
-    <Routes>
-        <Route
-            path={PATH.ERROR_LOGIN}
-            element={<PrivateHistoryRoute component={<ErrorLoginPage />} />}
-        />
-        <Route path={PATH.SUCCESS} element={<PrivateHistoryRoute component={<SuccessPage />} />} />
-        <Route
-            path={PATH.ERROR_USER_EXIST}
-            element={<PrivateHistoryRoute component={<ErrorUserExistPage />} />}
-        />
-        <Route
-            path={PATH.ERROR}
-            element={<PrivateHistoryRoute component={<ServerErrorPage />} />}
-        />
-        <Route
-            path={PATH.ERROR_CHECK_EMAIL_NO_EXIST}
-            element={<PrivateHistoryRoute component={<ErrorCheckEmailNoExistPage />} />}
-        />
-        <Route
-            path={PATH.ERROR_CHANGE_PASSWORD}
-            element={<PrivateHistoryRoute component={<ErrorChangePasswordPage />} />}
-        />
-        <Route
-            path={PATH.ERROR_CHECK_EMAIL}
-            element={<PrivateHistoryRoute component={<ErrorCheckEmailPage />} />}
-        />
-        <Route
-            path={PATH.SUCCESS_CHANGE_PASSWORD}
-            element={<PrivateHistoryRoute component={<SuccessChangePasswordPage />} />}
-        />
-        <Route
-            path={PATH.CONFIRM_EMAIL}
-            element={<PrivateHistoryRoute component={<ConfirmEmailPage />} />}
-        />
-        <Route
-            path={PATH.CHANGE_PASSWORD}
-            element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
-        />
-        <Route
-            path={PATH.REGISTRATION}
-            element={<PrivateHistoryRoute component={<RegistrationPage />} />}
-        />
-        <Route path={PATH.AUTH} element={<LoginPage />} />
-        <Route path={PATH.MAIN} element={<MainPage />} />
-        <Route path={PATH.DEFAULT} element={<Navigate to={PATH.AUTH} replace />} />
-    </Routes>
-);
+export const Router: React.FC = () => {
+    const { isAuthorized } = useContext(GlobalContext);
+    return (
+        <Routes>
+            <Route
+                path={PATH.ERROR_LOGIN}
+                element={<PrivateHistoryRoute component={<ErrorLoginPage />} />}
+            />
+            <Route
+                path={PATH.SUCCESS}
+                element={<PrivateHistoryRoute component={<SuccessPage />} />}
+            />
+            <Route
+                path={PATH.ERROR_USER_EXIST}
+                element={<PrivateHistoryRoute component={<ErrorUserExistPage />} />}
+            />
+            <Route
+                path={PATH.ERROR}
+                element={<PrivateHistoryRoute component={<ServerErrorPage />} />}
+            />
+            <Route
+                path={PATH.ERROR_CHECK_EMAIL_NO_EXIST}
+                element={<PrivateHistoryRoute component={<ErrorCheckEmailNoExistPage />} />}
+            />
+            <Route
+                path={PATH.ERROR_CHANGE_PASSWORD}
+                element={<PrivateHistoryRoute component={<ErrorChangePasswordPage />} />}
+            />
+            <Route
+                path={PATH.ERROR_CHECK_EMAIL}
+                element={<PrivateHistoryRoute component={<ErrorCheckEmailPage />} />}
+            />
+            <Route
+                path={PATH.SUCCESS_CHANGE_PASSWORD}
+                element={<PrivateHistoryRoute component={<SuccessChangePasswordPage />} />}
+            />
+            <Route
+                path={PATH.CONFIRM_EMAIL}
+                element={<PrivateHistoryRoute component={<ConfirmEmailPage />} />}
+            />
+            <Route
+                path={PATH.CHANGE_PASSWORD}
+                element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
+            />
+            <Route
+                path={PATH.REGISTRATION}
+                element={<PrivateHistoryRoute component={<RegistrationPage />} />}
+            />
+            <Route
+                path={PATH.MAIN}
+                element={<ProtectedAuthorizeRoute component={<MainPage />} />}
+            />
+
+            <Route
+                path={PATH.AUTH}
+                element={!isAuthorized ? <LoginPage /> : <Navigate to={PATH.MAIN} replace />}
+            />
+            <Route
+                path={PATH.DEFAULT}
+                element={<Navigate to={isAuthorized ? PATH.MAIN : PATH.AUTH} replace />}
+            />
+        </Routes>
+    );
+};

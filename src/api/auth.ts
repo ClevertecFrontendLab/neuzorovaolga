@@ -1,6 +1,10 @@
 import { instance } from './index';
 
-export const loginRequest = (email: string, password: string) => {
+interface ILoginResponse {
+    accessToken: string;
+}
+
+export const loginRequest = (email: string, password: string): Promise<ILoginResponse> => {
     return instance.post('/auth/login', {
         email: email,
         password: password,

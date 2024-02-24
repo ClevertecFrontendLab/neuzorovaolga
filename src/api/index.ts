@@ -9,7 +9,7 @@ const onFulfilled = (response: AxiosResponse) => {
 };
 
 const onRejected = (reject: any): Promise<any> => {
-    return Promise.reject(reject?.response?.data);
+    return Promise.reject(reject?.response);
 };
 
 instance.interceptors.response.use(onFulfilled, onRejected);

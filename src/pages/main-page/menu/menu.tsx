@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import FullLogoSrc from './../../../assets/img/logo.png';
 import ShortLogoSrc from './../../../assets/img/short-logo.png';
 import styles from './menu.module.css';
-import 'antd/dist/antd.css';
 
 import {
     CalendarTwoTone,
@@ -15,12 +14,16 @@ import {
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
 import { MenuItem } from '@pages/main-page/menu/menu-item/menu-item';
 import ExitSrc from '../../../assets/img/vector.png';
-import { GlobalStateContext } from '../../../context/GlobalStateProvider';
+import { GlobalContext } from '../../../context/GlobalContext';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@app/router';
+import { removeTokenHelper } from '@utils/storage';
 
 export const Menu: React.FC = () => {
+    const navigate = useNavigate();
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
-    const { collapsed, showMenu, hideMenu } = useContext(GlobalStateContext);
+    const { collapsed, showMenu, hideMenu, logOut } = useContext(GlobalContext);
 
     const actionButtons = [
         {
@@ -70,6 +73,12 @@ export const Menu: React.FC = () => {
         },
     ];
 
+    const handleLogOut = () => {
+        logOut();
+        removeTokenHelper();
+        navigate(PATH.AUTH);
+    };
+
     return (
         <div className={styles.menuWrapper}>
             <div className={collapsed ? styles.menuContentCollapsed : styles.menuContent}>
@@ -92,6 +101,7 @@ export const Menu: React.FC = () => {
                                 icon={<img src={ExitSrc} />}
                                 label='Выход'
                                 collapsed={collapsed}
+                                handler={handleLogOut}
                             />
                         </div>
                     </div>

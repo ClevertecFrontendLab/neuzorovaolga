@@ -8,8 +8,12 @@
     justify-content: center;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -100vw;
     z-index: 1000;
+}
+
+.display {
+    left: 0;
 }
 
 .lottie {

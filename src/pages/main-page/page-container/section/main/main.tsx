@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import styles from './main.module.css';
 import { CardAction } from './card-action/card-action';
 import { CalendarTwoTone, HeartFilled, SolutionOutlined } from '@ant-design/icons';
-import { GlobalStateContext } from '../../../../../context/GlobalStateProvider';
+import { GlobalContext } from '../../../../../context/GlobalContext';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const cards = [
@@ -23,7 +23,7 @@ const cards = [
 export const Main: React.FC = () => {
     const { width } = useWindowDimensions();
     const isTablet = width < 1440 && width > 833;
-    const { collapsed } = useContext(GlobalStateContext);
+    const { collapsed } = useContext(GlobalContext);
     return (
         <div className={styles.wrapper}>
             <div className={styles.about}>

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
 import styles from './registration-page.module.css';
-import 'antd/dist/antd.css';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 
 import { Button, Form, Input } from 'antd';
@@ -44,7 +43,7 @@ export const RegistrationPage: React.FC = () => {
                 navigate(PATH.SUCCESS);
             })
             .catch((error) => {
-                if (error.statusCode === 409) {
+                if (error.status === 409) {
                     navigate(PATH.ERROR_USER_EXIST);
                 } else {
                     navigate(PATH.ERROR);

@@ -3,7 +3,6 @@ import Logo from './../../assets/img/infoCardLogo.png';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 import styles from './login-page.module.css';
 
-import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -12,24 +11,21 @@ import { checkEmailRequest, loginRequest } from './../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
-import { useSelector } from 'react-redux';
-import { getRouterSelector } from '@redux/selector';
 import { PATH } from '../../router';
+import { GlobalContext } from '../../context/GlobalContext';
+import { saveTokenHelper } from '@utils/storage';
 
 interface FormData {
     username: string;
     password: string;
-    remember: string;
+    remember: boolean;
 }
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
-
-    const router = useSelector(getRouterSelector);
     const { email, changeEmail, repeatedRequest, changeRepeatedRequest } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
-    console.log(router);
-
+    const { logIn } = useContext(GlobalContext);
     const [emailValue, setEmailValue] = useState(email);
 
     const items1: MenuProps['items'] = ['Вход', 'Регистрация'].map((key) => ({
@@ -54,7 +50,7 @@ export const LoginPage: React.FC = () => {
             .then(() => navigate(PATH.CONFIRM_EMAIL))
 
             .catch((error) => {
-                if (error.statusCode === 404 && error.message === 'Email не найден') {
+                if (error.status === 404) {
                     navigate(PATH.ERROR_CHECK_EMAIL_NO_EXIST);
                 } else {
                     navigate(PATH.ERROR_CHECK_EMAIL);
@@ -63,12 +59,12 @@ export const LoginPage: React.FC = () => {
             .finally(hideLoader);
     };
 
-    const onFinish = ({ username, password }: FormData) => {
+    const onFinish = ({ username, password, remember }: FormData) => {
         showLoader();
         loginRequest(username, password)
-            .then((data) => {
-                console.log('data', data);
-
+            .then(({ accessToken }) => {
+                logIn();
+                saveTokenHelper(accessToken, remember);
                 navigate(PATH.MAIN);
             })
             .catch(() => {
