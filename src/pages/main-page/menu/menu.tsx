@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import FullLogoSrc from '@assets/img/full-logo.png';
-import ShortLogoSrc from '@assets/img/short-logo.png';
+import FullLogoSrc from '../../../assets/img/full-logo.png';
+import ShortLogoSrc from '../../../assets/img/short-logo.png';
 import styles from './menu.module.css';
 
 import {
@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
 import { MenuItem } from '@pages/main-page/menu/menu-item/menu-item';
-import ExitSrc from '@assets/img/vector.png';
+import ExitSrc from '../../../assets/img/vector.png';
 import { GlobalContext } from '@context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@app/router';
