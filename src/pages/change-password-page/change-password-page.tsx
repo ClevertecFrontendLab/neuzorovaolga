@@ -7,6 +7,7 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 interface FormData {
     password: string;
@@ -15,6 +16,8 @@ interface FormData {
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
 
     const { repeatedRequest, changeRepeatedRequest, password, changePassword } =
         useContext(AuthContext);
@@ -91,7 +94,11 @@ export const ChangePasswordPage = () => {
                             data-test-id='change-password'
                             placeholder='Новый пароль'
                             size='large'
-                            style={{ width: 368, fontSize: '15px' }}
+                            style={
+                                !isMobile
+                                    ? { width: 368, fontSize: '15px' }
+                                    : { width: 296, fontSize: '15px' }
+                            }
                         />
                     </Form.Item>
 
@@ -114,7 +121,11 @@ export const ChangePasswordPage = () => {
                             data-test-id='change-confirm-password'
                             placeholder='Повторите пароль'
                             size='large'
-                            style={{ width: 368, fontSize: '15px' }}
+                            style={
+                                !isMobile
+                                    ? { width: 368, fontSize: '15px', marginTop: '23px' }
+                                    : { width: 296, fontSize: '15px', marginTop: '9px' }
+                            }
                         />
                     </Form.Item>
                     <Form.Item wrapperCol={{ span: 360 }}>
