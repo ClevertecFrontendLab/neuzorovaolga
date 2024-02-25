@@ -10,11 +10,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('./../../assets/img/enter-page-light.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    z-index: 1;
 }
-/*
+
 .background {
     width: 1440px;
     height: 1024px;
@@ -26,13 +24,14 @@
     top: 0;
     left: 50%;
     transform: translateX(-720px);
-    z-index: ;
-} */
+    z-index: 1;
+}
 
 @media (max-width: 1439px) {
     .wrapper {
         width: 834px;
         height: 1194px;
+        transform: translateX(-417px);
     }
 }
 
@@ -40,5 +39,6 @@
     .wrapper {
         width: 360px;
         height: 800px;
+        transform: translateX(-180px);
     }
 }
