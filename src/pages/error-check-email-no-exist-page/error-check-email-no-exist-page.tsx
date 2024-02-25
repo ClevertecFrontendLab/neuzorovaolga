@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { PATH } from '../../router';
+import styles from './error-check-email-no-exist-page.module.css';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 export const ErrorCheckEmailNoExistPage = () => {
     const navigate = useNavigate();
-
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
     const { changeEmail } = useContext(AuthContext);
 
     const handleButton = () => {
@@ -19,11 +22,17 @@ export const ErrorCheckEmailNoExistPage = () => {
             <InfoCard
                 iconType='error'
                 title='Такой e-mail не зарегистрирован'
-                message='Мы не нашли в базе вашего e-mail. Попробуйте
-                войти с другим e-mail'
+                message={
+                    !isMobile
+                        ? `Мы не нашли в базе вашего e-mail. Попробуйте
+                войти с другим e-mail`
+                        : `Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail`
+                }
                 buttonText='Попробовать снова'
                 handleButton={handleButton}
                 dataTestId='check-retry-button'
+                wrapperStyles={styles.wrapper}
+                buttonStyles={styles.button}
             />
         </ScreenWrapper>
     );

@@ -3,6 +3,7 @@ import WarningIcon from './../../assets/img/warning-icon.png';
 import SuccessfulIcon from './../../assets/img/successful-icon.png';
 import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './info-card.module.css';
+import classNames from 'classnames';
 
 interface Props {
     iconType: 'error' | 'success' | 'warning';
@@ -11,6 +12,8 @@ interface Props {
     buttonText: string;
     handleButton: () => void;
     dataTestId: string;
+    wrapperStyles?: string;
+    buttonStyles?: string;
 }
 
 export const InfoCard = ({
@@ -20,14 +23,14 @@ export const InfoCard = ({
     buttonText,
     handleButton,
     dataTestId,
+    wrapperStyles,
+    buttonStyles,
 }: Props) => {
     return (
-        <div className={styles.wrapper}>
-            {iconType === 'error' && <img className={styles.errorIcon} src={ErrorIcon} />}
-            {iconType === 'success' && (
-                <img className={styles.successfulIcon} src={SuccessfulIcon} />
-            )}
-            {iconType === 'warning' && <img className={styles.warningIcon} src={WarningIcon} />}
+        <div className={classNames(styles.wrapper, wrapperStyles)}>
+            {iconType === 'error' && <img src={ErrorIcon} />}
+            {iconType === 'success' && <img src={SuccessfulIcon} />}
+            {iconType === 'warning' && <img src={WarningIcon} />}
             <div className={styles.title}>{title}</div>
             <div className={styles.message}>{message}</div>
             <Button
@@ -36,9 +39,7 @@ export const InfoCard = ({
                 size='large'
                 onClick={handleButton}
                 data-test-id={dataTestId}
-                style={{
-                    backgroundColor: '#2f54eb',
-                }}
+                className={classNames(styles.button, buttonStyles)}
             >
                 {buttonText}
             </Button>

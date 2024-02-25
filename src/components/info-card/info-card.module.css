@@ -30,6 +30,10 @@
     white-space: pre-line;
 }
 
+.button {
+    background-color: '#2f54eb';
+}
+
 @media (max-width: 833px) {
     .wrapper {
         width: 328px;

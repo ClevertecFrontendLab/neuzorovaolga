@@ -31,12 +31,20 @@
     .wrapper {
         width: 834px;
         height: 1194px;
+    }
+    .background {
+        width: 834px;
+        height: 1194px;
         transform: translateX(-417px);
     }
 }
 
 @media (max-width: 833px) {
     .wrapper {
+        width: 360px;
+        height: 800px;
+    }
+    .background {
         width: 360px;
         height: 800px;
         transform: translateX(-180px);
