@@ -7,7 +7,7 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
-import useWindowDimensions from '@hooks/useWindowDimensions';
+import { regexPasswordValidation } from '@utils/validation';
 
 interface FormData {
     password: string;
@@ -16,8 +16,6 @@ interface FormData {
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();
-    const { width } = useWindowDimensions();
-    const isMobile = width <= 833;
 
     const { repeatedRequest, changeRepeatedRequest, password, changePassword } =
         useContext(AuthContext);
@@ -40,16 +38,6 @@ export const ChangePasswordPage = () => {
         handleChangePassword(password, confirmPassword);
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    const regex = (value: string) => {
-        const regexValue = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g;
-        const result = regexValue.test(value);
-        return result;
-    };
-
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -68,7 +56,6 @@ export const ChangePasswordPage = () => {
                     style={{ width: '100%', height: 320 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     autoComplete='off'
                 >
                     <Form.Item<FormData>
@@ -81,7 +68,7 @@ export const ChangePasswordPage = () => {
 
                             {
                                 validator: (_, value) =>
-                                    value && regex(value)
+                                    value && regexPasswordValidation(value)
                                         ? Promise.resolve()
                                         : Promise.reject(
                                               'Пароль не менее 8 символов, с заглавной буквой и цифрой',
@@ -94,11 +81,7 @@ export const ChangePasswordPage = () => {
                             data-test-id='change-password'
                             placeholder='Новый пароль'
                             size='large'
-                            style={
-                                !isMobile
-                                    ? { width: 368, fontSize: '15px' }
-                                    : { width: 296, fontSize: '15px' }
-                            }
+                            className={styles.inputPassword}
                         />
                     </Form.Item>
 
@@ -121,11 +104,7 @@ export const ChangePasswordPage = () => {
                             data-test-id='change-confirm-password'
                             placeholder='Повторите пароль'
                             size='large'
-                            style={
-                                !isMobile
-                                    ? { width: 368, fontSize: '15px', marginTop: '23px' }
-                                    : { width: 296, fontSize: '15px', marginTop: '9px' }
-                            }
+                            className={styles.inputConfirmPassword}
                         />
                     </Form.Item>
                     <Form.Item wrapperCol={{ span: 360 }}>

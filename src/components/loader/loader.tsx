@@ -4,11 +4,11 @@ import loaderAnimation from '../../assets/animation/loader.json';
 import styles from './loader.module.css';
 import classNames from 'classnames';
 
-interface IProps {
+interface Props {
     loaderStatus: boolean;
 }
 
-export const Loader = ({ loaderStatus }: IProps) => {
+export const Loader = ({ loaderStatus }: Props) => {
     return (
         <div className={classNames(styles.wrapper, loaderStatus && styles.display)}>
             <Lottie

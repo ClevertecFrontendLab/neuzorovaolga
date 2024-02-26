@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import styles from './header.module.css';
 import { Space } from 'antd';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { GlobalContext } from '../../../../context/GlobalContext';
 
-export const Header: React.FC = () => {
+export const Header = () => {
     const { width } = useWindowDimensions();
     const isTablet = width < 1440 && width > 833;
     const { collapsed } = useContext(GlobalContext);

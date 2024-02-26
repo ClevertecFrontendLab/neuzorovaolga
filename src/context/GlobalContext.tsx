@@ -29,7 +29,7 @@ export const GlobalContext = createContext<GlobalStateInterface>({
     },
 });
 
-export const GlobalProvider: React.FC<Props> = ({ children }) => {
+export const GlobalProvider = ({ children }: Props) => {
     const [collapsed, setCollapsed] = useState(false);
     const token = localStorage.getItem('token');
     const [isAuthorized, setIsAuthorized] = useState(token ? true : false);

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import FullLogoSrc from '../../../assets/img/full-logo.png';
 import ShortLogoSrc from '../../../assets/img/short-logo.png';
 import styles from './menu.module.css';
@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { PATH } from '@app/router';
 import { removeTokenHelper } from '@utils/storage';
 
-export const Menu: React.FC = () => {
+export const Menu = () => {
     const navigate = useNavigate();
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;

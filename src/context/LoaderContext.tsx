@@ -18,7 +18,7 @@ export const LoaderContext = createContext<GlobalStateInterface>({
     },
 });
 
-export const LoaderProvider: React.FC<Props> = ({ children }) => {
+export const LoaderProvider = ({ children }: Props) => {
     const [loaderStatus, setLoaderStatus] = useState(false);
 
     const showLoader = () => {

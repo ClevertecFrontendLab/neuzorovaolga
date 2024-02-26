@@ -10,15 +10,18 @@
     background-color: #fff;
     z-index: 100;
 }
+
 .logo {
     margin-bottom: 46px;
 }
+
 .form {
     width: 368px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .buttonWrapper {
     width: 100%;
     padding-bottom: 25px;
@@ -29,6 +32,16 @@
     justify-content: space-between;
     height: 53px;
     margin-top: 48px;
+}
+
+.password {
+    width: 368px;
+}
+
+.buttonForgotPassword {
+    padding-right: 0;
+    font-size: 16px;
+    color: #2f54eb;
 }
 
 @media (max-width: 1439px) {
@@ -47,20 +60,34 @@
         bottom: 4px;
         padding: 32px 16px;
     }
+
     .form {
         width: 296px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .logo {
         margin-bottom: 32px;
     }
+
     .checkAndLink {
         height: 49px;
     }
+
     .googleButton {
         margin-top: -10px;
         font-size: 14px;
+    }
+
+    .password {
+        width: 296px;
+        font-size: 14px;
+    }
+
+    .buttonForgotPassword {
+        font-size: 14px;
+        margin-right: 5px;
     }
 }

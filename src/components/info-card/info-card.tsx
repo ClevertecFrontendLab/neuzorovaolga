@@ -26,11 +26,15 @@ export const InfoCard = ({
     wrapperStyles,
     buttonStyles,
 }: Props) => {
+    const icon = {
+        error: <img src={ErrorIcon} />,
+        success: <img src={SuccessfulIcon} />,
+        warning: <img src={WarningIcon} />,
+    };
+
     return (
         <div className={classNames(styles.wrapper, wrapperStyles)}>
-            {iconType === 'error' && <img src={ErrorIcon} />}
-            {iconType === 'success' && <img src={SuccessfulIcon} />}
-            {iconType === 'warning' && <img src={WarningIcon} />}
+            {icon[iconType]}
             <div className={styles.title}>{title}</div>
             <div className={styles.message}>{message}</div>
             <Button

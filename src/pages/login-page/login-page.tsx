@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
 import MobileLogo from './../../assets/img/mobile-logo.png';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
@@ -23,7 +23,7 @@ interface FormData {
     remember: boolean;
 }
 
-export const LoginPage: React.FC = () => {
+export const LoginPage = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
     const { width } = useWindowDimensions();
@@ -89,10 +89,6 @@ export const LoginPage: React.FC = () => {
             .finally(hideLoader);
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -117,7 +113,6 @@ export const LoginPage: React.FC = () => {
                         style={{ width: '100%', height: 270 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
                         autoComplete='off'
                         form={form}
                     >
@@ -152,7 +147,7 @@ export const LoginPage: React.FC = () => {
                                 data-test-id='login-password'
                                 placeholder='Пароль'
                                 size='large'
-                                style={!isMobile ? { width: 368 } : { width: 296, fontSize: 14 }}
+                                className={styles.password}
                             />
                         </Form.Item>
                         <div className={styles.checkAndLink}>
@@ -166,20 +161,7 @@ export const LoginPage: React.FC = () => {
                             <Button
                                 data-test-id='login-forgot-button'
                                 type='link'
-                                style={
-                                    !isMobile
-                                        ? {
-                                              paddingRight: 0,
-                                              fontSize: 16,
-                                              color: '#2f54eb',
-                                          }
-                                        : {
-                                              paddingRight: 0,
-                                              fontSize: 14,
-                                              marginRight: 5,
-                                              color: '#2f54eb',
-                                          }
-                                }
+                                className={styles.buttonForgotPassword}
                                 onClick={handleForgotPassword}
                             >
                                 Забыли пароль?

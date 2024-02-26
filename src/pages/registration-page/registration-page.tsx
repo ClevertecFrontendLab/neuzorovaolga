@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Logo from './../../assets/img/infoCardLogo.png';
 import MobileLogo from './../../assets/img/mobile-logo.png';
 import styles from './registration-page.module.css';
@@ -15,6 +15,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { regexPasswordValidation } from '@utils/validation';
 
 interface FormData {
     username: string;
@@ -22,7 +23,7 @@ interface FormData {
     confirmPassword?: string;
 }
 
-export const RegistrationPage: React.FC = () => {
+export const RegistrationPage = () => {
     const navigate = useNavigate();
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
@@ -67,16 +68,6 @@ export const RegistrationPage: React.FC = () => {
         handleRegistration(username, password);
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
-
-    const regex = (value: string) => {
-        const regexValue = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g;
-        const result = regexValue.test(value);
-        return result;
-    };
-
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -103,14 +94,9 @@ export const RegistrationPage: React.FC = () => {
                         name='basic'
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
-                        style={
-                            !isMobile
-                                ? { width: '100%', height: 319 }
-                                : { width: '100%', height: 308 }
-                        }
+                        className={styles.formWrapper}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
                         autoComplete='off'
                     >
                         <Form.Item<FormData>
@@ -124,11 +110,7 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-email'
                                 addonBefore='e-mail:'
                                 size='large'
-                                style={
-                                    !isMobile
-                                        ? { width: 368, marginBottom: 8 }
-                                        : { width: 296, marginBottom: 8 }
-                                }
+                                className={styles.inputEmail}
                             />
                         </Form.Item>
 
@@ -142,7 +124,7 @@ export const RegistrationPage: React.FC = () => {
 
                                 {
                                     validator: (_, value) =>
-                                        value && regex(value)
+                                        value && regexPasswordValidation(value)
                                             ? Promise.resolve()
                                             : Promise.reject(
                                                   'Пароль не менее 8 символов, с заглавной буквой и цифрой',
@@ -155,9 +137,7 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-password'
                                 placeholder='Пароль'
                                 size='large'
-                                style={
-                                    !isMobile ? { width: 368 } : { width: 296, fontSize: '14px' }
-                                }
+                                className={styles.inputPassword}
                             />
                         </Form.Item>
 
@@ -180,11 +160,7 @@ export const RegistrationPage: React.FC = () => {
                                 data-test-id='registration-confirm-password'
                                 placeholder='Повторите пароль'
                                 size='large'
-                                style={
-                                    !isMobile
-                                        ? { width: 368, marginTop: 25 }
-                                        : { width: 296, fontSize: 14, marginTop: 13 }
-                                }
+                                className={styles.inputConfirmPassword}
                             />
                         </Form.Item>
                         <Form.Item wrapperCol={{ span: 360 }}>
@@ -194,11 +170,7 @@ export const RegistrationPage: React.FC = () => {
                                 htmlType='submit'
                                 block
                                 size='large'
-                                style={
-                                    !isMobile
-                                        ? { marginTop: 36, backgroundColor: '#2f54eb' }
-                                        : { marginTop: 31, backgroundColor: '#2f54eb' }
-                                }
+                                className={styles.submitButton}
                             >
                                 Войти
                             </Button>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -37,7 +37,7 @@ export const PATH = {
     DEFAULT: '*',
 };
 
-export const Router: React.FC = () => {
+export const Router = () => {
     const { isAuthorized } = useContext(GlobalContext);
     return (
         <Routes>
@@ -77,10 +77,11 @@ export const Router: React.FC = () => {
                 path={PATH.CONFIRM_EMAIL}
                 element={<PrivateHistoryRoute component={<ConfirmEmailPage />} />}
             />
-            <Route
+            {/* <Route
                 path={PATH.CHANGE_PASSWORD}
                 element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
-            />
+            /> */}
+            <Route path={PATH.CHANGE_PASSWORD} element={<ChangePasswordPage />} />
             <Route
                 path={PATH.REGISTRATION}
                 element={<PrivateHistoryRoute component={<RegistrationPage />} />}

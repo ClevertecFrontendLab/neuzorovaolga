@@ -27,7 +27,7 @@ export const AuthContext = createContext<IAuthContext>({
     },
 });
 
-export const AuthProvider: React.FC<Props> = ({ children }) => {
+export const AuthProvider = ({ children }: Props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatedRequest, setRepeatedRequest] = useState(false);

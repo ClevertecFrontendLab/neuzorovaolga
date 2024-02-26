@@ -1,9 +1,8 @@
-import React from 'react';
 import styles from './footer.module.css';
 import { Button } from 'antd';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 
-export const Footer: React.FC = () => (
+export const Footer = () => (
     <div className={styles.wrapper}>
         <div className={styles.linkButtonWrapper}>
             <Button

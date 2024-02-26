@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-
+import { useContext } from 'react';
 import styles from './main.module.css';
 import { CardAction } from './card-action/card-action';
 import { CalendarTwoTone, HeartFilled, SolutionOutlined } from '@ant-design/icons';
@@ -20,7 +19,7 @@ const cards = [
     { icon: <SolutionOutlined color='link' />, iconTitle: 'Профиль', title: 'Заполнить профиль' },
 ];
 
-export const Main: React.FC = () => {
+export const Main = () => {
     const { width } = useWindowDimensions();
     const isTablet = width < 1440 && width > 833;
     const { collapsed } = useContext(GlobalContext);
