@@ -1,0 +1,18 @@
+/* fonts styles */
+:root {
+    --font-family: 'Inter', sans-serif;
+    --font-14: 14px;
+    --font-24: 24px;
+    --weight-400: 400;
+    --weight-500: 500;
+    --spacing-1: 1px;
+    --line-h130: 130%;
+}
+
+/* basic wrapper styles */
+:root {
+    --modal-width: 539px;
+    --modal-mobile-width: 328px;
+    --authentication-input-width: 368px;
+    --authentication-mobile-input-width: 296px;
+}

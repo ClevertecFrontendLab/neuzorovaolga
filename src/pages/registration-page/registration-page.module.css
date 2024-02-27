@@ -1,0 +1,112 @@
+.wrapper {
+    width: var(--modal-width);
+    height: 686px;
+    border-radius: 2px;
+    padding: 63px 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--neutral-gray-1);
+    z-index: 100;
+}
+.logo {
+    margin-bottom: 46px;
+}
+.form {
+    width: var(--authentication-input-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttonWrapper {
+    width: 100%;
+    padding-bottom: 32px;
+}
+
+.formWrapper {
+    width: 100%;
+    height: 319px;
+}
+
+.inputEmail {
+    width: var(--authentication-input-width);
+    margin-bottom: 8px;
+}
+
+.inputPassword {
+    width: var(--authentication-input-width);
+}
+
+.inputConfirmPassword {
+    width: var(--authentication-input-width);
+    margin-top: 25px;
+}
+
+.submitButton {
+    margin-top: 36px;
+    background-color: var(--primary-light-6);
+}
+
+@media (max-width: 1439px) {
+    .wrapper {
+        width: var(--modal-width);
+        height: 686px;
+        position: relative;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: 328px;
+        height: 564px;
+        bottom: 4px;
+        padding: 32px 16px;
+    }
+
+    .form {
+        width: var(--authentication-mobile-input-width);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-bottom: 32px;
+    }
+
+    .checkAndLink {
+        height: 49px;
+    }
+
+    .googleButton {
+        font-size: var(--font-14);
+    }
+
+    .buttonWrapper {
+        padding-bottom: 23px;
+    }
+
+    .formWrapper {
+        height: 308px;
+    }
+
+    .inputEmail {
+        width: var(--authentication-mobile-input-width);
+    }
+
+    .inputPassword {
+        width: var(--authentication-mobile-input-width);
+        font-size: var(--font-14);
+    }
+
+    .inputConfirmPassword {
+        width: var(--authentication-mobile-input-width);
+        margin-top: 13px;
+        font-size: var(--font-14);
+    }
+
+    .submitButton {
+        margin-top: 31px;
+    }
+}

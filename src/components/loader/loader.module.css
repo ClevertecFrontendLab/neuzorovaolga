@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    z-index: 1000;
+}
+
+.display {
+    left: 0;
+}
+
+.lottie {
+    width: 150px;
+    height: 150px;
+}
+
+@media (max-width: 1439px) {
+    .lottie {
+        width: 100px;
+        height: 100px;
+    }
+}

@@ -1,3 +1,66 @@
 #root {
     background-color: rgba(243, 243, 243, 0.75);
 }
+
+.ant-menu-horizontal > .ant-menu-item:after {
+    left: 0;
+    right: 0;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+    color: var(--primary-light-6);
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover {
+    color: var(--primary-light-6);
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected:after {
+    border-bottom: 2px solid var(--primary-light-6);
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after {
+    border-bottom: 2px solid var(--primary-light-6);
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: var(--primary-light-6);
+    border-color: var(--primary-light-6);
+}
+
+.ant-input-group-addon {
+    color: var(--character-light-primary-85);
+}
+
+.ant-form-item-explain-error,
+.ant-form-item-extra {
+    font-size: 12px;
+    width: var(--authentication-input-width);
+}
+
+.ant-form-item-explain > div {
+    font-size: 12px;
+    width: var(--authentication-input-width);
+}
+@media (max-width: 833px) {
+    .ant-form-item-explain > div {
+        width: 297px;
+    }
+}
+
+.vi__character {
+    font-size: var(--font-14);
+}
+
+.vi__character--selected,
+.vi__character--inactive {
+    color: var(--character-light-primary-85);
+    background-color: transparent;
+}

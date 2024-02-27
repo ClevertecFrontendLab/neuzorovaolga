@@ -1,0 +1,93 @@
+.wrapper {
+    width: var(--modal-width);
+    height: 742px;
+    border-radius: 2px;
+    padding: 64px 32px;
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--neutral-gray-1);
+    z-index: 100;
+}
+
+.logo {
+    margin-bottom: 46px;
+}
+
+.form {
+    width: var(--authentication-input-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonWrapper {
+    width: 100%;
+    padding-bottom: 25px;
+}
+
+.checkAndLink {
+    display: flex;
+    justify-content: space-between;
+    height: 53px;
+    margin-top: 48px;
+}
+
+.password {
+    width: var(--authentication-input-width);
+}
+
+.buttonForgotPassword {
+    padding-right: 0;
+    font-size: 16px;
+    color: var(--primary-light-6);
+}
+
+@media (max-width: 1439px) {
+    .wrapper {
+        width: var(--modal-width);
+        height: 742px;
+        position: relative;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: var(--modal-mobile-width);
+        height: 612px;
+        bottom: 4px;
+        padding: 32px 16px;
+    }
+
+    .form {
+        width: var(--authentication-mobile-input-width);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-bottom: 32px;
+    }
+
+    .checkAndLink {
+        height: 49px;
+    }
+
+    .googleButton {
+        margin-top: -10px;
+        font-size: var(--font-14);
+    }
+
+    .password {
+        width: var(--authentication-mobile-input-width);
+        font-size: var(--font-14);
+    }
+
+    .buttonForgotPassword {
+        font-size: var(--font-14);
+        margin-right: 5px;
+    }
+}

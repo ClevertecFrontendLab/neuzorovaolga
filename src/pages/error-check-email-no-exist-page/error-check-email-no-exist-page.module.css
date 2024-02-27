@@ -1,0 +1,17 @@
+.wrapper {
+    padding: 66px 67px 59px;
+}
+
+.button {
+    width: fit-content !important;
+    padding: 0 17px;
+    font-size: var(--font-14);
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        width: var(--modal-mobile-width);
+        height: 386px;
+        padding: 66px 23px 59px;
+    }
+}
