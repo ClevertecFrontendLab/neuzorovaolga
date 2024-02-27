@@ -1,19 +1,19 @@
 .wrapper {
-    width: 539px;
+    width: var(--modal-width);
     height: 686px;
     border-radius: 2px;
     padding: 63px 32px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--neutral-gray-1);
     z-index: 100;
 }
 .logo {
     margin-bottom: 46px;
 }
 .form {
-    width: 368px;
+    width: var(--authentication-input-width);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,27 +29,27 @@
 }
 
 .inputEmail {
-    width: 368px;
+    width: var(--authentication-input-width);
     margin-bottom: 8px;
 }
 
 .inputPassword {
-    width: 368px;
+    width: var(--authentication-input-width);
 }
 
 .inputConfirmPassword {
-    width: 368px;
+    width: var(--authentication-input-width);
     margin-top: 25px;
 }
 
 .submitButton {
     margin-top: 36px;
-    background-color: #2f54eb;
+    background-color: var(--primary-light-6);
 }
 
 @media (max-width: 1439px) {
     .wrapper {
-        width: 539px;
+        width: var(--modal-width);
         height: 686px;
         position: relative;
         bottom: 25px;
@@ -65,7 +65,7 @@
     }
 
     .form {
-        width: 296px;
+        width: var(--authentication-mobile-input-width);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -80,7 +80,7 @@
     }
 
     .googleButton {
-        font-size: 14px;
+        font-size: var(--font-14);
     }
 
     .buttonWrapper {
@@ -92,18 +92,18 @@
     }
 
     .inputEmail {
-        width: 296px;
+        width: var(--authentication-mobile-input-width);
     }
 
     .inputPassword {
-        width: 296px;
-        font-size: 14px;
+        width: var(--authentication-mobile-input-width);
+        font-size: var(--font-14);
     }
 
     .inputConfirmPassword {
-        width: 296px;
+        width: var(--authentication-mobile-input-width);
         margin-top: 13px;
-        font-size: 14px;
+        font-size: var(--font-14);
     }
 
     .submitButton {

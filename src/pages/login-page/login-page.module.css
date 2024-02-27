@@ -1,5 +1,5 @@
 .wrapper {
-    width: 539px;
+    width: var(--modal-width);
     height: 742px;
     border-radius: 2px;
     padding: 64px 32px;
@@ -7,7 +7,7 @@
 
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--neutral-gray-1);
     z-index: 100;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .form {
-    width: 368px;
+    width: var(--authentication-input-width);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,18 +35,18 @@
 }
 
 .password {
-    width: 368px;
+    width: var(--authentication-input-width);
 }
 
 .buttonForgotPassword {
     padding-right: 0;
     font-size: 16px;
-    color: #2f54eb;
+    color: var(--primary-light-6);
 }
 
 @media (max-width: 1439px) {
     .wrapper {
-        width: 539px;
+        width: var(--modal-width);
         height: 742px;
         position: relative;
         bottom: 25px;
@@ -55,14 +55,14 @@
 
 @media (max-width: 833px) {
     .wrapper {
-        width: 328px;
+        width: var(--modal-mobile-width);
         height: 612px;
         bottom: 4px;
         padding: 32px 16px;
     }
 
     .form {
-        width: 296px;
+        width: var(--authentication-mobile-input-width);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -78,16 +78,16 @@
 
     .googleButton {
         margin-top: -10px;
-        font-size: 14px;
+        font-size: var(--font-14);
     }
 
     .password {
-        width: 296px;
-        font-size: 14px;
+        width: var(--authentication-mobile-input-width);
+        font-size: var(--font-14);
     }
 
     .buttonForgotPassword {
-        font-size: 14px;
+        font-size: var(--font-14);
         margin-right: 5px;
     }
 }

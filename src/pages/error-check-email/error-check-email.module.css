@@ -1,37 +1,37 @@
 .wrapper {
-    width: 539px;
+    width: var(--modal-width);
     height: 550px;
     border-radius: 2px;
     padding: 64px 45px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--neutral-gray-1);
     z-index: 100;
 }
 
 .title {
     margin-top: 25px;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 130%;
-    letter-spacing: 1px;
+    font-weight: var(--weight-500);
+    font-size: var(--font-24);
+    line-height: var(--line-h130);
+    letter-spacing: var(--spacing-1);
     text-align: center;
-    color: #262626;
+    color: var(--character-light-primary-85);
 }
 
 .message {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 130%;
+    font-weight: var(--weight-400);
+    font-size: var(--font-14);
+    line-height: var(--line-h130);
     text-align: center;
-    color: #8c8c8c;
+    color: var(--neutral-gray-7);
     margin-bottom: 23px;
 }
 
 @media (max-width: 833px) {
     .wrapper {
-        width: 328px;
+        width: var(--modal-mobile-width);
         height: 568px;
         padding: 64px 39px;
     }
