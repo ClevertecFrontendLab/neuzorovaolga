@@ -1,0 +1,42 @@
+.wrapper {
+    position: absolute;
+    top: 50%;
+    border-radius: 2px;
+    width: 539px;
+    backdrop-filter: blur(10px);
+    background: var(--character-light-primary-inverse);
+}
+
+.title {
+    display: flex;
+    padding: 16px 24px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--character-light-dividers);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.form {
+    padding: 16px 0 0;
+    border-bottom: 1px solid var(--character-light-dividers);
+}
+.message {
+    padding: 0 16px;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 1px solid var(--character-light-dividers);
+}
+
+.submit {
+    margin-top: 15px;
+    margin-right: 15px;
+    background: var(--primary-light-6);
+}

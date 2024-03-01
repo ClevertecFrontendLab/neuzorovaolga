@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './feedbacks-card.module.css';
-import { Rate } from 'antd';
+import { Avatar, Rate } from 'antd';
+import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 
 interface Props {
     id: string;
@@ -29,7 +30,8 @@ export const FeedbacksCard = ({ id, fullName, imageSrc, message, rating, created
     return (
         <div className={styles.wrapper}>
             <div className={styles.user}>
-                <div className={styles.photo}>{imageSrc}</div>
+                {/* <div className={styles.photo}>{imageSrc}</div> */}
+                <Avatar size={42} icon={<UserOutlined />} />
                 <div>Вероника Киверова</div>
             </div>
             <div>
