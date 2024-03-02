@@ -1,4 +1,4 @@
-const getTimeHelper = (data: string) => {
+export const getTimeHelper = (data: string) => {
     const date = new Date(data);
     const day = date.getDate();
     const month = date.getMonth() + 1;
