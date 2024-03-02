@@ -1,12 +1,3 @@
-.wrapper {
-    position: absolute;
-    top: 50%;
-    border-radius: 2px;
-    width: 539px;
-    backdrop-filter: blur(10px);
-    background: var(--character-light-primary-inverse);
-}
-
 .title {
     display: flex;
     padding: 16px 24px;

@@ -1,73 +1,88 @@
 import { Menu } from '@pages/main-page/menu/menu';
 import styles from './feedbacks-page.module.css';
-import { useContext, useState } from 'react';
-import { feedbacksRequest } from '@app/api/feedbacks';
-import { FeedbacksContext } from '@context/FeedbacksContext';
-import { FeedbacksCard } from './feedbacks-card/feedbacks-card';
+import { useEffect, useState } from 'react';
+import { getFeedbacksRequest } from '@app/api/feedbacks';
+import { FeedbackCard } from '@pages/feedbacks-page/feedback-card/feedback-card.tsx';
 import { Button } from 'antd';
-import { ModalCardFeedback } from './modal-card/modal-card';
+import { CreateFeedbackModal } from '@pages/feedbacks-page/create-feedback-modal/create-feedback-modal.tsx';
+
+export interface Feedback {
+    id: string;
+    fullName: string;
+    imageSrc: string;
+    message: string;
+    rating: number;
+    createdAt: string;
+}
 
 export const FeedbacksPage = () => {
-    const [statusWriteComment, setStatusWriteComment] = useState(false);
-    const [showComments, setShowComments] = useState(false);
-    const { createFeedback, feedbacks } = useContext(FeedbacksContext);
+    const [isCreateModal, setIsCreateModal] = useState(false);
+    const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
+    const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
 
-    feedbacksRequest().then((res) => {
-        const feedbacks = res;
-        createFeedback(feedbacks);
-    });
-
-    // .catch((error) => {
-    //     console.log(error);
-    // });
-
-    const handleButton = () => {
-        if (statusWriteComment) {
-            setStatusWriteComment(false);
-        } else {
-            setStatusWriteComment(true);
-        }
+    const updateFeedbacks = () => {
+        getFeedbacksRequest()
+            .then((response) => {
+                setFeedbacks(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
-    const handleShow = () => {
-        if (showComments) {
-            setShowComments(false);
+    useEffect(() => {
+        updateFeedbacks();
+    }, []);
+
+    const showCreateFeedbackModal = () => {
+        setIsCreateModal(true);
+    };
+
+    const hideCreateFeedbackModal = () => {
+        setIsCreateModal(false);
+    };
+
+    const handleAllFeedback = () => {
+        if (isAllFeedbacks) {
+            setIsAllFeedbacks(false);
         } else {
-            setShowComments(true);
+            setIsAllFeedbacks(true);
         }
     };
 
     const showAllFeedbacks = () => {
-        return feedbacks
-            .slice(-4)
-            .reverse()
-            .map(({ id, fullName, imageSrc, message, rating, createdAt }) => (
-                <FeedbacksCard
-                    key={id}
-                    id={id}
-                    fullName={fullName}
-                    imageSrc={imageSrc}
-                    message={message}
-                    rating={rating}
-                    createdAt={createdAt}
-                />
-            ));
+        return (
+            feedbacks
+                .slice(0, 4)
+                // .reverse()
+                .map(({ id, fullName, imageSrc, message, rating, createdAt }) => (
+                    <FeedbackCard
+                        key={id}
+                        fullName={fullName}
+                        imageSrc={imageSrc}
+                        message={message}
+                        rating={rating}
+                        createdAt={createdAt}
+                    />
+                ))
+        );
     };
 
     const showFourFeedbacks = () => {
-        return feedbacks
-            .reverse()
-            .map(({ id, fullName, imageSrc, message, rating, createdAt }) => (
-                <FeedbacksCard
-                    key={id}
-                    id={id}
-                    fullName={fullName}
-                    imageSrc={imageSrc}
-                    message={message}
-                    rating={rating}
-                    createdAt={createdAt}
-                />
-            ));
+        return (
+            feedbacks
+                // .reverse()
+                .map(({ id, fullName, imageSrc, message, rating, createdAt }) => (
+                    <FeedbackCard
+                        key={id}
+                        fullName={fullName}
+                        imageSrc={imageSrc}
+                        message={message}
+                        rating={rating}
+                        createdAt={createdAt}
+                    />
+                ))
+        );
     };
 
     return (
@@ -79,27 +94,27 @@ export const FeedbacksPage = () => {
                 </div>
                 <div className={styles.feedbacksContainer}>
                     <div className={styles.comments}>
-                        {showComments ? showFourFeedbacks() : showAllFeedbacks()}
+                        {isAllFeedbacks ? showFourFeedbacks() : showAllFeedbacks()}
                     </div>
                     <div className={styles.navigateButtons}>
                         <Button
                             className={styles.buttonWriteFeedback}
                             type='primary'
-                            onClick={handleButton}
+                            onClick={showCreateFeedbackModal}
                         >
                             Написать отзыв
                         </Button>
                         <Button
                             className={styles.buttonAllFeedback}
                             type='link'
-                            onClick={handleShow}
+                            onClick={handleAllFeedback}
                         >
-                            {!showComments ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
+                            {!isAllFeedbacks ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
                         </Button>
                     </div>
                 </div>
             </div>
-            {statusWriteComment && <ModalCardFeedback handleButton={handleButton} />}
+            {isCreateModal && <CreateFeedbackModal handleClose={hideCreateFeedbackModal} />}
         </div>
     );
 };

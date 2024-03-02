@@ -1,14 +1,15 @@
 import { instance } from './index';
+import { Feedback } from '@pages/feedbacks-page/feedbacks-page.tsx';
 
 interface IFeedbackResponse {
     accessToken: string;
 }
 
-export const feedbacksRequest = () => {
+export const getFeedbacksRequest = (): Promise<Feedback[]> => {
     return instance.get('/feedback');
 };
 
-export const feedbacksUserRequest = (
+export const createFeedbackRequest = (
     message: string,
     rating: number,
 ): Promise<IFeedbackResponse> => {

@@ -13,7 +13,6 @@ import { GlobalProvider } from './context/GlobalContext';
 import { Router } from './router';
 import { AuthProvider } from './context/AuthContext';
 import { LoaderProvider } from './context/LoaderContext';
-import { FeedbacksProvider } from '@context/FeedbacksContext';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -23,13 +22,11 @@ root.render(
         <LoaderProvider>
             <GlobalProvider>
                 <AuthProvider>
-                    <FeedbacksProvider>
-                        <Provider store={store}>
-                            <HistoryRouter history={history}>
-                                <Router />
-                            </HistoryRouter>
-                        </Provider>
-                    </FeedbacksProvider>
+                    <Provider store={store}>
+                        <HistoryRouter history={history}>
+                            <Router />
+                        </HistoryRouter>
+                    </Provider>
                 </AuthProvider>
             </GlobalProvider>
         </LoaderProvider>
