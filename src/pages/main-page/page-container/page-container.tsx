@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './page-container.module.css';
 import { Header } from './header';
 import { Section } from './section/section';

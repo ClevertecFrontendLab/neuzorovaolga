@@ -16,6 +16,7 @@ import { LoaderContext } from '../../context/LoaderContext';
 import { PATH } from '../../router';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { regexPasswordValidation } from '@utils/validation';
+import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface FormData {
     username: string;
@@ -77,7 +78,7 @@ export const RegistrationPage = () => {
 
     return (
         <ScreenWrapper>
-            <div className={styles.wrapper}>
+            <ModalWrapper modalWrapperStales={styles.wrapper}>
                 {!isMobile && <img className={styles.logo} src={Logo} />}
                 {isMobile && <img className={styles.logo} src={MobileLogo} />}
 
@@ -186,7 +187,7 @@ export const RegistrationPage = () => {
                         Регистрация через Google
                     </Button>
                 </div>
-            </div>
+            </ModalWrapper>
         </ScreenWrapper>
     );
 };

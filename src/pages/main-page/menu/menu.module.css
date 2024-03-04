@@ -97,7 +97,6 @@
     }
     .menuWrapper {
         position: fixed;
-        width: 100vh;
         left: 50%;
         transform: translateX(-184px);
         top: 0;

@@ -1,4 +1,8 @@
-export const CloseIcon = ({ handleClick }: any) => {
+interface Props {
+    handleClick: () => void;
+}
+
+export const CloseIcon = ({ handleClick }: Props) => {
     return (
         <div onClick={handleClick}>
             <svg

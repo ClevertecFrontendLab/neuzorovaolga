@@ -1,5 +1,5 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
-import { InfoCard } from '@components/info-card/info-card';
+import { InfoModal } from '@components/info-modal/info-modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -19,7 +19,7 @@ export const ErrorCheckEmailNoExistPage = () => {
     };
     return (
         <ScreenWrapper>
-            <InfoCard
+            <InfoModal
                 iconType='error'
                 title='Такой e-mail не зарегистрирован'
                 message={

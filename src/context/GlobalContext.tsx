@@ -1,4 +1,4 @@
-import React, { createContext, useLayoutEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 export interface GlobalStateInterface {
     collapsed: boolean;
@@ -30,7 +30,7 @@ export const GlobalContext = createContext<GlobalStateInterface>({
 });
 
 export const GlobalProvider = ({ children }: Props) => {
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const token = localStorage.getItem('token');
     const [isAuthorized, setIsAuthorized] = useState(token ? true : false);
 

@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 export const Footer = () => {
     const navigate = useNavigate();
-    const handleButton = () => {
+
+    const handleFeedback = () => {
         navigate('/feedbacks');
     };
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.linkButtonWrapper}>
@@ -17,7 +19,8 @@ export const Footer = () => {
                     }}
                     type='link'
                     size='large'
-                    onClick={handleButton}
+                    data-test-id='see-reviews'
+                    onClick={handleFeedback}
                 >
                     Cмотреть отзывы
                 </Button>

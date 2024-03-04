@@ -1,13 +1,18 @@
-import styles from './create-feedback-modal.module.css';
+import styles from './modal-wrapper.module.css';
+import classnames from 'classnames';
+import { Modal } from 'antd';
 
 interface Props {
     children: React.ReactNode;
+    modalWrapperStales?: string;
 }
 
-export const ModalWrapper = ({ children }: Props) => {
+export const ModalWrapper = ({ children, modalWrapperStales }: Props) => {
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.modal}>{children}</div>
+        <div className={classnames(styles.wrapper)}>
+            <Modal open closable={false} footer={null} className={modalWrapperStales}>
+                {children}
+            </Modal>
         </div>
     );
 };

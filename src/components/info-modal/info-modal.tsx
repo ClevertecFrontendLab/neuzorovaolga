@@ -1,9 +1,10 @@
 import { Button } from 'antd';
-import WarningIcon from './../../assets/img/warning-icon.png';
-import SuccessfulIcon from './../../assets/img/successful-icon.png';
-import ErrorIcon from './../../assets/img/error-icon.png';
-import styles from './info-card.module.css';
+import styles from './info-modal.module.css';
 import classNames from 'classnames';
+import { ErrorIcon } from '@app/assets/icons/close-icon/error-icon.tsx';
+import { SuccessIcon } from '@app/assets/icons/close-icon/success-icon.tsx';
+import { WarningIcon } from '@app/assets/icons/close-icon/warning-icon.tsx';
+import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface Props {
     iconType: 'error' | 'success' | 'warning';
@@ -16,7 +17,7 @@ interface Props {
     buttonStyles?: string;
 }
 
-export const InfoCard = ({
+export const InfoModal = ({
     iconType,
     title,
     message,
@@ -27,13 +28,13 @@ export const InfoCard = ({
     buttonStyles,
 }: Props) => {
     const icon = {
-        error: <img src={ErrorIcon} />,
-        success: <img src={SuccessfulIcon} />,
-        warning: <img src={WarningIcon} />,
+        error: <ErrorIcon />,
+        success: <SuccessIcon />,
+        warning: <WarningIcon />,
     };
 
     return (
-        <div className={classNames(styles.wrapper, wrapperStyles)}>
+        <ModalWrapper modalWrapperStales={classNames(styles.wrapper, wrapperStyles)}>
             {icon[iconType]}
             <div className={styles.title}>{title}</div>
             <div className={styles.message}>{message}</div>
@@ -47,6 +48,6 @@ export const InfoCard = ({
             >
                 {buttonText}
             </Button>
-        </div>
+        </ModalWrapper>
     );
 };
