@@ -8,7 +8,6 @@ import { AuthContext } from '@context/AuthContext';
 import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import { regexPasswordValidation } from '@utils/validation';
-import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface FormData {
     password: string;
@@ -48,7 +47,7 @@ export const ChangePasswordPage = () => {
 
     return (
         <ScreenWrapper>
-            <ModalWrapper modalWrapperStales={styles.wrapper}>
+            <div className={styles.wrapper}>
                 <div className={styles.title}>Восстановление аккаунта</div>
                 <Form
                     name='basic'
@@ -121,7 +120,7 @@ export const ChangePasswordPage = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-            </ModalWrapper>
+            </div>
         </ScreenWrapper>
     );
 };

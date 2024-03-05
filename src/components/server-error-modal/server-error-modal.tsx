@@ -5,10 +5,11 @@ import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface Props {
     handleButton: () => void;
+    isModal?: boolean;
 }
-export const ServerErrorModal = ({ handleButton }: Props) => {
-    return (
-        <ModalWrapper modalWrapperStales={styles.wrapper}>
+export const ServerErrorModal = ({ handleButton, isModal }: Props) => {
+    const content = (
+        <>
             <img src={ServerErrorSrc} alt='error' />
             <div className={styles.title}>Что-то пошло не так</div>
             <div className={styles.message}>
@@ -22,6 +23,15 @@ export const ServerErrorModal = ({ handleButton }: Props) => {
             >
                 Назад
             </Button>
-        </ModalWrapper>
+        </>
+    );
+    return (
+        <>
+            {isModal ? (
+                <ModalWrapper modalWrapperStales={styles.wrapper}>{content}</ModalWrapper>
+            ) : (
+                <div className={styles.wrapper}>{content}</div>
+            )}
+        </>
     );
 };

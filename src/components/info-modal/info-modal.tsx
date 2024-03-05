@@ -34,7 +34,7 @@ export const InfoModal = ({
     };
 
     return (
-        <ModalWrapper modalWrapperStales={classNames(styles.wrapper, wrapperStyles)}>
+        <div className={classNames(styles.wrapper, wrapperStyles)}>
             {icon[iconType]}
             <div className={styles.title}>{title}</div>
             <div className={styles.message}>{message}</div>
@@ -48,6 +48,6 @@ export const InfoModal = ({
             >
                 {buttonText}
             </Button>
-        </ModalWrapper>
+        </div>
     );
 };

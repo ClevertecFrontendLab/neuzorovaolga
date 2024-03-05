@@ -11,12 +11,11 @@ import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { registrationRequest } from './../../api/auth';
-import { AuthContext } from '../../context/AuthContext';
-import { LoaderContext } from '../../context/LoaderContext';
+import { AuthContext } from '@context/AuthContext';
+import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { regexPasswordValidation } from '@utils/validation';
-import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface FormData {
     username: string;
@@ -78,7 +77,7 @@ export const RegistrationPage = () => {
 
     return (
         <ScreenWrapper>
-            <ModalWrapper modalWrapperStales={styles.wrapper}>
+            <div className={styles.wrapper}>
                 {!isMobile && <img className={styles.logo} src={Logo} />}
                 {isMobile && <img className={styles.logo} src={MobileLogo} />}
 
@@ -187,7 +186,7 @@ export const RegistrationPage = () => {
                         Регистрация через Google
                     </Button>
                 </div>
-            </ModalWrapper>
+            </div>
         </ScreenWrapper>
     );
 };

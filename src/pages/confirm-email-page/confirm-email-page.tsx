@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import { ErrorIcon } from '@app/assets/icons/close-icon/error-icon.tsx';
-import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 import { InfoIcon } from '@app/assets/icons/close-icon/info-icon.tsx';
 
 export const ConfirmEmailPage = () => {
@@ -21,7 +20,7 @@ export const ConfirmEmailPage = () => {
 
     return (
         <ScreenWrapper>
-            <ModalWrapper modalWrapperStales={styles.wrapper}>
+            <div className={styles.wrapper}>
                 {!errorStatus ? <InfoIcon /> : <ErrorIcon />}
                 <div className={styles.title}>
                     Введите код <br />
@@ -67,7 +66,7 @@ export const ConfirmEmailPage = () => {
                 />
 
                 <div className={styles.text}>Не пришло письмо? Проверьте папку Спам.</div>
-            </ModalWrapper>
+            </div>
         </ScreenWrapper>
     );
 };

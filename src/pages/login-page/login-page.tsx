@@ -16,7 +16,6 @@ import { PATH } from '../../router';
 import { GlobalContext } from '@context/GlobalContext';
 import { saveTokenHelper } from '@utils/storage';
 import useWindowDimensions from '@hooks/useWindowDimensions';
-import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
 interface FormData {
     username: string;
@@ -100,7 +99,7 @@ export const LoginPage = () => {
 
     return (
         <ScreenWrapper>
-            <ModalWrapper modalWrapperStales={styles.wrapper}>
+            <div className={styles.wrapper}>
                 {!isMobile && <img className={styles.logo} src={Logo} />}
                 {isMobile && <img className={styles.logo} src={MobileLogo} />}
                 <div className={styles.form}>
@@ -194,7 +193,7 @@ export const LoginPage = () => {
                         Войти через Google
                     </Button>
                 </div>
-            </ModalWrapper>
+            </div>
         </ScreenWrapper>
     );
 };
