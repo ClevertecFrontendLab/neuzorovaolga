@@ -3,6 +3,7 @@ import styles from './create-feedback-modal.module.css';
 import { Button, Form, Input, Rate } from 'antd';
 import { CloseIcon } from '@app/assets/icons/close-icon/close-icon.tsx';
 import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
+import { StarFilled, StarOutlined } from '@ant-design/icons';
 
 export interface CreateFeedbackData {
     message: string;
@@ -39,6 +40,13 @@ export const CreateFeedbackModal = ({
                     <Form.Item name='rating'>
                         <Rate
                             style={{ fontSize: '14px', marginBottom: '10px', marginLeft: '16px' }}
+                            character={({ value, index }) => {
+                                return value && index! < value ? (
+                                    <StarFilled style={{ color: '#faad14' }} />
+                                ) : (
+                                    <StarOutlined style={{ color: '#faad14' }} />
+                                );
+                            }}
                             defaultValue={defaultData?.rating}
                         />
                     </Form.Item>
@@ -46,6 +54,7 @@ export const CreateFeedbackModal = ({
                         <Input.TextArea
                             placeholder='Autosize height based on content lines'
                             defaultValue={defaultData?.message}
+                            autoSize
                         />
                     </Form.Item>
                     <Form.Item className={styles.button}>

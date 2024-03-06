@@ -12,6 +12,7 @@ import { ErrorFeedbackModal } from '@pages/feedbacks-page/error-feedback-modal/e
 import { SuccessFeedbackModal } from '@pages/feedbacks-page/success-feedback-modal/success-feedback-modal.tsx';
 import { ServerErrorModal } from '@components/server-error-modal/server-error-modal.tsx';
 import { useNavigate } from 'react-router-dom';
+import { VacantFeedback } from './vacant-feedback/vacant-feedback';
 
 export interface Feedback {
     id: string;
@@ -131,27 +132,34 @@ export const FeedbacksPage = () => {
                     <p className={styles.lightText}>Главная /</p> <p>&nbsp;Отзывы пользователей</p>
                 </div>
                 <div className={styles.feedbacksContainer}>
-                    <div className={styles.comments}>
-                        {isAllFeedbacks ? showFourFeedbacks() : showAllFeedbacks()}
-                    </div>
-                    <div className={styles.navigateButtons}>
-                        <Button
-                            className={styles.buttonWriteFeedback}
-                            type='primary'
-                            data-test-id='write-review'
-                            onClick={handleShowCreateModal}
-                        >
-                            Написать отзыв
-                        </Button>
-                        <Button
-                            className={styles.buttonAllFeedback}
-                            type='link'
-                            data-test-id='all-reviews-button'
-                            onClick={handleAllFeedback}
-                        >
-                            {!isAllFeedbacks ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
-                        </Button>
-                    </div>
+                    {feedbacks.length > 0 && (
+                        <div className={styles.comments}>
+                            {isAllFeedbacks ? showFourFeedbacks() : showAllFeedbacks()}
+                        </div>
+                    )}
+                    {feedbacks.length === 0 && (
+                        <VacantFeedback handleShowCreateModal={handleShowCreateModal} />
+                    )}
+                    {feedbacks.length > 0 && (
+                        <div className={styles.navigateButtons}>
+                            <Button
+                                className={styles.buttonWriteFeedback}
+                                type='primary'
+                                data-test-id='write-review'
+                                onClick={handleShowCreateModal}
+                            >
+                                Написать отзыв
+                            </Button>
+                            <Button
+                                className={styles.buttonAllFeedback}
+                                type='link'
+                                data-test-id='all-reviews-button'
+                                onClick={handleAllFeedback}
+                            >
+                                {!isAllFeedbacks ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
             {isCreateModal && (

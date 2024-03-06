@@ -47,4 +47,6 @@
     font-size: 14px;
     line-height: 130%;
     color: var(--character-light-secondary-45);
+    max-width: 1100px;
+    word-wrap: break-word;
 }
