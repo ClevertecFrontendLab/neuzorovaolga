@@ -1,7 +1,9 @@
 import { getTimeHelper } from '@utils/date';
 import styles from './feedback-card.module.css';
-import { Rate } from 'antd';
-import { StarFilled, StarOutlined } from '@ant-design/icons';
+import { Avatar, Rate } from 'antd';
+import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
+import { useContext } from 'react';
+import { GlobalContext } from '@context/GlobalContext';
 
 interface Props {
     fullName: string;
@@ -12,12 +14,21 @@ interface Props {
 }
 
 export const FeedbackCard = ({ fullName, imageSrc, message, rating, createdAt }: Props) => {
+    const { collapsed } = useContext(GlobalContext);
+    const arrName = fullName?.split(' ');
     return (
         <div className={styles.wrapper}>
             <div className={styles.user}>
-                <img className={styles.photo} src={imageSrc} alt='feedback-img' />
-                {/*<Avatar size={42} icon={<UserOutlined />} />*/}
-                <div>{fullName || 'Вы'}</div>
+                {imageSrc && <img className={styles.photo} src={imageSrc} alt='feedback-img' />}
+                {!imageSrc && <Avatar size={42} className={styles.photo} icon={<UserOutlined />} />}
+                {fullName ? (
+                    <div className={styles.fullName}>
+                        <div>{arrName[0]}</div>
+                        <div>{arrName[1]}</div>
+                    </div>
+                ) : (
+                    <div>Анонимный</div>
+                )}
             </div>
             <div>
                 <div className={styles.rate}>
@@ -37,7 +48,7 @@ export const FeedbackCard = ({ fullName, imageSrc, message, rating, createdAt }:
                         {getTimeHelper(createdAt)}
                     </div>
                 </div>
-                <div className={styles.message}>{message}</div>
+                <div className={!collapsed ? styles.message : styles.messageBig}>{message}</div>
             </div>
         </div>
     );

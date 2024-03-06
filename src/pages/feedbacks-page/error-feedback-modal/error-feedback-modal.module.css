@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 64px;
+    padding: 64px 0;
+    width: fit-content;
 }
 
 .title {
@@ -29,11 +30,12 @@
 .buttonsWrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 115%;
 }
 
 .button {
     background-color: var(--primary-light-6);
+    font-size: 14px;
 }
 
 .cancelButton {
@@ -41,4 +43,11 @@
     color: var(--character-light-title-85);
     background-color: var(--character-light-primary-inverse);
     border-color: var(--character-light-secondary-45);
+    font-size: 14px;
+}
+
+@media (max-width: 833px) {
+    .buttonsWrapper {
+        width: 100%;
+    }
 }

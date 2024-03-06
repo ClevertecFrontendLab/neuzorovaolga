@@ -1,6 +1,6 @@
 import { Menu } from '@pages/main-page/menu/menu';
 import styles from './feedbacks-page.module.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getFeedbacksRequest } from '@app/api/feedbacks';
 import { FeedbackCard } from '@pages/feedbacks-page/feedback-card/feedback-card.tsx';
 import { Button } from 'antd';
@@ -13,6 +13,7 @@ import { SuccessFeedbackModal } from '@pages/feedbacks-page/success-feedback-mod
 import { ServerErrorModal } from '@components/server-error-modal/server-error-modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { VacantFeedback } from './vacant-feedback/vacant-feedback';
+import { LoaderContext } from '@context/LoaderContext';
 
 export interface Feedback {
     id: string;
@@ -25,6 +26,7 @@ export interface Feedback {
 
 export const FeedbacksPage = () => {
     const navigate = useNavigate();
+    const { showLoader, hideLoader } = useContext(LoaderContext);
     const [isCreateModal, setIsCreateModal] = useState(false);
     const [isErrorModal, setIsErrorModal] = useState(false);
     const [isSuccessModal, setIsSuccessModal] = useState(false);
@@ -39,11 +41,13 @@ export const FeedbacksPage = () => {
     };
 
     const updateFeedbacks = () => {
+        showLoader();
         getFeedbacksRequest()
             .then((response) => {
                 setFeedbacks(response.reverse());
             })
-            .catch(handleServerError);
+            .catch(handleServerError)
+            .finally(hideLoader);
     };
 
     const handleShowCreateModal = () => {

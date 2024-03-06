@@ -35,3 +35,13 @@
     margin-right: 15px;
     background: var(--primary-light-6);
 }
+
+@media (max-width: 833px) {
+    .button {
+        margin-left: 15px;
+        justify-content: flex-start;
+    }
+    .submit {
+        width: 220%;
+    }
+}
