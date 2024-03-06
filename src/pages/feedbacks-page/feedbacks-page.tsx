@@ -169,7 +169,9 @@ export const FeedbacksPage = () => {
                 />
             )}
             {isSuccessModal && <SuccessFeedbackModal handleClose={handleCloseSuccessModal} />}
-            {isServerErrorModal && <ServerErrorModal handleButton={handleCloseServerErrorModal} />}
+            {isServerErrorModal && (
+                <ServerErrorModal handleButton={handleCloseServerErrorModal} isModal />
+            )}
         </div>
     );
 };
