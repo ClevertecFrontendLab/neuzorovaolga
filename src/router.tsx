@@ -20,6 +20,7 @@ import { PrivateHistoryRoute } from '@components/private-history-route/private-h
 import { ProtectedAuthorizeRoute } from '@components/protected-authorized-route/protected-authorized-route';
 import { GlobalContext } from '@context/GlobalContext';
 import { FeedbacksPage } from '@pages/feedbacks-page/feedbacks-page';
+import useGoogleAuth from '@hooks/useGoogleAuth.ts';
 
 export const PATH = {
     ERROR_LOGIN: '/result/error-login',
@@ -41,6 +42,8 @@ export const PATH = {
 
 export const Router = () => {
     const { isAuthorized } = useContext(GlobalContext);
+    useGoogleAuth();
+
     return (
         <Routes>
             <Route

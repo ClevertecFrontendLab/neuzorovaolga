@@ -68,6 +68,10 @@ export const RegistrationPage = () => {
         handleRegistration(username, password);
     };
 
+    const handleGoogle = () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
+
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -182,6 +186,7 @@ export const RegistrationPage = () => {
                         block
                         size='large'
                         icon={!isMobile && <GooglePlusOutlined />}
+                        onClick={handleGoogle}
                     >
                         Регистрация через Google
                     </Button>

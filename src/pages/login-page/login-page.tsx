@@ -90,6 +90,10 @@ export const LoginPage = () => {
             .finally(hideLoader);
     };
 
+    const handleGoogle = () => {
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
+
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -189,6 +193,7 @@ export const LoginPage = () => {
                         block
                         size='large'
                         icon={!isMobile && <GooglePlusOutlined />}
+                        onClick={handleGoogle}
                     >
                         Войти через Google
                     </Button>
