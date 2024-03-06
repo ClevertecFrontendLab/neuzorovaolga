@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
 
-export interface IAuthContext {
+export type AuthContext = {
     email: string;
     changeEmail: (email: string) => void;
     password: string;
     changePassword: (email: string) => void;
     repeatedRequest: boolean;
     changeRepeatedRequest: (status: boolean) => void;
-}
-interface Props {
+};
+type Props = {
     children: React.ReactNode;
-}
+};
 
-export const AuthContext = createContext<IAuthContext>({
+export const AuthContext = createContext<AuthContext>({
     email: '',
     changeEmail: () => {
         return;

@@ -1,0 +1,53 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 64px 0;
+    width: fit-content;
+}
+
+.title {
+    margin-top: 25px;
+    font-weight: var(--weight-500);
+    font-size: var(--font-24);
+    line-height: var(--line-h130);
+    letter-spacing: var(--spacing-1);
+    text-align: center;
+    color: var(--character-light-primary-85);
+}
+
+.message {
+    font-weight: var(--weight-400);
+    font-size: var(--font-14);
+    line-height: var(--line-h130);
+    text-align: center;
+    color: var(--neutral-gray-7);
+    margin-bottom: 23px;
+    white-space: pre-line;
+}
+
+.buttonsWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 115%;
+}
+
+.button {
+    background-color: var(--primary-light-6);
+    font-size: 14px;
+}
+
+.cancelButton {
+    margin-left: 10px;
+    color: var(--character-light-title-85);
+    background-color: var(--character-light-primary-inverse);
+    border-color: var(--character-light-secondary-45);
+    font-size: 14px;
+}
+
+@media (max-width: 833px) {
+    .buttonsWrapper {
+        width: 100%;
+    }
+}

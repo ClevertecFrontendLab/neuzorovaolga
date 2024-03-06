@@ -1,0 +1,28 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 64px;
+}
+
+.title {
+    margin-top: 25px;
+    margin-bottom: 23px;
+    font-weight: var(--weight-500);
+    font-size: var(--font-24);
+    line-height: var(--line-h130);
+    letter-spacing: var(--spacing-1);
+    text-align: center;
+    color: var(--character-light-primary-85);
+}
+
+.button {
+    background-color: var(--primary-light-6);
+}
+
+@media (max-width: 833px) {
+    .content {
+        padding: 32px 16px;
+    }
+}

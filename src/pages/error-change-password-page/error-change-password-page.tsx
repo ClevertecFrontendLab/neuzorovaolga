@@ -1,5 +1,5 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
-import { InfoCard } from '@components/info-card/info-card';
+import { InfoModal } from '@components/info-modal/info-modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -17,7 +17,7 @@ export const ErrorChangePasswordPage = () => {
     };
     return (
         <ScreenWrapper>
-            <InfoCard
+            <InfoModal
                 iconType='error'
                 title='Данные не сохранились'
                 message='Что-то пошло не так. Попробуйте ещё раз.'

@@ -5,23 +5,22 @@ import styles from './registration-page.module.css';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 
 import { Button, Form, Input } from 'antd';
-
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { registrationRequest } from './../../api/auth';
-import { AuthContext } from '../../context/AuthContext';
-import { LoaderContext } from '../../context/LoaderContext';
+import { AuthContext } from '@context/AuthContext';
+import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { regexPasswordValidation } from '@utils/validation';
 
-interface FormData {
+type FormData = {
     username: string;
     password: string;
     confirmPassword?: string;
-}
+};
 
 export const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -66,6 +65,10 @@ export const RegistrationPage = () => {
         changeEmail(username);
         changePassword(password);
         handleRegistration(username, password);
+    };
+
+    const handleGoogle = () => {
+        window.location.href = `${PATH.BASE}${PATH.GOOGLE_AUTH}`;
     };
 
     useEffect(() => {
@@ -182,6 +185,7 @@ export const RegistrationPage = () => {
                         block
                         size='large'
                         icon={!isMobile && <GooglePlusOutlined />}
+                        onClick={handleGoogle}
                     >
                         Регистрация через Google
                     </Button>

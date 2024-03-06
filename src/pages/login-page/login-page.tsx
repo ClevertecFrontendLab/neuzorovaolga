@@ -10,18 +10,18 @@ import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { checkEmailRequest, loginRequest } from './../../api/auth';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from './../../context/AuthContext';
-import { LoaderContext } from '../../context/LoaderContext';
+import { AuthContext } from '@context/AuthContext';
+import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
-import { GlobalContext } from '../../context/GlobalContext';
+import { GlobalContext } from '@context/GlobalContext';
 import { saveTokenHelper } from '@utils/storage';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
-interface FormData {
+type FormData = {
     username: string;
     password: string;
     remember: boolean;
-}
+};
 
 export const LoginPage = () => {
     const navigate = useNavigate();
@@ -89,6 +89,10 @@ export const LoginPage = () => {
             .finally(hideLoader);
     };
 
+    const handleGoogle = () => {
+        window.location.href = `${PATH.BASE}${PATH.GOOGLE_AUTH}`;
+    };
+
     useEffect(() => {
         if (repeatedRequest) {
             changeRepeatedRequest(false);
@@ -111,7 +115,7 @@ export const LoginPage = () => {
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
                         style={{ width: '100%', height: 270 }}
-                        initialValues={{ remember: true }}
+                        initialValues={{ remember: false }}
                         onFinish={onFinish}
                         autoComplete='off'
                         form={form}
@@ -188,6 +192,7 @@ export const LoginPage = () => {
                         block
                         size='large'
                         icon={!isMobile && <GooglePlusOutlined />}
+                        onClick={handleGoogle}
                     >
                         Войти через Google
                     </Button>

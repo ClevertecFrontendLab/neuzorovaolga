@@ -4,15 +4,15 @@ import { Button, Form, Input } from 'antd';
 import { changePasswordRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { LoaderContext } from '../../context/LoaderContext';
+import { AuthContext } from '@context/AuthContext';
+import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import { regexPasswordValidation } from '@utils/validation';
 
-interface FormData {
+type FormData = {
     password: string;
     confirmPassword: string;
-}
+};
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();

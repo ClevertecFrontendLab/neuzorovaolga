@@ -5,11 +5,11 @@ import { Button } from 'antd';
 import { GlobalContext } from '../../../../../../context/GlobalContext';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
-interface Props {
+type Props = {
     icon: React.ReactNode;
     iconTitle: string;
     title: string;
-}
+};
 
 export const CardAction = ({ icon, iconTitle, title }: Props) => {
     const { width } = useWindowDimensions();

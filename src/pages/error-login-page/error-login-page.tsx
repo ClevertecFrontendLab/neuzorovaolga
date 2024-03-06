@@ -1,5 +1,5 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
-import { InfoCard } from '@components/info-card/info-card';
+import { InfoModal } from '@components/info-modal/info-modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../router';
 
@@ -11,7 +11,7 @@ export const ErrorLoginPage = () => {
     };
     return (
         <ScreenWrapper>
-            <InfoCard
+            <InfoModal
                 iconType='warning'
                 title='Вход не выполнен'
                 message='Что-то пошло не так. Попробуйте еще раз'

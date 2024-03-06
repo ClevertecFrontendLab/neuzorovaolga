@@ -5,9 +5,9 @@ import { PATH } from '@app/router';
 import { useContext } from 'react';
 import { GlobalContext } from '@context/GlobalContext';
 
-interface Props {
+type Props = {
     component: React.ReactNode;
-}
+};
 
 export const PrivateHistoryRoute = ({ component }: Props) => {
     const { isAuthorized } = useContext(GlobalContext);

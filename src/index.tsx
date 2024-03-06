@@ -9,10 +9,10 @@ import 'antd/dist/antd.css';
 import './index.css';
 import '../src/styles/colors.css';
 import '../src/styles/variables.css';
-import { GlobalProvider } from './context/GlobalContext';
 import { Router } from './router';
-import { AuthProvider } from './context/AuthContext';
-import { LoaderProvider } from './context/LoaderContext';
+import { GlobalProvider } from '@context/GlobalContext';
+import { AuthProvider } from '@context/AuthContext';
+import { LoaderProvider } from '@context/LoaderContext';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);

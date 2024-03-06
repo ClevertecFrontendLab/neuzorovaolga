@@ -1,18 +1,17 @@
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
-import InfoIcon from './../../assets/img/info-icon.png';
-import ErrorIcon from './../../assets/img/error-icon.png';
 import styles from './confirm-email-page.module.css';
 import { useContext, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '@context/AuthContext';
 import VerificationInput from 'react-verification-input';
 import { confirmEmailRequest } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
-import { LoaderContext } from '../../context/LoaderContext';
+import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
+import { ErrorIcon } from '@app/assets/icons/close-icon/error-icon.tsx';
+import { InfoIcon } from '@app/assets/icons/close-icon/info-icon.tsx';
 
 export const ConfirmEmailPage = () => {
     const navigate = useNavigate();
-
     const { email } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const [errorStatus, setErrorStatus] = useState(false);
@@ -21,7 +20,7 @@ export const ConfirmEmailPage = () => {
     return (
         <ScreenWrapper>
             <div className={styles.wrapper}>
-                {!errorStatus ? <img src={InfoIcon} /> : <img src={ErrorIcon} />}
+                {!errorStatus ? <InfoIcon /> : <ErrorIcon />}
                 <div className={styles.title}>
                     Введите код <br />
                     для восстановления аккаунта
@@ -49,7 +48,6 @@ export const ConfirmEmailPage = () => {
                     value={value}
                     onChange={(data) => {
                         setValue(data);
-                        console.log('data', data);
                     }}
                     onComplete={(code: string) => {
                         showLoader();
@@ -57,7 +55,7 @@ export const ConfirmEmailPage = () => {
                             .then(() => {
                                 navigate(PATH.CHANGE_PASSWORD);
                             })
-                            .catch((error) => {
+                            .catch(() => {
                                 setValue('');
                                 setErrorStatus(true);
                             })

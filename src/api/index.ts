@@ -13,3 +13,10 @@ const onRejected = (reject: any): Promise<any> => {
 };
 
 instance.interceptors.response.use(onFulfilled, onRejected);
+instance.interceptors.request.use((config: any) => {
+    const token = sessionStorage.getItem('token');
+    return {
+        ...config,
+        headers: { ...config.headers, Authorization: token ? `Bearer ${token}` : undefined },
+    };
+});

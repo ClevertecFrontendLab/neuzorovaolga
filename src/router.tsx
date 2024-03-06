@@ -19,6 +19,8 @@ import { ChangePasswordPage } from '@pages/change-password-page/change-password-
 import { PrivateHistoryRoute } from '@components/private-history-route/private-history-route';
 import { ProtectedAuthorizeRoute } from '@components/protected-authorized-route/protected-authorized-route';
 import { GlobalContext } from '@context/GlobalContext';
+import { FeedbacksPage } from '@pages/feedbacks-page/feedbacks-page';
+import useGoogleAuth from '@hooks/useGoogleAuth.ts';
 
 export const PATH = {
     ERROR_LOGIN: '/result/error-login',
@@ -31,14 +33,19 @@ export const PATH = {
     SUCCESS_CHANGE_PASSWORD: '/result/success-change-password',
     CONFIRM_EMAIL: '/auth/confirm-email',
     CHANGE_PASSWORD: '/auth/change-password',
+    FEEDBACKS: '/feedbacks',
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
     MAIN: '/main',
+    BASE: 'https://marathon-api.clevertec.ru/',
+    GOOGLE_AUTH: 'auth/google',
     DEFAULT: '*',
 };
 
 export const Router = () => {
     const { isAuthorized } = useContext(GlobalContext);
+    useGoogleAuth();
+
     return (
         <Routes>
             <Route
@@ -77,20 +84,26 @@ export const Router = () => {
                 path={PATH.CONFIRM_EMAIL}
                 element={<PrivateHistoryRoute component={<ConfirmEmailPage />} />}
             />
-            {/* <Route
+            <Route
                 path={PATH.CHANGE_PASSWORD}
                 element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
-            /> */}
-            <Route path={PATH.CHANGE_PASSWORD} element={<ChangePasswordPage />} />
+            />
             <Route
-                path={PATH.REGISTRATION}
-                element={<PrivateHistoryRoute component={<RegistrationPage />} />}
+                path={PATH.CHANGE_PASSWORD}
+                element={<PrivateHistoryRoute component={<ChangePasswordPage />} />}
+            />
+            <Route
+                path={PATH.FEEDBACKS}
+                element={<PrivateHistoryRoute component={<FeedbacksPage />} />}
             />
             <Route
                 path={PATH.MAIN}
                 element={<ProtectedAuthorizeRoute component={<MainPage />} />}
             />
-
+            <Route
+                path={PATH.REGISTRATION}
+                element={<PrivateHistoryRoute component={<RegistrationPage />} />}
+            />
             <Route
                 path={PATH.AUTH}
                 element={!isAuthorized ? <LoginPage /> : <Navigate to={PATH.MAIN} replace />}

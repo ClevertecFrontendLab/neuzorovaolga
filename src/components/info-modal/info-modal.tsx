@@ -1,11 +1,12 @@
 import { Button } from 'antd';
-import WarningIcon from './../../assets/img/warning-icon.png';
-import SuccessfulIcon from './../../assets/img/successful-icon.png';
-import ErrorIcon from './../../assets/img/error-icon.png';
-import styles from './info-card.module.css';
+import styles from './info-modal.module.css';
 import classNames from 'classnames';
+import { ErrorIcon } from '@app/assets/icons/close-icon/error-icon.tsx';
+import { SuccessIcon } from '@app/assets/icons/close-icon/success-icon.tsx';
+import { WarningIcon } from '@app/assets/icons/close-icon/warning-icon.tsx';
+import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
-interface Props {
+type Props = {
     iconType: 'error' | 'success' | 'warning';
     title: string;
     message: string;
@@ -14,9 +15,9 @@ interface Props {
     dataTestId: string;
     wrapperStyles?: string;
     buttonStyles?: string;
-}
+};
 
-export const InfoCard = ({
+export const InfoModal = ({
     iconType,
     title,
     message,
@@ -27,9 +28,9 @@ export const InfoCard = ({
     buttonStyles,
 }: Props) => {
     const icon = {
-        error: <img src={ErrorIcon} />,
-        success: <img src={SuccessfulIcon} />,
-        warning: <img src={WarningIcon} />,
+        error: <ErrorIcon />,
+        success: <SuccessIcon />,
+        warning: <WarningIcon />,
     };
 
     return (
