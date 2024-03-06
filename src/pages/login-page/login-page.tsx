@@ -17,11 +17,11 @@ import { GlobalContext } from '@context/GlobalContext';
 import { saveTokenHelper } from '@utils/storage';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
-interface FormData {
+type FormData = {
     username: string;
     password: string;
     remember: boolean;
-}
+};
 
 export const LoginPage = () => {
     const navigate = useNavigate();
@@ -76,7 +76,6 @@ export const LoginPage = () => {
     };
 
     const onFinish = ({ username, password, remember }: FormData) => {
-        console.log('remember', remember);
         showLoader();
         loginRequest(username, password)
             .then(({ accessToken }) => {
@@ -91,7 +90,7 @@ export const LoginPage = () => {
     };
 
     const handleGoogle = () => {
-        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+        window.location.href = `${PATH.BASE}${PATH.GOOGLE_AUTH}`;
     };
 
     useEffect(() => {

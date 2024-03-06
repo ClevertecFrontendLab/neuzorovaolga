@@ -5,17 +5,17 @@ import { CloseIcon } from '@app/assets/icons/close-icon/close-icon.tsx';
 import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 
-export interface CreateFeedbackData {
+export type CreateFeedbackData = {
     message: string;
     rating: number;
-}
+};
 
-interface Props {
-    defaultData?: CreateFeedbackData;
+type Props = {
     handleClose: () => void;
     handleError: (data: CreateFeedbackData) => void;
     handleSuccess: () => void;
-}
+    defaultData?: CreateFeedbackData;
+};
 
 export const CreateFeedbackModal = ({
     defaultData,

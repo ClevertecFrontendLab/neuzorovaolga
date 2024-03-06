@@ -12,7 +12,6 @@ import { InfoIcon } from '@app/assets/icons/close-icon/info-icon.tsx';
 
 export const ConfirmEmailPage = () => {
     const navigate = useNavigate();
-
     const { email } = useContext(AuthContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const [errorStatus, setErrorStatus] = useState(false);
@@ -49,7 +48,6 @@ export const ConfirmEmailPage = () => {
                     value={value}
                     onChange={(data) => {
                         setValue(data);
-                        console.log('data', data);
                     }}
                     onComplete={(code: string) => {
                         showLoader();

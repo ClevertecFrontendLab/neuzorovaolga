@@ -1,15 +1,15 @@
 import { Loader } from '@components/loader/loader';
 import React, { createContext, useState } from 'react';
 
-export interface GlobalStateInterface {
+export type GlobalStateType = {
     showLoader: () => void;
     hideLoader: () => void;
-}
-interface Props {
+};
+type Props = {
     children: React.ReactNode;
-}
+};
 
-export const LoaderContext = createContext<GlobalStateInterface>({
+export const LoaderContext = createContext<GlobalStateType>({
     showLoader: () => {
         return;
     },

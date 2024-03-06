@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
 
-export interface GlobalStateInterface {
+export type GlobalStateType = {
     collapsed: boolean;
     isAuthorized: boolean;
     showMenu: () => void;
     hideMenu: () => void;
     logIn: () => void;
     logOut: () => void;
-}
-interface Props {
+};
+type Props = {
     children: React.ReactNode;
-}
+};
 
-export const GlobalContext = createContext<GlobalStateInterface>({
+export const GlobalContext = createContext<GlobalStateType>({
     collapsed: false,
     isAuthorized: false,
     showMenu: () => {

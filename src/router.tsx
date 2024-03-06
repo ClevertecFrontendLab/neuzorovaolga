@@ -37,6 +37,8 @@ export const PATH = {
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
     MAIN: '/main',
+    BASE: 'https://marathon-api.clevertec.ru/',
+    GOOGLE_AUTH: 'auth/google',
     DEFAULT: '*',
 };
 

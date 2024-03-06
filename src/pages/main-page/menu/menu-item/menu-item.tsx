@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './menu-item.module.css';
 import useWindowDimensions from '@hooks/useWindowDimensions.ts';
 
-interface Props {
+type Props = {
     icon: React.ReactNode;
     label: string;
     collapsed: boolean;
     handler?: () => void;
-}
+};
 
 export const MenuItem = ({ icon, label, collapsed, handler }: Props) => {
     const { width } = useWindowDimensions();

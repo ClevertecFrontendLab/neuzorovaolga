@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { saveTokenHelper } from '@utils/storage.ts';
 import { GlobalContext } from '@context/GlobalContext.tsx';
+import { PATH } from '@app/router';
 
 export default function useGoogleAuth() {
     const { search } = useLocation();
@@ -13,7 +14,7 @@ export default function useGoogleAuth() {
         if (token) {
             logIn();
             saveTokenHelper(token, false);
-            navigate('main');
+            navigate(PATH.MAIN);
         }
     }, []);
 }

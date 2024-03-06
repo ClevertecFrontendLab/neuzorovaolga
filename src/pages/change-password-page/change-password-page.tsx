@@ -9,10 +9,10 @@ import { LoaderContext } from '@context/LoaderContext';
 import { PATH } from '../../router';
 import { regexPasswordValidation } from '@utils/validation';
 
-interface FormData {
+type FormData = {
     password: string;
     confirmPassword: string;
-}
+};
 
 export const ChangePasswordPage = () => {
     const navigate = useNavigate();

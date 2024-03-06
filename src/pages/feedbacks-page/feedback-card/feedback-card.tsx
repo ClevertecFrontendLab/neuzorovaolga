@@ -5,13 +5,13 @@ import { StarFilled, StarOutlined, UserOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { GlobalContext } from '@context/GlobalContext';
 
-interface Props {
+type Props = {
     fullName: string;
     imageSrc: string;
     message: string;
     rating: number;
     createdAt: string;
-}
+};
 
 export const FeedbackCard = ({ fullName, imageSrc, message, rating, createdAt }: Props) => {
     const { collapsed } = useContext(GlobalContext);

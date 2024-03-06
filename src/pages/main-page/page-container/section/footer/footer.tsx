@@ -2,12 +2,13 @@ import styles from './footer.module.css';
 import { Button } from 'antd';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { PATH } from '@app/router';
 
 export const Footer = () => {
     const navigate = useNavigate();
 
     const handleFeedback = () => {
-        navigate('/feedbacks');
+        navigate(PATH.FEEDBACKS);
     };
 
     return (

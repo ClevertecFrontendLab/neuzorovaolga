@@ -13,16 +13,17 @@ import { SuccessFeedbackModal } from '@pages/feedbacks-page/success-feedback-mod
 import { ServerErrorModal } from '@components/server-error-modal/server-error-modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import { VacantFeedback } from './vacant-feedback/vacant-feedback';
+import { PATH } from '../../router';
 import { LoaderContext } from '@context/LoaderContext';
 
-export interface Feedback {
+export type Feedback = {
     id: string;
     fullName: string;
     imageSrc: string;
     message: string;
     rating: number;
     createdAt: string;
-}
+};
 
 export const FeedbacksPage = () => {
     const navigate = useNavigate();
@@ -33,7 +34,6 @@ export const FeedbacksPage = () => {
     const [isServerErrorModal, setIsServerErrorModal] = useState(false);
     const [createFeedbackData, setCreateFeedbackData] = useState<CreateFeedbackData | undefined>();
     const [isAllFeedbacks, setIsAllFeedbacks] = useState(false);
-    // const { updateFeedbacks, feedbacks } = useContext(FeedbacksContext);
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
 
     const handleServerError = () => {
@@ -121,7 +121,7 @@ export const FeedbacksPage = () => {
         ));
     };
     const handleCloseServerErrorModal = () => {
-        navigate('/main');
+        navigate(PATH.MAIN);
     };
 
     useEffect(() => {
@@ -160,7 +160,7 @@ export const FeedbacksPage = () => {
                                 data-test-id='all-reviews-button'
                                 onClick={handleAllFeedback}
                             >
-                                {!isAllFeedbacks ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
+                                {isAllFeedbacks ? 'Свернуть все отзывы' : 'Развернуть все отзывы'}
                             </Button>
                         </div>
                     )}

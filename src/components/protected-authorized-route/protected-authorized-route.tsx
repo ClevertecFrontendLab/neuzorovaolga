@@ -3,9 +3,9 @@ import { PATH } from '../../router';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
-interface Props {
+type Props = {
     component: React.ReactNode;
-}
+};
 
 export const ProtectedAuthorizeRoute = ({ component }: Props) => {
     const { isAuthorized } = useContext(GlobalContext);

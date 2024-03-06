@@ -6,7 +6,7 @@ import { SuccessIcon } from '@app/assets/icons/close-icon/success-icon.tsx';
 import { WarningIcon } from '@app/assets/icons/close-icon/warning-icon.tsx';
 import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 
-interface Props {
+type Props = {
     iconType: 'error' | 'success' | 'warning';
     title: string;
     message: string;
@@ -15,7 +15,7 @@ interface Props {
     dataTestId: string;
     wrapperStyles?: string;
     buttonStyles?: string;
-}
+};
 
 export const InfoModal = ({
     iconType,

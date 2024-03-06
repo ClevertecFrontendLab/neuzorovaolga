@@ -5,7 +5,6 @@ import styles from './registration-page.module.css';
 import { ScreenWrapper } from '@components/screen-wrapper/screen-wrapper';
 
 import { Button, Form, Input } from 'antd';
-
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -17,11 +16,11 @@ import { PATH } from '../../router';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { regexPasswordValidation } from '@utils/validation';
 
-interface FormData {
+type FormData = {
     username: string;
     password: string;
     confirmPassword?: string;
-}
+};
 
 export const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -69,7 +68,7 @@ export const RegistrationPage = () => {
     };
 
     const handleGoogle = () => {
-        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+        window.location.href = `${PATH.BASE}${PATH.GOOGLE_AUTH}`;
     };
 
     useEffect(() => {

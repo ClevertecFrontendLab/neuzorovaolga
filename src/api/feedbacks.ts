@@ -1,9 +1,9 @@
 import { instance } from './index';
 import { Feedback } from '@pages/feedbacks-page/feedbacks-page.tsx';
 
-interface IFeedbackResponse {
+type FeedbackResponse = {
     accessToken: string;
-}
+};
 
 export const getFeedbacksRequest = (): Promise<Feedback[]> => {
     return instance.get('/feedback');
@@ -12,7 +12,7 @@ export const getFeedbacksRequest = (): Promise<Feedback[]> => {
 export const createFeedbackRequest = (
     message: string,
     rating: number,
-): Promise<IFeedbackResponse> => {
+): Promise<FeedbackResponse> => {
     return instance.post('/feedback', {
         message: message,
         rating: rating,
