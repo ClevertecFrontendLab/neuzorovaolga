@@ -1,0 +1,54 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendarWrapper {
+    flex: 1;
+}
+
+.headerWrapper {
+    display: flex;
+    padding: 16px 24px 0;
+    background: var(--primary-light-1);
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.lightText {
+    color: var(--character-light-secondary-45);
+}
+
+.events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 101;
+}
+
+.events .ant-badge-status {
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.notes-month {
+    font-size: 28px;
+    text-align: center;
+}
+.notes-month section {
+    font-size: 28px;
+}

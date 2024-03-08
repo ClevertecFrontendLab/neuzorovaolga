@@ -21,6 +21,7 @@ import { ProtectedAuthorizeRoute } from '@components/protected-authorized-route/
 import { GlobalContext } from '@context/GlobalContext';
 import { FeedbacksPage } from '@pages/feedbacks-page/feedbacks-page';
 import useGoogleAuth from '@hooks/useGoogleAuth.ts';
+import { CalendarPage } from '@pages/calendar-page/calendar-page';
 
 export const PATH = {
     ERROR_LOGIN: '/result/error-login',
@@ -34,6 +35,7 @@ export const PATH = {
     CONFIRM_EMAIL: '/auth/confirm-email',
     CHANGE_PASSWORD: '/auth/change-password',
     FEEDBACKS: '/feedbacks',
+    CALENDAR: '/calendar',
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
     MAIN: '/main',
@@ -96,6 +98,7 @@ export const Router = () => {
                 path={PATH.FEEDBACKS}
                 element={<PrivateHistoryRoute component={<FeedbacksPage />} />}
             />
+            <Route path={PATH.CALENDAR} element={<CalendarPage />} />
             <Route
                 path={PATH.MAIN}
                 element={<ProtectedAuthorizeRoute component={<MainPage />} />}

@@ -90,8 +90,8 @@ export const Menu = () => {
                         )}
                     </div>
                     <div className={styles.tabs}>
-                        {actionButtons.map(({ icon, label }) => (
-                            <MenuItem icon={icon} label={label} collapsed={collapsed} />
+                        {actionButtons.map(({ icon, label, key }) => (
+                            <MenuItem key={key} icon={icon} label={label} collapsed={collapsed} />
                         ))}
                     </div>
 

@@ -73,3 +73,14 @@
     color: var(--character-light-primary-85);
     background-color: transparent;
 }
+
+.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-today {
+    z-index: 100;
+}
+
+.ant-picker-cell-inner .ant-picker-calendar-date .ant-picker-calendar-date-today {
+    z-index: 100;
+}
+.ant-picker-calendar-date-content {
+    z-index: 100;
+}
