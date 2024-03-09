@@ -3,13 +3,21 @@ import styles from './calendar-page.module.css';
 
 import 'antd/dist/antd.css';
 
-import { Badge, BadgeProps, Calendar } from 'antd';
+import { Badge, BadgeProps, Calendar, Drawer } from 'antd';
 import type { Moment } from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CreateTrainee } from './create-trainee/create-trainee';
 import { CalendarCell } from './calendar-cell/calendar-cell';
+import { getTrainingsRequest } from '@app/api/training';
+import { useDispatch } from 'react-redux';
+import { hideDrawer, setTrainings } from '@redux/calendar/reducer';
+import { useSelector } from 'react-redux';
+import { selectIsDrawer } from '@redux/calendar/selectors';
+import { ExersiceDrawer } from './exersice-drawer/exersice-drawer';
 
 export const CalendarPage = () => {
+    const dispatch = useDispatch();
+
     const [activeDateModal, setActiveDateModal] = useState('');
 
     const handleDateClick = (date: string) => {
@@ -40,6 +48,13 @@ export const CalendarPage = () => {
         },
     ];
 
+    useEffect(() => {
+        getTrainingsRequest().then((data) => {
+            console.log(data);
+            dispatch(setTrainings(data));
+        });
+    }, []);
+
     const dateCellRender = (value: Moment) => {
         const stringValue = value.format('DD.MM.yyyy');
         const listData = data.filter(({ date }) => date === stringValue);
@@ -61,7 +76,6 @@ export const CalendarPage = () => {
                 <div className={styles.headerWrapper}>
                     <p className={styles.lightText}>Главная /</p> <p>&nbsp;Календарь</p>
                 </div>
-
                 <Calendar
                     dateCellRender={dateCellRender}
                     onSelect={(value: Moment) => {
@@ -71,6 +85,7 @@ export const CalendarPage = () => {
                         }
                     }}
                 />
+                <ExersiceDrawer />
             </div>
         </div>
     );

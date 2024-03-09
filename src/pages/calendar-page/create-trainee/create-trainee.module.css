@@ -17,6 +17,13 @@
     display: flex;
     justify-content: space-between;
 }
+.topSelect {
+    display: flex;
+    padding: 20px 15px 0;
+    width: 264px;
+    height: 53px;
+    align-items: center;
+}
 
 .title {
     font-family: var(--font-family);
@@ -48,4 +55,11 @@
     margin-top: 15px;
     margin-left: 12px;
     width: 91%;
+}
+
+.buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
 }
