@@ -66,7 +66,9 @@ export const CalendarPage = () => {
                     dateCellRender={dateCellRender}
                     onSelect={(value: Moment) => {
                         const stringValue = value.format('DD.MM.yyyy');
-                        handleDateClick(stringValue);
+                        if (stringValue !== activeDateModal) {
+                            handleDateClick(stringValue);
+                        }
                     }}
                 />
             </div>

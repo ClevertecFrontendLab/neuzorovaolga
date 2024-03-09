@@ -74,13 +74,17 @@
     background-color: transparent;
 }
 
-.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-today {
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
     z-index: 100;
 }
 
-.ant-picker-cell-inner .ant-picker-calendar-date .ant-picker-calendar-date-today {
-    z-index: 100;
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+    background-color: white;
 }
-.ant-picker-calendar-date-content {
-    z-index: 100;
+
+.ant-picker-calendar .ant-picker-panel .ant-picker-date-panel,
+.ant-picker-calendar-header {
+    background: var(--primary-light-1);
 }

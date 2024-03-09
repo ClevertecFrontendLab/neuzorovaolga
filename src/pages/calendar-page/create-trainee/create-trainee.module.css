@@ -6,6 +6,8 @@
     background: var(--character-light-primary-inverse);
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     z-index: 102;
+    left: 0;
+    top: 0;
 }
 
 .top {
