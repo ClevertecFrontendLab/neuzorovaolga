@@ -88,3 +88,11 @@
 .ant-picker-calendar-header {
     background: var(--primary-light-1);
 }
+
+.ant-badge-status-text {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}

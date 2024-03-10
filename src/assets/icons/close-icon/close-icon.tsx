@@ -1,5 +1,5 @@
 type Props = {
-    handleClick: () => void;
+    handleClick?: () => void;
 };
 
 export const CloseIcon = ({ handleClick }: Props) => (

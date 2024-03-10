@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { hideDrawer, setTrainings } from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
 import { selectIsDrawer } from '@redux/calendar/selectors';
-import { ExersiceDrawer } from './exersice-drawer/exersice-drawer';
+import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
@@ -85,7 +85,7 @@ export const CalendarPage = () => {
                         }
                     }}
                 />
-                <ExersiceDrawer />
+                <ExerciseDrawer />
             </div>
         </div>
     );
