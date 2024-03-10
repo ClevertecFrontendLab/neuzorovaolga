@@ -1,18 +1,12 @@
 import { Menu } from '@pages/main-page/menu/menu';
 import styles from './calendar-page.module.css';
-
-import 'antd/dist/antd.css';
-
-import { Badge, BadgeProps, Calendar, Drawer } from 'antd';
+import { Calendar } from 'antd';
 import type { Moment } from 'moment';
 import { useEffect, useState } from 'react';
-import { CreateTrainee } from './create-trainee/create-trainee';
 import { CalendarCell } from './calendar-cell/calendar-cell';
 import { getTrainingsRequest } from '@app/api/training';
 import { useDispatch } from 'react-redux';
-import { hideDrawer, setTrainings } from '@redux/calendar/reducer';
-import { useSelector } from 'react-redux';
-import { selectIsDrawer } from '@redux/calendar/selectors';
+import { setTrainings } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 
 export const CalendarPage = () => {
@@ -86,6 +80,7 @@ export const CalendarPage = () => {
                     }}
                 />
                 <ExerciseDrawer />
+                {/* <ErrorDownloadModal /> */}
             </div>
         </div>
     );

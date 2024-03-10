@@ -96,3 +96,7 @@
     line-height: 130%;
     color: var(--character-light-secondary-45);
 }
+
+.anticon {
+    align-items: flex-start;
+}

@@ -37,6 +37,9 @@ export const Menu = () => {
                 />
             ),
             label: 'Календарь',
+            handleClick: () => {
+                navigate(PATH.CALENDAR);
+            },
         },
         {
             key: '2',
@@ -90,8 +93,14 @@ export const Menu = () => {
                         )}
                     </div>
                     <div className={styles.tabs}>
-                        {actionButtons.map(({ icon, label, key }) => (
-                            <MenuItem key={key} icon={icon} label={label} collapsed={collapsed} />
+                        {actionButtons.map(({ icon, label, key, handleClick }) => (
+                            <MenuItem
+                                key={key}
+                                icon={icon}
+                                label={label}
+                                collapsed={collapsed}
+                                handleClick={handleClick}
+                            />
                         ))}
                     </div>
 
@@ -101,7 +110,7 @@ export const Menu = () => {
                                 icon={<img src={ExitSrc} />}
                                 label='Выход'
                                 collapsed={collapsed}
-                                handler={handleLogOut}
+                                handleClick={handleLogOut}
                             />
                         </div>
                     </div>

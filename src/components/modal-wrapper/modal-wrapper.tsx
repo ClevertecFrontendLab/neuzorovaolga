@@ -5,11 +5,19 @@ import { Modal } from 'antd';
 type Props = {
     children: React.ReactNode;
     modalWrapperStales?: string;
+    width?: string | number;
 };
 
-export const ModalWrapper = ({ children, modalWrapperStales }: Props) => (
+export const ModalWrapper = ({ children, modalWrapperStales, width }: Props) => (
     <div className={classnames(styles.wrapper)}>
-        <Modal open closable={false} footer={null} className={modalWrapperStales}>
+        <Modal
+            open
+            closable={false}
+            footer={null}
+            className={modalWrapperStales}
+            centered
+            width={width}
+        >
             {children}
         </Modal>
     </div>

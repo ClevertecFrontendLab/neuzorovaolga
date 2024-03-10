@@ -1,5 +1,6 @@
 import { CloseIcon } from '@app/assets/icons/close-icon/close-icon';
 import { BackIcon } from '@app/assets/icons/close-icon/back-icon';
+import classnames from 'classnames';
 import styles from './create-trainee.module.css';
 import Empty from '../../../assets/img/empty-image.png';
 import { Button, Select } from 'antd';
@@ -7,7 +8,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { showDrawer } from '@redux/calendar/reducer';
 
-export const CreateTrainee = ({ handleClose, date }: any) => {
+type Props = {
+    handleClose: () => void;
+    date: string;
+    isRightPosition: boolean;
+};
+
+export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => {
     const dispatch = useDispatch();
     const [isCreateTrainee, setIsCreateTrainee] = useState(false);
     const exercises = [
@@ -69,7 +76,7 @@ export const CreateTrainee = ({ handleClose, date }: any) => {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <div className={classnames(styles.wrapper, isRightPosition ? styles.right : styles.left)}>
             {!isCreateTrainee && (
                 <div>
                     <div className={styles.top}>
