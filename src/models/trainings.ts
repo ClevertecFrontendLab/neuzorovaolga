@@ -3,7 +3,7 @@ export type Training = {
     name: string;
     date: string;
     isImplementation: boolean;
-    userId: string;
+    userId?: string;
     parameters: {
         repeat: boolean;
         period: number;

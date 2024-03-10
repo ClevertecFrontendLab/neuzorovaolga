@@ -1,10 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Training, TrainingsListItem } from '@models/trainings';
+import { Exercise, Training, TrainingsListItem } from '@models/trainings';
+
+const PARAMETERS = {
+    repeat: false,
+    period: 7,
+    jointTraining: false,
+    participants: [],
+};
 
 type CalendarState = {
     isDrawer: boolean;
     trainings: Training[];
     trainingsList: TrainingsListItem[];
+    selectedTraining?: Training;
 };
 
 const initialState: CalendarState = {
@@ -29,8 +37,23 @@ const calendarSlice = createSlice({
         setTrainingsList: (state, action: PayloadAction<TrainingsListItem[]>) => {
             state.trainingsList = action.payload;
         },
+        selectTraining: (state, action: PayloadAction<Omit<Training, 'parameters'>>) => {
+            state.selectedTraining = { ...action.payload, parameters: PARAMETERS };
+        },
+        updateExercises: (state, action: PayloadAction<Exercise[]>) => {
+            if (state.selectedTraining) {
+                state.selectedTraining.exercises = action.payload;
+            }
+        },
     },
 });
 
-export const { showDrawer, hideDrawer, setTrainings, setTrainingsList } = calendarSlice.actions;
+export const {
+    showDrawer,
+    hideDrawer,
+    setTrainings,
+    setTrainingsList,
+    selectTraining,
+    updateExercises,
+} = calendarSlice.actions;
 export default calendarSlice.reducer;

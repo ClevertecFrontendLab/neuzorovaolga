@@ -1,7 +1,7 @@
-import { Button, Input, InputNumber } from 'antd';
-import styles from './exercises.module.css';
+import { Input, InputNumber } from 'antd';
+import styles from './exercise.module.css';
 
-export const Exercises = () => {
+export const Exercise = () => {
     return (
         <div>
             <Input placeholder='Упражнение' />
@@ -21,7 +21,6 @@ export const Exercises = () => {
                     </div>
                 </div>
             </div>
-            <button className={styles.button}>+ Добавить еще </button>
         </div>
     );
 };

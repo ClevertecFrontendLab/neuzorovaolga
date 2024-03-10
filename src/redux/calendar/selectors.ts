@@ -17,3 +17,13 @@ export const selectTrainingsList = createSelector(
     [selectCalendarSlice],
     (calendar) => calendar.trainingsList,
 );
+
+export const selectSelectedTraining = createSelector(
+    [selectCalendarSlice],
+    (calendar) => calendar.selectedTraining,
+);
+
+export const selectSelectedExercises = createSelector(
+    [selectCalendarSlice],
+    (calendar) => calendar.selectedTraining?.exercises || [],
+);

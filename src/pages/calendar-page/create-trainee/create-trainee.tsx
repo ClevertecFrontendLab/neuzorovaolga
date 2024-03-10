@@ -6,9 +6,9 @@ import Empty from '../../../assets/img/empty-image.png';
 import { Button, Select } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { showDrawer } from '@redux/calendar/reducer';
+import { selectTraining, showDrawer } from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
-import { selectTrainingsList } from '@redux/calendar/selectors';
+import { selectSelectedTraining, selectTrainingsList } from '@redux/calendar/selectors';
 
 type Props = {
     handleClose: () => void;
@@ -19,63 +19,22 @@ type Props = {
 export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => {
     const dispatch = useDispatch();
     const trainingsList = useSelector(selectTrainingsList);
+    const selectedTraining = useSelector(selectSelectedTraining);
     const [isCreateTrainee, setIsCreateTrainee] = useState(false);
-    const exercises = [
-        {
-            _id: '1',
-            name: 'Силовая',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-        {
-            _id: '2',
-            name: 'Кардио',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-        {
-            _id: '3',
-            name: 'Руки',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-        {
-            _id: '4',
-            name: 'Грудь',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-        {
-            _id: '5',
-            name: 'Спина',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-        {
-            _id: '6',
-            name: 'Ноги',
-            replays: 0,
-            weight: 0,
-            approaches: 0,
-            isImplementation: false,
-        },
-    ];
+
     const handleButton = () => {
         setIsCreateTrainee(true);
     };
 
     const handleOpenDrawer = () => {
         dispatch(showDrawer());
+    };
+
+    const handleSelectTrainingName = (value: string) => {
+        console.log(value);
+        dispatch(
+            selectTraining({ name: value, date: date, isImplementation: false, exercises: [] }),
+        );
     };
 
     return (
@@ -108,16 +67,19 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => 
                         <BackIcon handleClick={handleClose} />
                         <Select
                             defaultValue='Выбор типа тренировки'
+                            onSelect={handleSelectTrainingName}
                             style={{ width: 220 }}
                             bordered={false}
                             options={trainingsList.map(({ name, key }) => ({
-                                value: key,
+                                value: name,
                                 label: name,
                             }))}
                         />
                     </div>
                     <div className={styles.buttons}>
-                        <Button onClick={handleOpenDrawer}>Добавить упражнения</Button>
+                        <Button onClick={handleOpenDrawer} disabled={!selectedTraining}>
+                            Добавить упражнения
+                        </Button>
                         <Button type='text' disabled>
                             Сохранить
                         </Button>
