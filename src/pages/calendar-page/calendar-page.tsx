@@ -4,9 +4,9 @@ import { Calendar } from 'antd';
 import type { Moment } from 'moment';
 import { useEffect, useState } from 'react';
 import { CalendarCell } from './calendar-cell/calendar-cell';
-import { getTrainingsRequest } from '@app/api/training';
+import { getTrainingsListRequest, getTrainingsRequest } from '@app/api/training';
 import { useDispatch } from 'react-redux';
-import { setTrainings } from '@redux/calendar/reducer';
+import { setTrainings, setTrainingsList } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 
 export const CalendarPage = () => {
@@ -46,6 +46,10 @@ export const CalendarPage = () => {
         getTrainingsRequest().then((data) => {
             console.log(data);
             dispatch(setTrainings(data));
+        });
+        getTrainingsListRequest().then((data) => {
+            console.log(data);
+            dispatch(setTrainingsList(data));
         });
     }, []);
 

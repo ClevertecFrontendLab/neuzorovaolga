@@ -7,6 +7,8 @@ import { Button, Select } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { showDrawer } from '@redux/calendar/reducer';
+import { useSelector } from 'react-redux';
+import { selectTrainingsList } from '@redux/calendar/selectors';
 
 type Props = {
     handleClose: () => void;
@@ -16,6 +18,7 @@ type Props = {
 
 export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => {
     const dispatch = useDispatch();
+    const trainingsList = useSelector(selectTrainingsList);
     const [isCreateTrainee, setIsCreateTrainee] = useState(false);
     const exercises = [
         {
@@ -107,32 +110,10 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => 
                             defaultValue='Выбор типа тренировки'
                             style={{ width: 220 }}
                             bordered={false}
-                            options={[
-                                {
-                                    value: 'Силовая',
-                                    label: 'Силовая',
-                                },
-                                {
-                                    value: 'Кардио',
-                                    label: 'Кардио',
-                                },
-                                {
-                                    value: 'Руки',
-                                    label: 'Руки',
-                                },
-                                {
-                                    value: 'Грудь',
-                                    label: 'Грудь',
-                                },
-                                {
-                                    value: 'Спина',
-                                    label: 'Спина',
-                                },
-                                {
-                                    value: 'Ноги',
-                                    label: 'Ноги',
-                                },
-                            ]}
+                            options={trainingsList.map(({ name, key }) => ({
+                                value: key,
+                                label: name,
+                            }))}
                         />
                     </div>
                     <div className={styles.buttons}>
