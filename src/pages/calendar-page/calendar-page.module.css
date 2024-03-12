@@ -94,6 +94,10 @@
     font-size: 28px;
 }
 
+.bluBackground {
+    background-color: aqua;
+}
+
 @media (max-width: 1439px) {
     .wrapper {
         max-width: 834px;

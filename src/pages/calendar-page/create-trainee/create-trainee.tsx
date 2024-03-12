@@ -9,11 +9,12 @@ import { useDispatch } from 'react-redux';
 import { selectTraining, showDrawer } from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
 import { selectSelectedTraining, selectTrainingsList } from '@redux/calendar/selectors';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 type Props = {
     handleClose: () => void;
     date: string;
-    isRightPosition: boolean;
+    isRightPosition?: boolean;
 };
 
 export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => {
@@ -21,6 +22,10 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => 
     const trainingsList = useSelector(selectTrainingsList);
     const selectedTraining = useSelector(selectSelectedTraining);
     const [isCreateTrainee, setIsCreateTrainee] = useState(false);
+    const desktopPositionStyles = isRightPosition ? styles.right : styles.left;
+
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
 
     console.log('trainings', selectedTraining?.exercises);
 
@@ -40,7 +45,7 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => 
     };
 
     return (
-        <div className={classnames(styles.wrapper, isRightPosition ? styles.right : styles.left)}>
+        <div className={classnames(styles.wrapper, !isMobile && desktopPositionStyles)}>
             {!isCreateTrainee && (
                 <div>
                     <div className={styles.top}>

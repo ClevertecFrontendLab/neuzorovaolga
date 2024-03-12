@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux';
 import { selectIsDrawer } from '@redux/calendar/selectors';
 import { SettingOutlined } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { CreateTrainee } from './create-trainee/create-trainee';
+import classnames from 'classnames';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
@@ -32,20 +34,20 @@ export const CalendarPage = () => {
         {
             id: 1,
             content: 'Example',
-            date: '01/02/2024',
+            date: '01.03.2024',
             status: 'error',
         },
         {
             id: 3,
             content: 'Example1',
             status: 'success',
-            date: '01/02/2024',
+            date: '01.03.2024',
         },
         {
             id: 2,
             content: 'Example2',
             status: 'warning',
-            date: '02/02/2024',
+            date: '02.03.2024',
         },
     ];
 
@@ -60,7 +62,7 @@ export const CalendarPage = () => {
         });
     }, []);
 
-    const dateCellRender = (value: Moment) => {
+    const dateCellContentRender = (value: Moment) => {
         const stringValue = value.format('DD.MM.yyyy');
         const listData = data.filter(({ date }) => date === stringValue);
 
@@ -71,6 +73,20 @@ export const CalendarPage = () => {
                 handleCloseModal={handleCloseModal}
                 activeDateModal={activeDateModal}
             />
+        );
+    };
+
+    const dateFullCellMobileRender = (value: Moment) => {
+        const date = value.format('DD.MM.yyyy');
+        const isBlueDate = data.some((training) => training.date === date);
+
+        return (
+            <div className={classnames(isBlueDate && styles.bluBackground)}>
+                {value.date()}
+                {date === activeDateModal && (
+                    <CreateTrainee handleClose={handleCloseModal} date={date} />
+                )}
+            </div>
         );
     };
 
@@ -97,7 +113,8 @@ export const CalendarPage = () => {
                 </div>
                 <Calendar
                     fullscreen={isMobile ? false : true}
-                    dateCellRender={dateCellRender}
+                    dateFullCellRender={isMobile ? dateFullCellMobileRender : undefined}
+                    dateCellRender={dateCellContentRender}
                     onSelect={(value: Moment) => {
                         const stringValue = value.format('DD.MM.yyyy');
                         if (stringValue !== activeDateModal) {

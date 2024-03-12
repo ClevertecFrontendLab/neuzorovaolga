@@ -6,13 +6,14 @@
     background: var(--character-light-primary-inverse);
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     z-index: 102;
-    top: 0;
 }
 
 .left {
+    top: 0;
     left: 0;
 }
 .right {
+    top: 0;
     right: 0;
 }
 
@@ -70,14 +71,12 @@
     padding: 15px;
 }
 
-/* @media (max-width: 833px) {
+@media (max-width: 833px) {
     .wrapper {
-        position: absolute;
-        width: 312px;
+        position: fixed;
+        width: 320px;
         height: 200px;
+        margin-top: 40px;
+        right: calc(50% - 160px);
     }
-    .top {
-        padding: 20px 15px 0 20px;
-        width: 300px;
-    }
-} */
+}
