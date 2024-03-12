@@ -1,3 +1,7 @@
+.drawer {
+    position: absolute;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -12,6 +16,7 @@
 .trainingInfo {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 24px;
     align-items: center;
     font-family: var(--font-family);
     font-weight: 500;
@@ -21,7 +26,6 @@
 }
 
 .button {
-    margin-top: 20px;
     border: none;
     border-radius: 0 0 6px 6px;
     width: 344px;
@@ -30,6 +34,18 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 130%;
-    text-align: center;
+    text-align: start;
+    padding-left: 10px;
     color: var(--primary-light-6);
+}
+
+@media (max-width: 833px) {
+    .drawer {
+        border-radius: 24px;
+        margin-top: calc(100vh - 555px);
+    }
+    .exerciseWrapper {
+        max-height: 375px;
+        overflow: scroll;
+    }
 }

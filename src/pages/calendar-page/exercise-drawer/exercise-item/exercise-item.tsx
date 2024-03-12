@@ -1,5 +1,6 @@
 import { Input, InputNumber } from 'antd';
 import styles from './exercise-item.module.css';
+import CrossIcon from '../../../../assets/img/input.png';
 import { Exercise } from '@models/trainings';
 import { ChangeEvent, ChangeEventHandler } from 'react';
 
@@ -24,11 +25,11 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
     };
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <Input placeholder='Упражнение' onChange={handleChangeName} value={item.name} />
             <div className={styles.exercises}>
-                <div>
-                    <div>Подходы</div>
+                <div className={styles.replays}>
+                    <div className={styles.text}>Подходы</div>
                     <InputNumber
                         value={item.replays}
                         addonBefore='+'
@@ -38,18 +39,22 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                     />
                 </div>
                 <div className={styles.exercisesCount}>
-                    <div>
-                        <div>Вес, кг</div>
-                        <InputNumber
-                            value={item.weight}
-                            min={0}
-                            type='number'
-                            onChange={handleChangeWeight}
-                        />
+                    <div className={styles.weight}>
+                        <div className={styles.textWeight}>Вес, кг</div>
+                        <div className={styles.marginCross}>
+                            <InputNumber
+                                value={item.weight}
+                                min={0}
+                                type='number'
+                                onChange={handleChangeWeight}
+                            />
+                            <p className={styles.cross}>X</p>
+                        </div>
                     </div>
                     <div>
-                        <div>Количество</div>
+                        <div className={styles.textApproaches}>Количество</div>
                         <InputNumber
+                            defaultValue={1}
                             value={item.approaches}
                             min={1}
                             type='number'

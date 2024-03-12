@@ -69,3 +69,15 @@
     flex-direction: column;
     padding: 15px;
 }
+
+/* @media (max-width: 833px) {
+    .wrapper {
+        position: absolute;
+        width: 312px;
+        height: 200px;
+    }
+    .top {
+        padding: 20px 15px 0 20px;
+        width: 300px;
+    }
+} */

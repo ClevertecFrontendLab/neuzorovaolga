@@ -1,6 +1,6 @@
 import { Menu } from '@pages/main-page/menu/menu';
 import styles from './calendar-page.module.css';
-import { Calendar } from 'antd';
+import { Calendar, Space } from 'antd';
 import type { Moment } from 'moment';
 import { useEffect, useState } from 'react';
 import { CalendarCell } from './calendar-cell/calendar-cell';
@@ -10,10 +10,14 @@ import { setTrainings, setTrainingsList } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 import { useSelector } from 'react-redux';
 import { selectIsDrawer } from '@redux/calendar/selectors';
+import { SettingOutlined } from '@ant-design/icons';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
     const isDrawer = useSelector(selectIsDrawer);
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
 
     const [activeDateModal, setActiveDateModal] = useState('');
 
@@ -73,11 +77,26 @@ export const CalendarPage = () => {
     return (
         <div className={styles.wrapper}>
             <Menu />
-            <div className={styles.feedbacksWrapper}>
+            <div className={styles.calendarWrapper}>
                 <div className={styles.headerWrapper}>
                     <p className={styles.lightText}>Главная /</p> <p>&nbsp;Календарь</p>
                 </div>
+                <div className={styles.settingsButtonWrapper}>
+                    {width >= 834 ? (
+                        <button className={styles.settingsButton}>
+                            <Space className={styles.icon}>
+                                <SettingOutlined />
+                            </Space>
+                            Настройки
+                        </button>
+                    ) : (
+                        <button className={styles.settingsButtonMobile}>
+                            <SettingOutlined />
+                        </button>
+                    )}
+                </div>
                 <Calendar
+                    fullscreen={isMobile ? false : true}
                     dateCellRender={dateCellRender}
                     onSelect={(value: Moment) => {
                         const stringValue = value.format('DD.MM.yyyy');

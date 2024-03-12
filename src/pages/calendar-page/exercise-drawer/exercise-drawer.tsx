@@ -8,6 +8,9 @@ import { CloseIcon } from '@app/assets/icons/close-icon/close-icon';
 import { ExerciseItem } from './exercise-item/exercise-item';
 import { useState } from 'react';
 import { Exercise } from '@models/trainings';
+import { PlusOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 const DEFAULT_EXERCISE = {
     name: '',
@@ -21,6 +24,9 @@ export const ExerciseDrawer = () => {
     const dispatch = useDispatch();
     const isDrawer = useSelector(selectIsDrawer);
     const selectedTraining = useSelector(selectSelectedTraining);
+
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
 
     const [exercises, setExercises] = useState(
         !selectedTraining?.exercises?.length ? [DEFAULT_EXERCISE] : selectedTraining?.exercises,
@@ -46,31 +52,35 @@ export const ExerciseDrawer = () => {
     };
     return (
         <Drawer
-            placement='right'
+            className={styles.drawer}
+            placement={isMobile ? 'bottom' : 'right'}
             closable={false}
             onClose={onClose}
             open={isDrawer}
             getContainer={false}
-            style={{ position: 'absolute' }}
         >
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div>+ Добавление упражнений</div>
-                    <CloseIcon />
+                    <div onClick={onClose}>
+                        <CloseIcon />
+                    </div>
                 </div>
                 <div className={styles.trainingInfo}>
                     <Badge status={'success'} text={selectedTraining?.name} />
                     <div>{selectedTraining?.date}</div>
                 </div>
-                {exercises.map((item, index) => (
-                    <ExerciseItem
-                        item={item}
-                        index={index}
-                        handleChangeExercise={handleChangeExercise}
-                    />
-                ))}
+                <div className={styles.exerciseWrapper}>
+                    {exercises.map((item, index) => (
+                        <ExerciseItem
+                            item={item}
+                            index={index}
+                            handleChangeExercise={handleChangeExercise}
+                        />
+                    ))}
+                </div>
                 <button className={styles.button} onClick={handleAddNew}>
-                    + Добавить еще
+                    <PlusOutlined /> Добавить еще
                 </button>
             </div>
         </Drawer>

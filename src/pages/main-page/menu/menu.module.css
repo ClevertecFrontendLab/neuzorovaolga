@@ -43,11 +43,9 @@
 @keyframes show {
     from {
         opacity: 0;
-        /* width: 0; */
     }
     to {
         opacity: 1;
-        /* width: auto; */
     }
 }
 
@@ -101,7 +99,7 @@
         left: 50%;
         transform: translateX(-184px);
         top: 0;
-        z-index: 1;
+        z-index: 105;
     }
     .menuContentCollapsed {
         width: 0;
