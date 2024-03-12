@@ -9,15 +9,17 @@ import { useDispatch } from 'react-redux';
 import { setTrainings, setTrainingsList } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 import { useSelector } from 'react-redux';
-import { selectIsDrawer } from '@redux/calendar/selectors';
+import { selectIsDrawer, selectTrainings } from '@redux/calendar/selectors';
 import { SettingOutlined } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { CreateTrainee } from './create-trainee/create-trainee';
 import classnames from 'classnames';
+import moment from 'moment';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
     const isDrawer = useSelector(selectIsDrawer);
+    const trainings = useSelector(selectTrainings);
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
 
@@ -52,19 +54,24 @@ export const CalendarPage = () => {
     ];
 
     useEffect(() => {
-        getTrainingsRequest().then((data) => {
-            console.log(data);
-            dispatch(setTrainings(data));
+        getTrainingsRequest().then((trainingsResponse) => {
+            dispatch(
+                setTrainings(
+                    trainingsResponse.map((item) => ({
+                        ...item,
+                        date: moment(item.date).format('DD.MM.yyyy'),
+                    })),
+                ),
+            );
         });
         getTrainingsListRequest().then((data) => {
-            console.log(data);
             dispatch(setTrainingsList(data));
         });
     }, []);
 
     const dateCellContentRender = (value: Moment) => {
         const stringValue = value.format('DD.MM.yyyy');
-        const listData = data.filter(({ date }) => date === stringValue);
+        const listData = trainings.filter(({ date }) => date === stringValue);
 
         return (
             <CalendarCell
@@ -72,6 +79,7 @@ export const CalendarPage = () => {
                 date={stringValue}
                 handleCloseModal={handleCloseModal}
                 activeDateModal={activeDateModal}
+                dateISO={value.toISOString()}
             />
         );
     };
@@ -84,7 +92,11 @@ export const CalendarPage = () => {
             <div className={classnames(isBlueDate && styles.bluBackground)}>
                 {value.date()}
                 {date === activeDateModal && (
-                    <CreateTrainee handleClose={handleCloseModal} date={date} />
+                    <CreateTrainee
+                        handleClose={handleCloseModal}
+                        date={date}
+                        dateISO={value.toISOString()}
+                    />
                 )}
             </div>
         );
