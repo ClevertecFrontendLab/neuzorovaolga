@@ -8,9 +8,12 @@ import { getTrainingsListRequest, getTrainingsRequest } from '@app/api/training'
 import { useDispatch } from 'react-redux';
 import { setTrainings, setTrainingsList } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
+import { useSelector } from 'react-redux';
+import { selectIsDrawer } from '@redux/calendar/selectors';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
+    const isDrawer = useSelector(selectIsDrawer);
 
     const [activeDateModal, setActiveDateModal] = useState('');
 
@@ -83,7 +86,7 @@ export const CalendarPage = () => {
                         }
                     }}
                 />
-                <ExerciseDrawer />
+                {isDrawer && <ExerciseDrawer />}
                 {/* <ErrorDownloadModal /> */}
             </div>
         </div>

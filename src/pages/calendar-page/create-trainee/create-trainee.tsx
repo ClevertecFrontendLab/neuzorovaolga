@@ -22,6 +22,8 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition }: Props) => 
     const selectedTraining = useSelector(selectSelectedTraining);
     const [isCreateTrainee, setIsCreateTrainee] = useState(false);
 
+    console.log('trainings', selectedTraining?.exercises);
+
     const handleButton = () => {
         setIsCreateTrainee(true);
     };
