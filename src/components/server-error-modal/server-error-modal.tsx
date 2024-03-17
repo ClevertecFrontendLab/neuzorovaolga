@@ -6,15 +6,16 @@ import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper.tsx';
 type Props = {
     handleButton: () => void;
     isModal?: boolean;
+    textError?: string;
 };
-export const ServerErrorModal = ({ handleButton, isModal }: Props) => (
+export const ServerErrorModal = ({ handleButton, isModal, textError, ...props }: Props) => (
     <>
         {isModal ? (
-            <ModalWrapper modalWrapperStales={styles.wrapper}>
+            <ModalWrapper modalWrapperStales={styles.wrapper} {...props}>
                 <img src={ServerErrorSrc} alt='error' />
                 <div className={styles.title}>Что-то пошло не так</div>
                 <div className={styles.message}>
-                    Произошла ошибка, попробуйте отправить форму еще раз
+                    {textError || 'Произошла ошибка, попробуйте ещё раз.'}
                 </div>
                 <Button
                     type='primary'

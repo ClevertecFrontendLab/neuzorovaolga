@@ -12,9 +12,10 @@ import { useSelector } from 'react-redux';
 import { selectIsDrawer, selectTrainings } from '@redux/calendar/selectors';
 import { SettingOutlined } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions';
-import { CreateTrainee } from './create-trainee/create-trainee';
+import { TrainingModal } from './training-modal/training-modal';
 import classnames from 'classnames';
 import moment from 'moment';
+import { ErrorDownloadModal } from './error-download-modal/error-download-modal';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const CalendarPage = () => {
     const isMobile = width <= 833;
 
     const [activeDateModal, setActiveDateModal] = useState('');
+    const [isOpenDataErrorModal, setIsOpenDataErrorModal] = useState(false);
 
     const handleDateClick = (date: string) => {
         setActiveDateModal(date);
@@ -32,41 +34,20 @@ export const CalendarPage = () => {
         setActiveDateModal('');
     };
 
-    const data = [
-        {
-            id: 1,
-            content: 'Example',
-            date: '01.03.2024',
-            status: 'error',
-        },
-        {
-            id: 3,
-            content: 'Example1',
-            status: 'success',
-            date: '01.03.2024',
-        },
-        {
-            id: 2,
-            content: 'Example2',
-            status: 'warning',
-            date: '02.03.2024',
-        },
-    ];
+    const handleOpenDataError = () => {
+        setIsOpenDataErrorModal(true);
+    };
+
+    const handleCloseOpenDataErrorModal = () => {
+        setIsOpenDataErrorModal(false);
+    };
 
     useEffect(() => {
-        getTrainingsRequest().then((trainingsResponse) => {
-            dispatch(
-                setTrainings(
-                    trainingsResponse.map((item) => ({
-                        ...item,
-                        date: moment(item.date).format('DD.MM.yyyy'),
-                    })),
-                ),
-            );
-        });
-        getTrainingsListRequest().then((data) => {
-            dispatch(setTrainingsList(data));
-        });
+        getTrainingsListRequest()
+            .then((data) => {
+                dispatch(setTrainingsList(data));
+            })
+            .catch(handleOpenDataError);
     }, []);
 
     const dateCellContentRender = (value: Moment) => {
@@ -86,13 +67,13 @@ export const CalendarPage = () => {
 
     const dateFullCellMobileRender = (value: Moment) => {
         const date = value.format('DD.MM.yyyy');
-        const isBlueDate = data.some((training) => training.date === date);
+        const isBlueDate = trainings.some((training) => training.date === date);
 
         return (
             <div className={classnames(isBlueDate && styles.bluBackground)}>
                 {value.date()}
                 {date === activeDateModal && (
-                    <CreateTrainee
+                    <TrainingModal
                         handleClose={handleCloseModal}
                         date={date}
                         dateISO={value.toISOString()}
@@ -135,8 +116,10 @@ export const CalendarPage = () => {
                     }}
                 />
                 {isDrawer && <ExerciseDrawer />}
-                {/* <ErrorDownloadModal /> */}
             </div>
+            {isOpenDataErrorModal && (
+                <ErrorDownloadModal handleButton={handleCloseOpenDataErrorModal} />
+            )}
         </div>
     );
 };

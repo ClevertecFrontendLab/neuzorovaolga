@@ -8,7 +8,7 @@ type Props = {
     width?: string | number;
 };
 
-export const ModalWrapper = ({ children, modalWrapperStales, width }: Props) => (
+export const ModalWrapper = ({ children, modalWrapperStales, width, ...props }: Props) => (
     <div className={classnames(styles.wrapper)}>
         <Modal
             open
@@ -17,6 +17,7 @@ export const ModalWrapper = ({ children, modalWrapperStales, width }: Props) => 
             className={modalWrapperStales}
             centered
             width={width}
+            {...props}
         >
             {children}
         </Modal>

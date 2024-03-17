@@ -1,41 +1,79 @@
 import { CloseIcon } from '@app/assets/icons/close-icon/close-icon';
 import { BackIcon } from '@app/assets/icons/close-icon/back-icon';
 import classnames from 'classnames';
-import styles from './create-trainee.module.css';
+import styles from './training-modal.module.css';
 import Empty from '../../../assets/img/empty-image.png';
 import { Button, Select } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectTraining, showDrawer } from '@redux/calendar/reducer';
+import { selectTraining, setTrainings, showDrawer } from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
 import { selectSelectedTraining, selectTrainingsList } from '@redux/calendar/selectors';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { EditOutlined } from '@ant-design/icons';
-import { createTrainingRequest } from '@app/api/training';
+import { createTrainingRequest, getTrainingsRequest } from '@app/api/training';
+import { ErrorSaveDataModal } from '../error-save-data-modal/error-save-data-modal';
+import moment from 'moment';
 
 type Props = {
     handleClose: () => void;
     date: string;
     isRightPosition?: boolean;
     dateISO: string;
+    top: number;
+    left: number;
+    right: number;
 };
 
-export const CreateTrainee = ({ handleClose, date, isRightPosition, dateISO }: Props) => {
+export const TrainingModal = ({
+    handleClose,
+    date,
+    isRightPosition,
+    dateISO,
+    top,
+    left,
+    right,
+}: Props) => {
     const dispatch = useDispatch();
     const trainingsList = useSelector(selectTrainingsList);
     const selectedTraining = useSelector(selectSelectedTraining);
-    const [isCreateTrainee, setIsCreateTrainee] = useState(false);
-    const desktopPositionStyles = isRightPosition ? styles.right : styles.left;
+    const [isCreateStatus, setIsCreateStatus] = useState(false);
+    const [isSaveDataErrorModal, setIsSaveDataErrorModal] = useState(false);
+    const desktopPositionStyles = isRightPosition
+        ? { top: `${top - 25}px`, right: `${right - 5}px` }
+        : { top: `${top - 25}px`, left: `${left - 5}px` };
 
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
 
+    const updateTrainings = () => {
+        getTrainingsRequest().then((trainingsResponse) => {
+            dispatch(
+                setTrainings(
+                    trainingsResponse.map((item) => ({
+                        ...item,
+                        date: moment(item.date).format('DD.MM.yyyy'),
+                    })),
+                ),
+            );
+            setIsCreateStatus(false);
+        });
+    };
+
     const handleButton = () => {
-        setIsCreateTrainee(true);
+        setIsCreateStatus(true);
     };
 
     const handleOpenDrawer = () => {
         dispatch(showDrawer());
+    };
+
+    const handleSaveDataError = () => {
+        setIsSaveDataErrorModal(true);
+    };
+
+    const handleCloseSaveDataErrorModal = () => {
+        setIsSaveDataErrorModal(false);
     };
 
     const handleSelectTrainingName = (value: string) => {
@@ -46,21 +84,27 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition, dateISO }: P
 
     const handleSaveTraining = () => {
         selectedTraining &&
-            createTrainingRequest({ ...selectedTraining, date: dateISO }).then((data) =>
-                console.log(data),
-            );
+            createTrainingRequest({ ...selectedTraining, date: dateISO })
+                .then(updateTrainings)
+                .catch(handleSaveDataError);
     };
 
     return (
-        <div className={classnames(styles.wrapper, !isMobile && desktopPositionStyles)}>
-            {!isCreateTrainee && (
-                <div>
+        <div className={classnames(styles.wrapper)} style={!isMobile ? desktopPositionStyles : {}}>
+            {!isCreateStatus && (
+                <div data-test-id='modal-create-training'>
                     <div className={styles.top}>
                         <div>
                             <div className={styles.title}>{`Tренировки на ${date}`}</div>
                             <div className={styles.message}>Нет активных тренировок</div>
                         </div>
-                        <CloseIcon handleClick={handleClose} />
+                        <Button
+                            type='link'
+                            onClick={handleClose}
+                            data-test-id='modal-create-training-button-close'
+                        >
+                            <CloseIcon />
+                        </Button>
                     </div>
                     <div className={styles.logo}>
                         <img src={Empty} />
@@ -75,11 +119,15 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition, dateISO }: P
                     </Button>
                 </div>
             )}
-            {isCreateTrainee && (
-                <div>
+            {isCreateStatus && (
+                <div data-test-id='modal-create-exercise'>
                     <div className={styles.topSelect}>
-                        <BackIcon handleClick={handleClose} />
+                        <BackIcon
+                            handleClick={handleClose}
+                            data-test-id='modal-exercise-training-button-close'
+                        />
                         <Select
+                            data-test-id='modal-create-exercise-select'
                             disabled={!!selectedTraining?.exercises?.length}
                             defaultValue='Выбор типа тренировки'
                             onSelect={handleSelectTrainingName}
@@ -113,6 +161,9 @@ export const CreateTrainee = ({ handleClose, date, isRightPosition, dateISO }: P
                         </Button>
                     </div>
                 </div>
+            )}
+            {isSaveDataErrorModal && (
+                <ErrorSaveDataModal handleButton={handleCloseSaveDataErrorModal} />
             )}
         </div>
     );

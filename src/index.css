@@ -35,7 +35,7 @@
     border-bottom: 2px solid var(--primary-light-6);
 }
 
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after {
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover :after {
     border-bottom: 2px solid var(--primary-light-6);
 }
 

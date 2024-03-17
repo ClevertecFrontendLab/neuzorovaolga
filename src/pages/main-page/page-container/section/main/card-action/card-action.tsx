@@ -9,9 +9,10 @@ type Props = {
     icon: React.ReactNode;
     iconTitle: string;
     title: string;
+    handleClick?: () => void;
 };
 
-export const CardAction = ({ icon, iconTitle, title }: Props) => {
+export const CardAction = ({ icon, iconTitle, title, handleClick }: Props) => {
     const { width } = useWindowDimensions();
     const isTablet = width < 1440 && width > 833;
     const { collapsed } = useContext(GlobalContext);
@@ -26,6 +27,7 @@ export const CardAction = ({ icon, iconTitle, title }: Props) => {
                 style={{
                     color: '#2f54eb',
                 }}
+                onClick={handleClick}
             >
                 {iconTitle}
             </Button>

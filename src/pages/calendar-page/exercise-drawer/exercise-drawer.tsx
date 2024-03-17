@@ -52,6 +52,7 @@ export const ExerciseDrawer = () => {
     };
     return (
         <Drawer
+            data-test-id='modal-drawer-right'
             className={styles.drawer}
             placement={isMobile ? 'bottom' : 'right'}
             closable={false}
@@ -62,7 +63,7 @@ export const ExerciseDrawer = () => {
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div>+ Добавление упражнений</div>
-                    <div onClick={onClose}>
+                    <div onClick={onClose} data-test-id='modal-drawer-right-button-close'>
                         <CloseIcon />
                     </div>
                 </div>

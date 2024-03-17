@@ -26,11 +26,17 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
 
     return (
         <div className={styles.wrapper}>
-            <Input placeholder='Упражнение' onChange={handleChangeName} value={item.name} />
+            <Input
+                placeholder='Упражнение'
+                onChange={handleChangeName}
+                value={item.name}
+                data-test-id={`modal-drawer-right-input-exercise${index}`}
+            />
             <div className={styles.exercises}>
                 <div className={styles.replays}>
                     <div className={styles.text}>Подходы</div>
                     <InputNumber
+                        data-test-id={`modal-drawer-right-input-approach${index}`}
                         value={item.replays}
                         addonBefore='+'
                         min={1}
@@ -43,6 +49,7 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                         <div className={styles.textWeight}>Вес, кг</div>
                         <div className={styles.marginCross}>
                             <InputNumber
+                                data-test-id={`modal-drawer-right-input-weight${index}`}
                                 value={item.weight}
                                 min={0}
                                 type='number'
@@ -54,6 +61,7 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                     <div>
                         <div className={styles.textApproaches}>Количество</div>
                         <InputNumber
+                            data-test-id={`modal-drawer-right-input-quantity${index}`}
                             defaultValue={1}
                             value={item.approaches}
                             min={1}
