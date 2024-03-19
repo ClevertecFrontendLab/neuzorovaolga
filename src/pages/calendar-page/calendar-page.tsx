@@ -76,17 +76,17 @@ export const CalendarPage = () => {
     };
 
     const dateFullCellMobileRender = (value: Moment) => {
-        const date = value.format('DD.MM.yyyy');
-        const isBlueDate = trainings.some((training) => training.date === date);
-        const listData = trainings.filter(({ date }) => date === date);
+        const stringValue = value.format('DD.MM.yyyy');
+        const isBlueDate = trainings.some((training) => training.date === stringValue);
+        const listData = trainings.filter((training) => training.date === stringValue);
 
         return (
             <div className={classnames(isBlueDate && styles.bluBackground)}>
                 {value.date()}
-                {date === activeDateModal && (
+                {stringValue === activeDateModal && (
                     <TrainingModal
                         handleClose={handleCloseModal}
-                        date={date}
+                        date={stringValue}
                         dateISO={value.toISOString()}
                         listData={listData}
                     />
