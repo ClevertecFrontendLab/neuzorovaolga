@@ -45,6 +45,9 @@ const calendarSlice = createSlice({
                 state.selectedTraining.exercises = action.payload;
             }
         },
+        cleanSelectedTraining: (state) => {
+            state.selectedTraining = undefined;
+        },
     },
 });
 
@@ -55,5 +58,6 @@ export const {
     setTrainingsList,
     selectTraining,
     updateExercises,
+    cleanSelectedTraining,
 } = calendarSlice.actions;
 export default calendarSlice.reducer;

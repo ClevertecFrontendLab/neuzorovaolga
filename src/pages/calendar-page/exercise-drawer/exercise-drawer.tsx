@@ -1,6 +1,6 @@
 import { hideDrawer, updateExercises } from '@redux/calendar/reducer';
 import { selectIsDrawer, selectSelectedTraining } from '@redux/calendar/selectors';
-import { Badge, Drawer } from 'antd';
+import { Badge, Button, Drawer } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styles from './exercise-drawer.module.css';
@@ -80,9 +80,9 @@ export const ExerciseDrawer = () => {
                         />
                     ))}
                 </div>
-                <button className={styles.button} onClick={handleAddNew}>
-                    <PlusOutlined /> Добавить еще
-                </button>
+                <Button className={styles.button} onClick={handleAddNew} icon={<PlusOutlined />}>
+                    Добавить ещё
+                </Button>
             </div>
         </Drawer>
     );

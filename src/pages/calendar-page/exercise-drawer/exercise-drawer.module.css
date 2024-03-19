@@ -26,8 +26,8 @@
 }
 
 .button {
-    border: none;
-    border-radius: 0 0 6px 6px;
+    /* border: none; */
+    /* border-radius: 0 0 6px 6px; */
     width: 344px;
     height: 40px;
     font-family: var(--font-family);

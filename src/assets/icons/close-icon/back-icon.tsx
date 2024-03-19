@@ -2,8 +2,8 @@ type Props = {
     handleClick?: () => void;
 };
 
-export const BackIcon = ({ handleClick }: Props) => (
-    <div onClick={handleClick}>
+export const BackIcon = ({ handleClick, ...props }: Props) => (
+    <div onClick={handleClick} {...props}>
         <svg
             width='16'
             height='16'

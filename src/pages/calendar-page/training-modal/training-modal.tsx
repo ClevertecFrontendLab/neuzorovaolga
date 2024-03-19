@@ -6,7 +6,12 @@ import Empty from '../../../assets/img/empty-image.png';
 import { Button, Select } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectTraining, setTrainings, showDrawer } from '@redux/calendar/reducer';
+import {
+    cleanSelectedTraining,
+    selectTraining,
+    setTrainings,
+    showDrawer,
+} from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
 import { selectSelectedTraining, selectTrainingsList } from '@redux/calendar/selectors';
 import useWindowDimensions from '@hooks/useWindowDimensions';
@@ -73,6 +78,8 @@ export const TrainingModal = ({
     };
 
     const handleCloseSaveDataErrorModal = () => {
+        handleClose();
+        dispatch(cleanSelectedTraining());
         setIsSaveDataErrorModal(false);
     };
 
@@ -84,9 +91,13 @@ export const TrainingModal = ({
 
     const handleSaveTraining = () => {
         selectedTraining &&
-            createTrainingRequest({ ...selectedTraining, date: dateISO })
+            createTrainingRequest({ ...selectedTraining })
                 .then(updateTrainings)
                 .catch(handleSaveDataError);
+    };
+
+    const handleBack = () => {
+        setIsCreateStatus(false);
     };
 
     return (
@@ -114,6 +125,7 @@ export const TrainingModal = ({
                         size='large'
                         className={styles.button}
                         onClick={handleButton}
+                        disabled={dateISO < new Date().toISOString() || }
                     >
                         Создать тренировку
                     </Button>
@@ -123,7 +135,7 @@ export const TrainingModal = ({
                 <div data-test-id='modal-create-exercise'>
                     <div className={styles.topSelect}>
                         <BackIcon
-                            handleClick={handleClose}
+                            handleClick={handleBack}
                             data-test-id='modal-exercise-training-button-close'
                         />
                         <Select
