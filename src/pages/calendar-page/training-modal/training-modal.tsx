@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import styles from './training-modal.module.css';
 import Empty from '../../../assets/img/empty-image.png';
 import { Badge, Button, Select } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     cleanSelectedTraining,
@@ -115,6 +115,7 @@ Props) => {
 
     const handleSaveTraining = () => {
         if (selectedTraining) {
+            const isImplementation = dateISO < new Date().toISOString();
             !isEditTraining &&
                 createTrainingRequest({ ...selectedTraining, date: dateISO })
                     .then(updateTrainings)
@@ -124,6 +125,7 @@ Props) => {
                 updateTrainingRequest(selectedTraining._id || '', {
                     ...selectedTraining,
                     date: dateISO,
+                    isImplementation,
                 })
                     .then(updateTrainings)
                     .catch(handleSaveDataError);
@@ -134,6 +136,12 @@ Props) => {
         dispatch(cleanSelectedTraining());
         setIsCreateStatus(false);
     };
+
+    useEffect(() => {
+        return () => {
+            dispatch(cleanSelectedTraining());
+        };
+    }, []);
 
     return (
         <div className={classnames(styles.wrapper)}>
@@ -162,19 +170,15 @@ Props) => {
                     {!!listData.length && (
                         <div>
                             {listData.map((item, index) => (
-                                <div
-                                    key={item._id}
-                                    className={styles.itemWrapper}
-                                    // data-test-id={`modal-update-training-edit-button${index}`}
-                                >
+                                <div key={item._id} className={styles.itemWrapper}>
                                     <Badge status='success' text={item.name} />
-                                    <div
-                                        className={styles.change}
+                                    <Button
+                                        type='link'
+                                        icon={<EditOutlined />}
                                         onClick={() => handleEditTraining(item)}
                                         data-test-id={`modal-update-training-edit-button${index}`}
-                                    >
-                                        <EditOutlined />
-                                    </div>
+                                        disabled={item.isImplementation}
+                                    />
                                 </div>
                             ))}
                         </div>

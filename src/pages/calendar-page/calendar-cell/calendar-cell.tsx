@@ -1,5 +1,5 @@
-import { Badge, BadgeProps } from 'antd';
-import { useRef, useState } from 'react';
+import { Badge } from 'antd';
+import { useRef } from 'react';
 import { TrainingModal } from '../training-modal/training-modal';
 import { Training } from '@models/trainings';
 
@@ -20,7 +20,6 @@ export const CalendarCell = ({
     dateISO,
 }: Props) => {
     const cellRef = useRef<HTMLDivElement>(null);
-    console.log(listData);
 
     return (
         <div className='events' ref={cellRef}>

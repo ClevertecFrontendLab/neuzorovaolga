@@ -13,7 +13,7 @@ export const createTrainingRequest = (
 
 export const updateTrainingRequest = (
     trainingId: string,
-    trainingData: Omit<Training, 'id' | 'isImplementation' | 'userId'>,
+    trainingData: Omit<Training, 'id' | 'userId'>,
 ): Promise<Training> => {
     return instance.put(`/training/${trainingId}`, trainingData);
 };
