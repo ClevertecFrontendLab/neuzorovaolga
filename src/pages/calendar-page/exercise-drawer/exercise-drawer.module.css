@@ -25,10 +25,20 @@
     color: var(--character-light-secondary-45);
 }
 
+.buttonWrapper {
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--character-light-dividers);
+}
+
 .button {
-    /* border: none; */
+    border: none;
+    background: var(--character-light-dividers);
     /* border-radius: 0 0 6px 6px; */
-    width: 344px;
+    /* width: 344px; */
     height: 40px;
     font-family: var(--font-family);
     font-weight: 400;

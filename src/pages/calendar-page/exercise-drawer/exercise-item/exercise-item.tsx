@@ -1,8 +1,10 @@
-import { Input, InputNumber } from 'antd';
+import { Checkbox, CheckboxProps, Input, InputNumber } from 'antd';
 import styles from './exercise-item.module.css';
 import CrossIcon from '../../../../assets/img/input.png';
 import { Exercise } from '@models/trainings';
 import { ChangeEvent, ChangeEventHandler } from 'react';
+import { useSelector } from 'react-redux';
+import { selectIsEditTraining } from '@redux/calendar/selectors';
 
 type Props = {
     item: Exercise;
@@ -11,6 +13,8 @@ type Props = {
 };
 
 export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
+    const isEditTraining = useSelector(selectIsEditTraining);
+
     const handleChangeReplays = (replays: number | null) => {
         handleChangeExercise({ ...item, replays: replays || 0 }, index);
     };
@@ -23,6 +27,9 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
     const handleChangeApproaches = (approaches: number | null) => {
         handleChangeExercise({ ...item, approaches: approaches || 0 }, index);
     };
+    const handleChangeCheckbox: CheckboxProps['onChange'] = (event) => {
+        handleChangeExercise({ ...item, checked: event.target.checked }, index);
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -31,6 +38,15 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                 onChange={handleChangeName}
                 value={item.name}
                 data-test-id={`modal-drawer-right-input-exercise${index}`}
+                addonAfter={
+                    isEditTraining ? (
+                        <Checkbox
+                            checked={item.checked}
+                            onChange={handleChangeCheckbox}
+                            data-test-id={`modal-drawer-right-checkbox-exercise${index}`}
+                        />
+                    ) : undefined
+                }
             />
             <div className={styles.exercises}>
                 <div className={styles.replays}>

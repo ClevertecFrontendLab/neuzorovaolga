@@ -30,13 +30,6 @@ export const CalendarCell = ({
                     handleClose={handleCloseModal}
                     date={date}
                     dateISO={dateISO}
-                    // top={cellRef?.current?.getBoundingClientRect?.()?.top || 0}
-                    // left={cellRef?.current?.getBoundingClientRect?.()?.left || 0}
-                    // right={
-                    //     window.innerWidth -
-                    //     (cellRef?.current?.getBoundingClientRect?.()?.left || 0) -
-                    //     (cellRef?.current?.getBoundingClientRect?.()?.width || 0)
-                    // }
                     isRightPosition={
                         (cellRef?.current?.getBoundingClientRect?.()?.left || 0) +
                             TRAINING_MODAL_WIDTH >
@@ -45,7 +38,7 @@ export const CalendarCell = ({
                 />
             )}
             {listData.map((item) => (
-                <div key={item.id}>
+                <div key={item._id}>
                     <Badge status='success' text={item.name} />
                 </div>
             ))}

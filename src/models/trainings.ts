@@ -1,5 +1,5 @@
 export type Training = {
-    id?: string;
+    _id?: string;
     name: string;
     date: string;
     isImplementation: boolean;
@@ -14,12 +14,13 @@ export type Training = {
 };
 
 export type Exercise = {
-    id?: string;
+    _id?: string;
     name: string;
     replays: number;
     weight: number;
     approaches: number;
     isImplementation: boolean;
+    checked?: boolean;
 };
 
 export type TrainingsListItem = {

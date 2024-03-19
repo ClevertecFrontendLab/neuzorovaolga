@@ -8,15 +8,24 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     cleanSelectedTraining,
+    selectEditTraining,
     selectTraining,
     setTrainings,
     showDrawer,
 } from '@redux/calendar/reducer';
 import { useSelector } from 'react-redux';
-import { selectSelectedTraining, selectTrainingsList } from '@redux/calendar/selectors';
+import {
+    selectIsEditTraining,
+    selectSelectedTraining,
+    selectTrainingsList,
+} from '@redux/calendar/selectors';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { EditOutlined } from '@ant-design/icons';
-import { createTrainingRequest, getTrainingsRequest } from '@app/api/training';
+import {
+    createTrainingRequest,
+    getTrainingsRequest,
+    updateTrainingRequest,
+} from '@app/api/training';
 import { ErrorSaveDataModal } from '../error-save-data-modal/error-save-data-modal';
 import moment from 'moment';
 import { Training } from '@models/trainings';
@@ -45,6 +54,7 @@ Props) => {
     const dispatch = useDispatch();
     const trainingsList = useSelector(selectTrainingsList);
     const selectedTraining = useSelector(selectSelectedTraining);
+    const isEditTraining = useSelector(selectIsEditTraining);
     const [isCreateStatus, setIsCreateStatus] = useState(false);
     const [isSaveDataErrorModal, setIsSaveDataErrorModal] = useState(false);
     // const desktopPositionStyles = isRightPosition
@@ -83,7 +93,7 @@ Props) => {
     };
 
     const handleEditTraining = (item: Training) => {
-        dispatch(selectTraining(item));
+        dispatch(selectEditTraining(item));
         setIsCreateStatus(true);
     };
 
@@ -104,10 +114,20 @@ Props) => {
     };
 
     const handleSaveTraining = () => {
-        selectedTraining &&
-            createTrainingRequest({ ...selectedTraining, date: dateISO })
-                .then(updateTrainings)
-                .catch(handleSaveDataError);
+        if (selectedTraining) {
+            !isEditTraining &&
+                createTrainingRequest({ ...selectedTraining, date: dateISO })
+                    .then(updateTrainings)
+                    .catch(handleSaveDataError);
+
+            isEditTraining &&
+                updateTrainingRequest(selectedTraining._id || '', {
+                    ...selectedTraining,
+                    date: dateISO,
+                })
+                    .then(updateTrainings)
+                    .catch(handleSaveDataError);
+        }
     };
 
     const handleBack = () => {
@@ -143,7 +163,7 @@ Props) => {
                         <div>
                             {listData.map((item, index) => (
                                 <div
-                                    key={item.id}
+                                    key={item._id}
                                     className={styles.itemWrapper}
                                     // data-test-id={`modal-update-training-edit-button${index}`}
                                 >
@@ -217,7 +237,7 @@ Props) => {
                             className={styles.buttonSave}
                             onClick={handleSaveTraining}
                         >
-                            Сохранить
+                            {isEditTraining ? 'Сохранить изменения' : 'Сохранить'}
                         </Button>
                     </div>
                 </div>

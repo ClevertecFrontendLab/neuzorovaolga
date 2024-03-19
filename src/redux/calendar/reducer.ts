@@ -10,6 +10,7 @@ const PARAMETERS = {
 
 type CalendarState = {
     isDrawer: boolean;
+    isEditTraining: boolean;
     trainings: Training[];
     trainingsList: TrainingsListItem[];
     selectedTraining?: Training;
@@ -17,6 +18,7 @@ type CalendarState = {
 
 const initialState: CalendarState = {
     isDrawer: false,
+    isEditTraining: false,
     trainings: [],
     trainingsList: [],
 };
@@ -37,6 +39,10 @@ const calendarSlice = createSlice({
         setTrainingsList: (state, action: PayloadAction<TrainingsListItem[]>) => {
             state.trainingsList = action.payload;
         },
+        selectEditTraining: (state, action: PayloadAction<Training>) => {
+            state.isEditTraining = true;
+            state.selectedTraining = action.payload;
+        },
         selectTraining: (state, action: PayloadAction<Omit<Training, 'parameters'>>) => {
             state.selectedTraining = { ...action.payload, parameters: PARAMETERS };
         },
@@ -46,6 +52,7 @@ const calendarSlice = createSlice({
             }
         },
         cleanSelectedTraining: (state) => {
+            state.isEditTraining = false;
             state.selectedTraining = undefined;
         },
     },
@@ -59,5 +66,6 @@ export const {
     selectTraining,
     updateExercises,
     cleanSelectedTraining,
+    selectEditTraining,
 } = calendarSlice.actions;
 export default calendarSlice.reducer;

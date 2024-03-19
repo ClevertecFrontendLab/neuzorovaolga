@@ -8,6 +8,11 @@ export const selectIsDrawer = createSelector(
     (calendar) => calendar.isDrawer,
 );
 
+export const selectIsEditTraining = createSelector(
+    [selectCalendarSlice],
+    (calendar) => calendar.isEditTraining,
+);
+
 export const selectTrainings = createSelector(
     [selectCalendarSlice],
     (calendar) => calendar.trainings,
