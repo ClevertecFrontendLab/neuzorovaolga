@@ -54,7 +54,7 @@
         border-radius: 24px;
         margin-top: calc(100vh - 555px);
     }
-    .wrapper {
+    .exerciseWrapper {
         max-height: 375px;
         overflow: scroll;
     }

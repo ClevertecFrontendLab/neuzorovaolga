@@ -57,6 +57,7 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                         addonBefore='+'
                         min={1}
                         type='number'
+                        controls={false}
                         onChange={handleChangeReplays}
                     />
                 </div>
@@ -69,6 +70,7 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                                 value={item.weight}
                                 min={0}
                                 type='number'
+                                controls={false}
                                 onChange={handleChangeWeight}
                             />
                             <p className={styles.cross}>X</p>
@@ -82,6 +84,7 @@ export const ExerciseItem = ({ item, index, handleChangeExercise }: Props) => {
                             value={item.approaches}
                             min={1}
                             type='number'
+                            controls={false}
                             onChange={handleChangeApproaches}
                         />
                     </div>
