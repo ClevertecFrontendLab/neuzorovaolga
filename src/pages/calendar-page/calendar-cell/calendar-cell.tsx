@@ -20,27 +20,23 @@ export const CalendarCell = ({
     dateISO,
 }: Props) => {
     const cellRef = useRef<HTMLDivElement>(null);
-    console.log(window.innerWidth, date, cellRef?.current?.getBoundingClientRect?.());
+    console.log(listData);
 
     return (
         <div className='events' ref={cellRef}>
-            {listData.map((item) => (
-                <div key={item.id}>
-                    <Badge status='success' text={item.name} />
-                </div>
-            ))}
             {date === activeDateModal && (
                 <TrainingModal
+                    listData={listData}
                     handleClose={handleCloseModal}
                     date={date}
                     dateISO={dateISO}
-                    top={cellRef?.current?.getBoundingClientRect?.()?.top || 0}
-                    left={cellRef?.current?.getBoundingClientRect?.()?.left || 0}
-                    right={
-                        window.innerWidth -
-                        (cellRef?.current?.getBoundingClientRect?.()?.left || 0) -
-                        (cellRef?.current?.getBoundingClientRect?.()?.width || 0)
-                    }
+                    // top={cellRef?.current?.getBoundingClientRect?.()?.top || 0}
+                    // left={cellRef?.current?.getBoundingClientRect?.()?.left || 0}
+                    // right={
+                    //     window.innerWidth -
+                    //     (cellRef?.current?.getBoundingClientRect?.()?.left || 0) -
+                    //     (cellRef?.current?.getBoundingClientRect?.()?.width || 0)
+                    // }
                     isRightPosition={
                         (cellRef?.current?.getBoundingClientRect?.()?.left || 0) +
                             TRAINING_MODAL_WIDTH >
@@ -48,6 +44,11 @@ export const CalendarCell = ({
                     }
                 />
             )}
+            {listData.map((item) => (
+                <div key={item.id}>
+                    <Badge status='success' text={item.name} />
+                </div>
+            ))}
         </div>
     );
 };

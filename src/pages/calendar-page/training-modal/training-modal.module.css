@@ -69,6 +69,11 @@
     color: var(--primary-light-6);
 }
 
+.itemWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .button {
     margin-top: 15px;
     margin-left: 12px;

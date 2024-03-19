@@ -43,6 +43,16 @@ export const CalendarPage = () => {
     };
 
     useEffect(() => {
+        // getTrainingsRequest().then((trainingsResponse) => {
+        //     dispatch(
+        //         setTrainings(
+        //             trainingsResponse.map((item) => ({
+        //                 ...item,
+        //                 date: moment(item.date).format('DD.MM.yyyy'),
+        //             })),
+        //         ),
+        //     );
+        // });
         getTrainingsListRequest()
             .then((data) => {
                 dispatch(setTrainingsList(data));
@@ -68,6 +78,7 @@ export const CalendarPage = () => {
     const dateFullCellMobileRender = (value: Moment) => {
         const date = value.format('DD.MM.yyyy');
         const isBlueDate = trainings.some((training) => training.date === date);
+        const listData = trainings.filter(({ date }) => date === date);
 
         return (
             <div className={classnames(isBlueDate && styles.bluBackground)}>
@@ -77,6 +88,7 @@ export const CalendarPage = () => {
                         handleClose={handleCloseModal}
                         date={date}
                         dateISO={value.toISOString()}
+                        listData={listData}
                     />
                 )}
             </div>

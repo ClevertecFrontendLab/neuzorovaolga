@@ -3,7 +3,7 @@ import { BackIcon } from '@app/assets/icons/close-icon/back-icon';
 import classnames from 'classnames';
 import styles from './training-modal.module.css';
 import Empty from '../../../assets/img/empty-image.png';
-import { Button, Select } from 'antd';
+import { Badge, Button, Select } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -19,34 +19,42 @@ import { EditOutlined } from '@ant-design/icons';
 import { createTrainingRequest, getTrainingsRequest } from '@app/api/training';
 import { ErrorSaveDataModal } from '../error-save-data-modal/error-save-data-modal';
 import moment from 'moment';
+import { Training } from '@models/trainings';
 
 type Props = {
+    listData: Training[];
     handleClose: () => void;
     date: string;
     isRightPosition?: boolean;
     dateISO: string;
-    top: number;
-    left: number;
-    right: number;
+    // top?: number;
+    // left: number;
+    // right: number;
 };
 
 export const TrainingModal = ({
+    listData,
     handleClose,
     date,
     isRightPosition,
     dateISO,
-    top,
-    left,
-    right,
-}: Props) => {
+}: // top,
+// left,
+// right,
+Props) => {
     const dispatch = useDispatch();
     const trainingsList = useSelector(selectTrainingsList);
     const selectedTraining = useSelector(selectSelectedTraining);
     const [isCreateStatus, setIsCreateStatus] = useState(false);
     const [isSaveDataErrorModal, setIsSaveDataErrorModal] = useState(false);
-    const desktopPositionStyles = isRightPosition
-        ? { top: `${top - 25}px`, right: `${right - 5}px` }
-        : { top: `${top - 25}px`, left: `${left - 5}px` };
+    // const desktopPositionStyles = isRightPosition
+    //     ? { top: `${top - 25}px`, right: `${right - 5}px` }
+    //     : { top: `${top - 25}px`, left: `${left - 5}px` };
+
+    const selectedTrainingNames = listData.map((item) => item.name);
+    const selectOptions = trainingsList.filter(
+        (item) => !selectedTrainingNames.includes(item.name),
+    );
 
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
@@ -61,6 +69,7 @@ export const TrainingModal = ({
                     })),
                 ),
             );
+            dispatch(cleanSelectedTraining());
             setIsCreateStatus(false);
         });
     };
@@ -71,6 +80,11 @@ export const TrainingModal = ({
 
     const handleOpenDrawer = () => {
         dispatch(showDrawer());
+    };
+
+    const handleEditTraining = (item: Training) => {
+        dispatch(selectTraining(item));
+        setIsCreateStatus(true);
     };
 
     const handleSaveDataError = () => {
@@ -91,23 +105,26 @@ export const TrainingModal = ({
 
     const handleSaveTraining = () => {
         selectedTraining &&
-            createTrainingRequest({ ...selectedTraining })
+            createTrainingRequest({ ...selectedTraining, date: dateISO })
                 .then(updateTrainings)
                 .catch(handleSaveDataError);
     };
 
     const handleBack = () => {
+        dispatch(cleanSelectedTraining());
         setIsCreateStatus(false);
     };
 
     return (
-        <div className={classnames(styles.wrapper)} style={!isMobile ? desktopPositionStyles : {}}>
+        <div className={classnames(styles.wrapper)}>
             {!isCreateStatus && (
                 <div data-test-id='modal-create-training'>
                     <div className={styles.top}>
                         <div>
                             <div className={styles.title}>{`Tренировки на ${date}`}</div>
-                            <div className={styles.message}>Нет активных тренировок</div>
+                            {!listData.length && (
+                                <div className={styles.message}>Нет активных тренировок</div>
+                            )}
                         </div>
                         <Button
                             type='link'
@@ -117,17 +134,42 @@ export const TrainingModal = ({
                             <CloseIcon />
                         </Button>
                     </div>
-                    <div className={styles.logo}>
-                        <img src={Empty} />
-                    </div>
+                    {!listData.length && (
+                        <div className={styles.logo}>
+                            <img src={Empty} />
+                        </div>
+                    )}
+                    {!!listData.length && (
+                        <div>
+                            {listData.map((item, index) => (
+                                <div
+                                    key={item.id}
+                                    className={styles.itemWrapper}
+                                    // data-test-id={`modal-update-training-edit-button${index}`}
+                                >
+                                    <Badge status='success' text={item.name} />
+                                    <div
+                                        className={styles.change}
+                                        onClick={() => handleEditTraining(item)}
+                                        data-test-id={`modal-update-training-edit-button${index}`}
+                                    >
+                                        <EditOutlined />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                     <Button
                         type='primary'
                         size='large'
                         className={styles.button}
                         onClick={handleButton}
-                        disabled={dateISO < new Date().toISOString() || }
+                        disabled={
+                            dateISO < new Date().toISOString() ||
+                            listData.length >= trainingsList.length
+                        }
                     >
-                        Создать тренировку
+                        {!listData.length ? 'Создать тренировку' : 'Создать тренировку'}
                     </Button>
                 </div>
             )}
@@ -142,19 +184,25 @@ export const TrainingModal = ({
                             data-test-id='modal-create-exercise-select'
                             disabled={!!selectedTraining?.exercises?.length}
                             defaultValue='Выбор типа тренировки'
+                            value={selectedTraining ? selectedTraining.name : undefined}
                             onSelect={handleSelectTrainingName}
                             style={{ width: 220 }}
                             bordered={false}
-                            options={trainingsList.map(({ name, key }) => ({
+                            options={selectOptions.map(({ name, key }) => ({
                                 value: name,
                                 label: name,
+                                disabled: selectedTrainingNames.includes(name),
                             }))}
                         />
                     </div>
-                    {selectedTraining?.exercises.map((item) => (
+                    {selectedTraining?.exercises.map((item, index) => (
                         <div className={styles.userExercisesWrapper}>
                             <div className={styles.userExercises}>{item.name}</div>
-                            <div className={styles.change} onClick={handleOpenDrawer}>
+                            <div
+                                className={styles.change}
+                                onClick={handleOpenDrawer}
+                                data-test-id={`modal-update-training-edit-button${index}`}
+                            >
                                 <EditOutlined />
                             </div>
                         </div>
