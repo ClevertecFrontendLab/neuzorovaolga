@@ -1,0 +1,70 @@
+.drawer {
+    position: absolute;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    margin-bottom: 25px;
+}
+
+.trainingInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    align-items: center;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.textBage {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    margin-left: 5px;
+}
+
+.buttonWrapper {
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--character-light-dividers);
+}
+
+.button {
+    border: none;
+    background: var(--character-light-dividers);
+    /* border-radius: 0 0 6px 6px; */
+    /* width: 344px; */
+    height: 40px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: start;
+    padding-left: 10px;
+    color: var(--primary-light-6);
+}
+
+@media (max-width: 833px) {
+    .drawer {
+        border-radius: 24px;
+        margin-top: calc(100vh - 555px);
+    }
+    .exerciseWrapper {
+        max-height: 375px;
+        overflow: scroll;
+    }
+}

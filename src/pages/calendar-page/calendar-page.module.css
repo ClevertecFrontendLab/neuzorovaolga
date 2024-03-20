@@ -1,0 +1,98 @@
+.wrapper {
+    background-image: url('../../assets/img/page-light.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendarWrapper {
+    background: var(--primary-light-1);
+    height: 1000px;
+    padding: 0 20px;
+    flex: 1;
+}
+
+.headerWrapper {
+    display: flex;
+    padding: 16px 0 0;
+    background: var(--primary-light-1);
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.settingsButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.settingsButton {
+    display: flex;
+    width: 129px;
+    height: 32px;
+    padding: 4px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: #262626;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.settingsButtonMobile {
+    font-size: 14px;
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 15px;
+}
+
+.lightText {
+    color: var(--character-light-secondary-45);
+}
+
+.notes-month {
+    font-size: 28px;
+    text-align: center;
+}
+.notes-month section {
+    font-size: 28px;
+}
+
+@media (max-width: 1439px) {
+    .wrapper {
+        max-width: 834px;
+    }
+    .calendarWrapper {
+        height: 1150px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        height: 100vh;
+        max-width: 360px;
+    }
+    .calendarWrapper {
+        height: 550px;
+    }
+}

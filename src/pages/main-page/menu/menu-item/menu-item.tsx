@@ -6,14 +6,21 @@ type Props = {
     icon: React.ReactNode;
     label: string;
     collapsed: boolean;
-    handler?: () => void;
+    handleClick?: () => void;
+    key?: string;
+    testId?: string;
 };
 
-export const MenuItem = ({ icon, label, collapsed, handler }: Props) => {
+export const MenuItem = ({ icon, label, collapsed, handleClick, testId }: Props) => {
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
+
     return (
-        <div className={collapsed ? styles.itemCollapsed : styles.item} onClick={handler}>
+        <div
+            className={collapsed ? styles.itemCollapsed : styles.item}
+            onClick={handleClick}
+            data-test-id={testId}
+        >
             {!isMobile && icon}
             {!collapsed && <p className={styles.itemLabel}>{label}</p>}
         </div>
