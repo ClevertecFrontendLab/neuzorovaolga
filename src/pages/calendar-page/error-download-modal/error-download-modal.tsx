@@ -30,8 +30,7 @@ export const ErrorDownloadModal = ({ handleButton }: Props) => {
                                 className={styles.title}
                                 data-test-id='modal-error-user-training-title'
                             >
-                                {`При открытии данных
-                                произошла ошибка`}
+                                {`При открытии данных произошла ошибка`}
                             </div>
                             <div
                                 className={styles.message}

@@ -108,6 +108,12 @@
     border-color: var(--primary-light-6);
 }
 
+.ant-badge-status-text {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--character-light-title-85);
+}
+
 @media (max-width: 833px) {
     .ant-picker-calendar .ant-picker-panel .ant-picker-date-panel,
     .ant-picker-calendar-mini .ant-picker-calendar-header {
@@ -143,4 +149,11 @@
     .ant-drawer-mask {
         background: none;
     }
+
+    .ant-select-selection-item {
+        flex: none;
+    }
+    /* .ant-select .ant-select-borderless .ant-select-single .ant-select-show-arrow {
+        width: 273px !important;
+    } */
 }

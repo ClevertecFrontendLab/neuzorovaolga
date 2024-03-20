@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { Exercise } from '@models/trainings';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { colorBadge } from '@utils/bage';
 
 const DEFAULT_EXERCISE = {
     name: '',
@@ -78,7 +79,10 @@ export const ExerciseDrawer = () => {
                     </div>
                 </div>
                 <div className={styles.trainingInfo}>
-                    <Badge status={'success'} text={selectedTraining?.name} />
+                    <div className={styles.textBage}>
+                        <Badge status={colorBadge(selectedTraining?.name)} />
+                        <div className={styles.text}>{selectedTraining?.name}</div>
+                    </div>
                     <div>{selectedTraining?.date}</div>
                 </div>
                 <div className={styles.exerciseWrapper}>

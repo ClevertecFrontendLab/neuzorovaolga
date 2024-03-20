@@ -25,6 +25,15 @@
     color: var(--character-light-secondary-45);
 }
 
+.textBage {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    margin-left: 5px;
+}
+
 .buttonWrapper {
     width: 100%;
     padding: 5px 10px;

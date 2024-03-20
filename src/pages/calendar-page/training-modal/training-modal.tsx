@@ -29,6 +29,7 @@ import {
 import { ErrorSaveDataModal } from '../error-save-data-modal/error-save-data-modal';
 import moment from 'moment';
 import { Training } from '@models/trainings';
+import { colorBadge } from '@utils/bage';
 
 type Props = {
     listData: Training[];
@@ -68,6 +69,8 @@ Props) => {
 
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
+
+    const desktopPositionStyles = isRightPosition ? styles.right : styles.left;
 
     const updateTrainings = () => {
         getTrainingsRequest().then((trainingsResponse) => {
@@ -144,7 +147,7 @@ Props) => {
     }, []);
 
     return (
-        <div className={classnames(styles.wrapper)}>
+        <div className={classnames(styles.wrapper, !isMobile && desktopPositionStyles)}>
             {!isCreateStatus && (
                 <div data-test-id='modal-create-training'>
                     <div className={styles.top}>
@@ -168,10 +171,10 @@ Props) => {
                         </div>
                     )}
                     {!!listData.length && (
-                        <div>
+                        <div className={styles.listStyle}>
                             {listData.map((item, index) => (
                                 <div key={item._id} className={styles.itemWrapper}>
-                                    <Badge status='success' text={item.name} />
+                                    <Badge status={colorBadge(item.name)} text={item.name} />
                                     <Button
                                         type='link'
                                         icon={<EditOutlined />}

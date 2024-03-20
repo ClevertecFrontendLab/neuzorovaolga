@@ -4,21 +4,25 @@ import { Calendar, Space } from 'antd';
 import type { Moment } from 'moment';
 import { useEffect, useState } from 'react';
 import { CalendarCell } from './calendar-cell/calendar-cell';
-import { getTrainingsListRequest, getTrainingsRequest } from '@app/api/training';
+import { getTrainingsListRequest } from '@app/api/training';
 import { useDispatch } from 'react-redux';
-import { setTrainings, setTrainingsList } from '@redux/calendar/reducer';
+import { setTrainingsList } from '@redux/calendar/reducer';
 import { ExerciseDrawer } from './exercise-drawer/exercise-drawer';
 import { useSelector } from 'react-redux';
 import { selectIsDrawer, selectTrainings } from '@redux/calendar/selectors';
 import { SettingOutlined } from '@ant-design/icons';
 import useWindowDimensions from '@hooks/useWindowDimensions';
-import { TrainingModal } from './training-modal/training-modal';
-import classnames from 'classnames';
-import moment from 'moment';
 import { ErrorDownloadModal } from './error-download-modal/error-download-modal';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@app/router';
+import moment from 'moment';
+import 'moment/locale/ru';
+import locale from 'antd/lib/date-picker/locale/ru_RU';
+import { PickerLocale } from 'antd/lib/date-picker/generatePicker';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isDrawer = useSelector(selectIsDrawer);
     const trainings = useSelector(selectTrainings);
     const { width } = useWindowDimensions();
@@ -27,9 +31,6 @@ export const CalendarPage = () => {
     const [activeDateModal, setActiveDateModal] = useState('');
     const [isOpenDataErrorModal, setIsOpenDataErrorModal] = useState(false);
 
-    const handleDateClick = (date: string) => {
-        setActiveDateModal(date);
-    };
     const handleCloseModal = () => {
         setActiveDateModal('');
     };
@@ -42,17 +43,16 @@ export const CalendarPage = () => {
         setIsOpenDataErrorModal(false);
     };
 
+    const redirectMainPage = () => {
+        navigate(PATH.MAIN);
+    };
+
+    const handleDateClick = (date: string) => {
+        setActiveDateModal(date);
+    };
+
     useEffect(() => {
-        // getTrainingsRequest().then((trainingsResponse) => {
-        //     dispatch(
-        //         setTrainings(
-        //             trainingsResponse.map((item) => ({
-        //                 ...item,
-        //                 date: moment(item.date).format('DD.MM.yyyy'),
-        //             })),
-        //         ),
-        //     );
-        // });
+        moment.locale('ru');
         getTrainingsListRequest()
             .then((data) => {
                 dispatch(setTrainingsList(data));
@@ -60,38 +60,18 @@ export const CalendarPage = () => {
             .catch(handleOpenDataError);
     }, []);
 
-    const dateCellContentRender = (value: Moment) => {
+    const dateFullCellRender = (value: Moment) => {
         const stringValue = value.format('DD.MM.yyyy');
-        const listData = trainings.filter(({ date }) => date === stringValue);
+        const listData = trainings.filter((training) => training.date === stringValue);
 
         return (
             <CalendarCell
                 listData={listData}
-                date={stringValue}
+                value={value}
                 handleCloseModal={handleCloseModal}
                 activeDateModal={activeDateModal}
-                dateISO={value.toISOString()}
+                handleDate={handleDateClick}
             />
-        );
-    };
-
-    const dateFullCellMobileRender = (value: Moment) => {
-        const stringValue = value.format('DD.MM.yyyy');
-        const isBlueDate = trainings.some((training) => training.date === stringValue);
-        const listData = trainings.filter((training) => training.date === stringValue);
-
-        return (
-            <div className={classnames(isBlueDate && styles.bluBackground)}>
-                {value.date()}
-                {stringValue === activeDateModal && (
-                    <TrainingModal
-                        handleClose={handleCloseModal}
-                        date={stringValue}
-                        dateISO={value.toISOString()}
-                        listData={listData}
-                    />
-                )}
-            </div>
         );
     };
 
@@ -100,7 +80,10 @@ export const CalendarPage = () => {
             <Menu />
             <div className={styles.calendarWrapper}>
                 <div className={styles.headerWrapper}>
-                    <p className={styles.lightText}>Главная /</p> <p>&nbsp;Календарь</p>
+                    <p className={styles.lightText} onClick={redirectMainPage}>
+                        Главная /
+                    </p>
+                    <p>&nbsp;Календарь</p>
                 </div>
                 <div className={styles.settingsButtonWrapper}>
                     {width >= 834 ? (
@@ -118,14 +101,7 @@ export const CalendarPage = () => {
                 </div>
                 <Calendar
                     fullscreen={isMobile ? false : true}
-                    dateFullCellRender={isMobile ? dateFullCellMobileRender : undefined}
-                    dateCellRender={dateCellContentRender}
-                    onSelect={(value: Moment) => {
-                        const stringValue = value.format('DD.MM.yyyy');
-                        if (stringValue !== activeDateModal) {
-                            handleDateClick(stringValue);
-                        }
-                    }}
+                    dateFullCellRender={dateFullCellRender}
                 />
                 {isDrawer && <ExerciseDrawer />}
             </div>
