@@ -114,6 +114,10 @@
     color: var(--character-light-title-85);
 }
 
+.ant-progress-status-success .ant-progress-bg {
+    background-color: #1890ff;
+}
+
 @media (max-width: 833px) {
     .ant-picker-calendar .ant-picker-panel .ant-picker-date-panel,
     .ant-picker-calendar-mini .ant-picker-calendar-header {
@@ -153,7 +157,4 @@
     .ant-select-selection-item {
         flex: none;
     }
-    /* .ant-select .ant-select-borderless .ant-select-single .ant-select-show-arrow {
-        width: 273px !important;
-    } */
 }

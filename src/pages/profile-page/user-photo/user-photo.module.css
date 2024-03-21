@@ -1,0 +1,9 @@
+.photoText {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-secondary-45);
+    padding: 0 8px;
+}

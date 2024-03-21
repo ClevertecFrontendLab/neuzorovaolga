@@ -17,8 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import { PATH } from '@app/router';
 import moment from 'moment';
 import 'moment/locale/ru';
-import locale from 'antd/lib/date-picker/locale/ru_RU';
-import { PickerLocale } from 'antd/lib/date-picker/generatePicker';
 
 export const CalendarPage = () => {
     const dispatch = useDispatch();

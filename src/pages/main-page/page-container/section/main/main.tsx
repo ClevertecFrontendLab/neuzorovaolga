@@ -48,6 +48,10 @@ export const Main = () => {
             .finally(hideLoader);
     };
 
+    const handleProfile = () => {
+        navigate(PATH.PROFILE);
+    };
+
     const cards = [
         {
             icon: <HeartFilled color='primary' />,
@@ -67,9 +71,7 @@ export const Main = () => {
             icon: <SolutionOutlined color='link' />,
             iconTitle: 'Профиль',
             title: 'Заполнить профиль',
-            handleClick: () => {
-                return;
-            },
+            handleClick: handleProfile,
         },
     ];
 

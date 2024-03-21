@@ -60,6 +60,10 @@ export const Menu = () => {
             .finally(hideLoader);
     };
 
+    const handleProfile = () => {
+        navigate(PATH.PROFILE);
+    };
+
     const actionButtons = [
         {
             key: '1',
@@ -106,6 +110,7 @@ export const Menu = () => {
                     }}
                 />
             ),
+            handleClick: handleProfile,
             label: 'Профиль',
         },
     ];
