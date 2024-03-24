@@ -1,0 +1,112 @@
+import { hideDrawer } from '@redux/calendar/reducer';
+import { selectIsDrawer } from '@redux/calendar/selectors';
+import { Button, Drawer, Radio, RadioChangeEvent } from 'antd';
+import TrueIcon from '../../../assets/img/true-icon.png';
+import FalseIcon from '../../../assets/img/false-icon.png';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import styles from './tariff-drawer.module.css';
+import { CloseIcon } from '@app/assets/icons/close-icon/close-icon';
+import useWindowDimensions from '@hooks/useWindowDimensions';
+import { selectUserTariffList } from '@redux/user/selectors';
+import { useState } from 'react';
+
+export const TariffDrawer = () => {
+    const dispatch = useDispatch();
+    const tariffList = useSelector(selectUserTariffList);
+    const [value, setValue] = useState(null);
+    const isDrawer = useSelector(selectIsDrawer);
+    const { width } = useWindowDimensions();
+    const isMobile = width <= 833;
+
+    const tariffDetails = [
+        { name: 'Статистика за месяц', free: true, pro: true },
+        { name: 'Статистика за все время', free: false, pro: true },
+        { name: 'Современные тренировки', free: true, pro: true },
+        { name: 'Участие в марафонах', free: false, pro: true },
+        { name: 'Приложение IOS', free: false, pro: true },
+        { name: 'Приложение Android', free: false, pro: true },
+        { name: 'Индивидуальный Chat GPT', free: false, pro: true },
+    ];
+
+    const onClose = () => {
+        dispatch(hideDrawer());
+    };
+    const onChange = (e: RadioChangeEvent) => {
+        console.log('radio checked', e.target.value);
+        setValue(e.target.value);
+    };
+
+    return (
+        <Drawer
+            className={styles.drawer}
+            placement={isMobile ? 'bottom' : 'right'}
+            closable={false}
+            onClose={onClose}
+            open={isDrawer}
+            getContainer={false}
+        >
+            <div className={styles.wrapper}>
+                <div className={styles.header}>
+                    <div>Сравнить тарифы</div>
+                    <div onClick={onClose} data-test-id='modal-drawer-right-button-close'>
+                        <CloseIcon />
+                    </div>
+                </div>
+                <div className={styles.tariffs}>
+                    {tariffList?.map((item) => (
+                        <div className={item.name !== 'Pro' ? styles.tariff : styles.tariffPro}>
+                            {item.name.toUpperCase()}
+                        </div>
+                    ))}
+                </div>
+                <div>
+                    <div className={styles.detailsWrapper}>
+                        {tariffDetails?.map((item, index) => (
+                            <div key={index}>
+                                <div className={styles.optionsWrapper}>
+                                    <div>{item.name}</div>
+                                    <div className={styles.options}>
+                                        <div className={styles.details}>
+                                            {item.free ? (
+                                                <img src={TrueIcon} />
+                                            ) : (
+                                                <img src={FalseIcon} />
+                                            )}
+                                        </div>
+                                        <div className={styles.details}>
+                                            {item.pro ? (
+                                                <img src={TrueIcon} />
+                                            ) : (
+                                                <img src={FalseIcon} />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={styles.message}>Стоимость тарифа</div>
+                <div className={styles.detailsWrapper}>
+                    {tariffList[1].periods?.map((item, index) => (
+                        <div className={styles.periods}>
+                            <div>{item.text}</div>
+                            <div className={styles.priceWrapper}>
+                                <div className={styles.price}>{`${item.cost} $`}</div>
+                                <Radio
+                                    value={index}
+                                    className={styles.price}
+                                    onChange={onChange}
+                                ></Radio>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <Button className={styles.payButton} type='primary' size='large' block disabled>
+                    Выбрать и оплатить
+                </Button>
+            </div>
+        </Drawer>
+    );
+};

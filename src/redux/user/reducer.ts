@@ -9,7 +9,7 @@ const FREE_TARIFF: TariffItem = {
 
 type UserProfileState = {
     profile?: Profile;
-    tariffList?: TariffItem[];
+    tariffList?: TariffItem[] | undefined;
 };
 
 const initialState: UserProfileState = {};

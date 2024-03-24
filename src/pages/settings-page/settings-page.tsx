@@ -7,8 +7,11 @@ import ProDisabled from '../../assets/img/pro-disabled-tariff.png';
 import { useSelector } from 'react-redux';
 import { selectUserTariffList } from '@redux/user/selectors';
 import { TariffCard } from './tarif-card/tarif-card';
+import { TariffDrawer } from './tariff-drawer/tariff-drawer';
+import { selectIsDrawer } from '@redux/calendar/selectors';
 
 export const SettingsPage = () => {
+    const isDrawer = useSelector(selectIsDrawer);
     const tariffList = useSelector(selectUserTariffList);
     const tariffImages = [Free, ProDisabled];
     console.log(tariffList);
@@ -63,6 +66,7 @@ export const SettingsPage = () => {
                     </div>
                 </div>
             </div>
+            {isDrawer && <TariffDrawer />}
         </div>
     );
 };

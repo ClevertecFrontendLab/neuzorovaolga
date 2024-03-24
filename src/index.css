@@ -118,6 +118,10 @@
     background-color: #1890ff;
 }
 
+.ant-radio-wrapper {
+    margin: 0;
+}
+
 @media (max-width: 833px) {
     .ant-picker-calendar .ant-picker-panel .ant-picker-date-panel,
     .ant-picker-calendar-mini .ant-picker-calendar-header {

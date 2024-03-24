@@ -1,0 +1,98 @@
+.drawer {
+    position: absolute;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    margin-bottom: 25px;
+}
+
+.tariffs {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.tariff {
+    text-align: center;
+    width: 56px;
+    height: 24px;
+    background: var(--character-light-dividers);
+}
+.tariffPro {
+    text-align: center;
+    width: 56px;
+    height: 24px;
+    color: var(--primary-light-7);
+    background: var(--primary-light-1);
+}
+
+.message {
+    margin-top: 100px;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.detailsWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 25px;
+}
+
+.details {
+    text-align: center;
+    width: 56px;
+    height: 24px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+.options {
+    display: flex;
+    gap: 14px;
+}
+
+.optionsWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.priceWrapper {
+    display: flex;
+    gap: 14px;
+}
+
+.periods {
+    display: flex;
+    justify-content: space-between;
+}
+.price {
+    text-align: center;
+    width: 56px;
+    height: 24px;
+    font-weight: 700;
+    justify-content: center;
+}
+
+.radioButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+}
+.payButton {
+    margin-top: 260px;
+}
