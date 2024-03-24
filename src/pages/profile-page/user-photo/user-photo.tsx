@@ -5,6 +5,8 @@ import { Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 import styles from './user-photo.module.css';
+import { useSelector } from 'react-redux';
+import { selectUserImageSrc, selectUserProfile } from '@redux/user/selectors';
 
 type Props = {
     showErrorsizeModal: () => void;
@@ -21,16 +23,22 @@ const getBase64 = (file: RcFile): Promise<string> =>
     });
 
 export const UserPhoto = ({ showErrorsizeModal }: Props) => {
+    const userImageSrc = useSelector(selectUserImageSrc);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
-    const [defaultList, setDefaultList] = useState<UploadFile[]>([
-        {
-            uid: '-5',
-            name: 'image.png',
-            status: 'error',
-        },
-    ]);
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const token = sessionStorage.getItem('token');
+    const errorFile: UploadFile = {
+        uid: '-5',
+        name: 'image.png',
+        status: 'error',
+    };
+    const defaultFile: UploadFile = {
+        uid: '-1',
+        name: 'user.png',
+        status: 'done',
+        url: userImageSrc,
+    };
+    const [fileList, setFileList] = useState<UploadFile[]>(userImageSrc ? [defaultFile] : []);
     const [statusError, setStatusError] = useState(false);
 
     const handleError = () => {
@@ -46,14 +54,25 @@ export const UserPhoto = ({ showErrorsizeModal }: Props) => {
         setPreviewOpen(true);
     };
 
+    const maxFileSize = 5 * 1024 * 1024; // Максимальный размер файла 5 МБ
+
+    const handleBeforeUpload = (file: RcFile) => {
+        if (file.size > maxFileSize) {
+            console.log(file.size);
+            return false; // Отклоняем загрузку файла
+        }
+        console.log(file.size);
+        return true; // Разрешаем загрузку файла
+    };
+
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-        console.log(newFileList);
-        if (newFileList[0]?.status !== 'error') {
+        if ((newFileList[0]?.size || 0) < maxFileSize) {
+            console.log(newFileList[0]?.size, newFileList[0]?.size || 0 < 400000);
             setFileList(newFileList);
-            return fileList[0];
         } else {
+            console.log('newFileList');
             showErrorsizeModal();
-            setFileList(defaultList);
+            setFileList([errorFile]);
         }
     };
 
@@ -66,25 +85,28 @@ export const UserPhoto = ({ showErrorsizeModal }: Props) => {
     return (
         <>
             <Upload
-                action='http://localhost:3000/profile'
+                action='https://marathon-api.clevertec.ru/upload-image'
+                headers={{ Authorization: `Bearer ${token}` }}
                 listType='picture-card'
                 fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                beforeUpload={(file) => {
-                    return new Promise((resolve, reject) => {
-                        console.log(file);
-                        if (file.size < 60000) {
-                            reject('file size big');
-                        } else {
-                            handleError();
-                            resolve('success');
-                        }
-                    });
-                }}
+                beforeUpload={handleBeforeUpload}
+                // beforeUpload={(file) => {
+                //     return new Promise((resolve, reject) => {
+                //         console.log(file);
+                //         if (file.size < 60000) {
+                //             reject('file size big');
+                //         } else {
+                //             handleError();
+                //             resolve('success');
+                //         }
+                //     });
+                // }}
             >
                 {fileList.length > 0 ? null : uploadButton}
             </Upload>
+
             <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
                 <img alt='example' style={{ width: '100%' }} src={previewImage} />
             </Modal>

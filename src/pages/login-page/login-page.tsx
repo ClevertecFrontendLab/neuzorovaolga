@@ -16,6 +16,7 @@ import { PATH } from '../../router';
 import { GlobalContext } from '@context/GlobalContext';
 import { saveTokenHelper } from '@utils/storage';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { getUserRequest } from '@app/api/user';
 
 type FormData = {
     username: string;

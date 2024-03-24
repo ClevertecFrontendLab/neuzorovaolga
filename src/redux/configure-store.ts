@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
-import calendarReducer from './calendar/reducer.ts'; // Import your calendar reducer
+import calendarReducer from './calendar/reducer.ts';
+import userProfileReducer from './user/reducer.ts'; // Import  user reducer
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -12,7 +13,8 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
-        calendar: calendarReducer, // Add your calendar reducer
+        calendar: calendarReducer,
+        userProfile: userProfileReducer, // Add user reducer
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
 });
