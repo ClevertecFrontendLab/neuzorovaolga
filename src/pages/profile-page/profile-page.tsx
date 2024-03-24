@@ -8,8 +8,15 @@ import { regexPasswordValidation } from '@utils/validation';
 
 import { useState } from 'react';
 import { ErrorSizeFileModal } from './error-size-file-modal/error-size-file-modal';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '@app/router';
+import { getUserCatalogsTariffRequest } from '@app/api/user';
+import { useDispatch } from 'react-redux';
+import { setUserTariffList } from '@redux/user/reducer';
 
 export const ProfilePage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
 
@@ -27,6 +34,11 @@ export const ProfilePage = () => {
         setIsErrorSizeModal(true);
     };
 
+    const handleButtonSettings = () => {
+        getUserCatalogsTariffRequest().then((data) => dispatch(setUserTariffList(data)));
+        navigate(PATH.SETTINGS);
+    };
+
     return (
         <div className={styles.wrapper}>
             <Menu />
@@ -35,7 +47,10 @@ export const ProfilePage = () => {
                     <div className={styles.headerTitle}>Профиль</div>
                     <div className={styles.settingsButtonWrapper}>
                         {width >= 834 ? (
-                            <button className={styles.settingsButton}>
+                            <button
+                                className={styles.settingsButton}
+                                onClick={handleButtonSettings}
+                            >
                                 <Space className={styles.icon}>
                                     <SettingOutlined />
                                 </Space>

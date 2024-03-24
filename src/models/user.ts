@@ -11,3 +11,16 @@ export type Profile = {
         expired: string;
     };
 };
+
+export type TariffItem = {
+    _id: string;
+    name: string;
+    isActive?: boolean;
+    periods?: [
+        {
+            text: string;
+            cost: number;
+            days: number;
+        },
+    ];
+};

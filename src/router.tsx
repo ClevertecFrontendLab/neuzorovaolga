@@ -23,6 +23,7 @@ import { FeedbacksPage } from '@pages/feedbacks-page/feedbacks-page';
 import useGoogleAuth from '@hooks/useGoogleAuth.ts';
 import { CalendarPage } from '@pages/calendar-page/calendar-page';
 import { ProfilePage } from '@pages/profile-page/profile-page';
+import { SettingsPage } from '@pages/settings-page/settings-page';
 
 export const PATH = {
     ERROR_LOGIN: '/result/error-login',
@@ -38,6 +39,7 @@ export const PATH = {
     FEEDBACKS: '/feedbacks',
     CALENDAR: '/calendar',
     PROFILE: '/profile',
+    SETTINGS: '/settings',
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
     MAIN: '/main',
@@ -102,6 +104,7 @@ export const Router = () => {
             />
             <Route path={PATH.CALENDAR} element={<CalendarPage />} />
             <Route path={PATH.PROFILE} element={<ProfilePage />} />
+            <Route path={PATH.SETTINGS} element={<SettingsPage />} />
             <Route
                 path={PATH.MAIN}
                 element={<ProtectedAuthorizeRoute component={<MainPage />} />}

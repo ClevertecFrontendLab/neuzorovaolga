@@ -9,3 +9,8 @@ export const selectUserImageSrc = createSelector(
     [selectUserProfileSlice],
     (user) => user.profile?.imgSrc,
 );
+
+export const selectUserTariffList = createSelector(
+    [selectUserProfileSlice],
+    (user) => user.tariffList,
+);
