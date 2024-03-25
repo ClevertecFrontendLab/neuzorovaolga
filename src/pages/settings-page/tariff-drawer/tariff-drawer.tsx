@@ -12,10 +12,19 @@ import { selectUserTariffList } from '@redux/user/selectors';
 import { useState } from 'react';
 import { connectionProTariffRequest } from '@app/api/user';
 import { PaymentCheckModal } from '../payment-check-modal/payment-check-modal';
+import { DownCircleOutlined } from '@ant-design/icons';
+
+type Props = {
+    userActiveTariff?: {
+        tariffId: string;
+        expired: string;
+    };
+    dateActiveTariff: string;
+};
 
 const PRO_TARIFF_INDEX = 1;
 
-export const TariffDrawer = () => {
+export const TariffDrawer = ({ userActiveTariff, dateActiveTariff }: Props) => {
     const dispatch = useDispatch();
     const tariffList = useSelector(selectUserTariffList);
     const [isCheckedTariff, setIsCheckedTariff] = useState(0);
@@ -68,10 +77,21 @@ export const TariffDrawer = () => {
                             <CloseIcon />
                         </div>
                     </div>
+                    {userActiveTariff && (
+                        <div
+                            className={styles.activeTariff}
+                        >{`Ваш PRO tarif активен до ${dateActiveTariff}`}</div>
+                    )}
                     <div className={styles.tariffs}>
                         {tariffList?.map((item) => (
                             <div className={item.name !== 'Pro' ? styles.tariff : styles.tariffPro}>
                                 {item.name.toUpperCase()}
+
+                                {item.name === 'Pro' && userActiveTariff && (
+                                    <DownCircleOutlined
+                                        style={{ color: 'green', paddingLeft: '3px' }}
+                                    />
+                                )}
                             </div>
                         ))}
                     </div>
@@ -102,33 +122,37 @@ export const TariffDrawer = () => {
                             ))}
                         </div>
                     </div>
-                    <div className={styles.message}>Стоимость тарифа</div>
-                    <div className={styles.detailsWrapper}>
-                        {tariffList?.[PRO_TARIFF_INDEX].periods?.map((item) => (
-                            <div className={styles.periods} key={item.days}>
-                                <div>{item.text}</div>
-                                <div className={styles.priceWrapper}>
-                                    <div className={styles.price}>{`${item.cost} $`}</div>
-                                    <Radio
-                                        value={item.days}
-                                        className={styles.price}
-                                        onChange={onChange}
-                                        checked={isCheckedTariff === item.days}
-                                    ></Radio>
+                    {!userActiveTariff && <div className={styles.message}>Стоимость тарифа</div>}
+                    {!userActiveTariff && (
+                        <div className={styles.detailsWrapper}>
+                            {tariffList?.[PRO_TARIFF_INDEX].periods?.map((item) => (
+                                <div className={styles.periods} key={item.days}>
+                                    <div>{item.text}</div>
+                                    <div className={styles.priceWrapper}>
+                                        <div className={styles.price}>{`${item.cost} $`}</div>
+                                        <Radio
+                                            value={item.days}
+                                            className={styles.price}
+                                            onChange={onChange}
+                                            checked={isCheckedTariff === item.days}
+                                        ></Radio>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                    <Button
-                        onClick={handlePostTariffRequest}
-                        className={styles.payButton}
-                        type='primary'
-                        size='large'
-                        block
-                        disabled={!isCheckedTariff}
-                    >
-                        Выбрать и оплатить
-                    </Button>
+                            ))}
+                        </div>
+                    )}
+                    {!userActiveTariff && (
+                        <Button
+                            onClick={handlePostTariffRequest}
+                            className={styles.payButton}
+                            type='primary'
+                            size='large'
+                            block
+                            disabled={!isCheckedTariff}
+                        >
+                            Выбрать и оплатить
+                        </Button>
+                    )}
                 </div>
             </Drawer>
             {isPaymentCheckModal && <PaymentCheckModal handleCloseModal={handleCloseModal} />}

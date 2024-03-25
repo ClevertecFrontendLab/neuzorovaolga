@@ -15,6 +15,11 @@ export const selectUserEmail = createSelector(
     (user) => user.profile?.email,
 );
 
+export const selectUserActiveTariff = createSelector(
+    [selectUserProfileSlice],
+    (user) => user.profile?.tariff,
+);
+
 export const selectUserTariffList = createSelector(
     [selectUserProfileSlice],
     (user) => user.tariffList,

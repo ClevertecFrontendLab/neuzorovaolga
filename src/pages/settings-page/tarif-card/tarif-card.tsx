@@ -8,9 +8,20 @@ type Props = {
     title: string;
     isActive: boolean | undefined;
     images: any;
+    userActiveTariff?: {
+        tariffId: string;
+        expired: string;
+    };
+    dateActiveTariff: string;
 };
 
-export const TariffCard = ({ title, images, isActive }: Props) => {
+export const TariffCard = ({
+    title,
+    images,
+    isActive,
+    userActiveTariff,
+    dateActiveTariff,
+}: Props) => {
     const dispatch = useDispatch();
 
     const handleOpenDrawer = () => {
@@ -27,13 +38,16 @@ export const TariffCard = ({ title, images, isActive }: Props) => {
             <img src={images} alt='photo' />
             {isActive && (
                 <div className={styles.active}>
-                    Активен <CheckOutlined />
+                    активен <CheckOutlined />
                 </div>
             )}
-            {!isActive && (
+            {!isActive && !userActiveTariff && (
                 <div className={styles.active}>
                     <Button type='primary'>Активировать</Button>{' '}
                 </div>
+            )}
+            {!isActive && !!userActiveTariff && (
+                <div className={styles.activeTariff}>{`активен до ${dateActiveTariff} `}</div>
             )}
         </div>
     );

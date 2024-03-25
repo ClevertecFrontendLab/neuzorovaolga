@@ -10,7 +10,21 @@
     font-size: 20px;
     line-height: 130%;
     color: var(--character-light-title-85);
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+}
+.activeTariff {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-10);
+    padding: 14px 0;
+    width: 344px;
+    height: 49px;
+    background: var(--primary-light-1);
+    margin-bottom: 50px;
+    margin-top: 25px;
 }
 
 .tariffs {
@@ -94,5 +108,5 @@
     display: flex;
 }
 .payButton {
-    margin-top: 260px;
+    margin-top: 250px;
 }

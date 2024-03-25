@@ -33,3 +33,14 @@
     line-height: 130%;
     color: var(--primary-light-10);
 }
+
+.activeTariff {
+    padding: 0 60px;
+    margin-top: 25px;
+    text-align: center;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-light-10);
+}
