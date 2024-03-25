@@ -8,3 +8,18 @@ export const getUserRequest = (): Promise<Profile> => {
 export const getUserCatalogsTariffRequest = (): Promise<TariffItem[]> => {
     return instance.get('/catalogs/tariff-list');
 };
+
+export const getUserActiveTariffRequest = (): Promise<TariffItem[]> => {
+    return instance.get('/catalogs/tariff-list');
+};
+
+export const connectionProTariffRequest = (tariffId: string | undefined, days: number) => {
+    return instance.post(
+        '/tariff',
+        {
+            tariffId: tariffId,
+            days: days,
+        },
+        { withCredentials: true },
+    );
+};

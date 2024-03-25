@@ -93,6 +93,7 @@ export const ProfilePage = () => {
                                 <Form.Item name='birthday'>
                                     <DatePicker
                                         style={{ width: 347 }}
+                                        format={'DD.MM.YYYY'}
                                         placeholder='Дата рождения'
                                     />
                                 </Form.Item>

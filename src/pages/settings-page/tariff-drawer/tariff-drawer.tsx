@@ -10,11 +10,16 @@ import { CloseIcon } from '@app/assets/icons/close-icon/close-icon';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { selectUserTariffList } from '@redux/user/selectors';
 import { useState } from 'react';
+import { connectionProTariffRequest } from '@app/api/user';
+import { PaymentCheckModal } from '../payment-check-modal/payment-check-modal';
+
+const PRO_TARIFF_INDEX = 1;
 
 export const TariffDrawer = () => {
     const dispatch = useDispatch();
     const tariffList = useSelector(selectUserTariffList);
-    const [value, setValue] = useState(null);
+    const [isCheckedTariff, setIsCheckedTariff] = useState(0);
+    const [isPaymentCheckModal, setIsPaymentCheckModal] = useState(false);
     const isDrawer = useSelector(selectIsDrawer);
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
@@ -33,80 +38,100 @@ export const TariffDrawer = () => {
         dispatch(hideDrawer());
     };
     const onChange = (e: RadioChangeEvent) => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
+        setIsCheckedTariff(e.target.value);
+        console.log(isCheckedTariff);
+    };
+
+    const handlePostTariffRequest = () => {
+        connectionProTariffRequest(tariffList?.[PRO_TARIFF_INDEX]?._id, isCheckedTariff);
+        setIsPaymentCheckModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsPaymentCheckModal(false);
     };
 
     return (
-        <Drawer
-            className={styles.drawer}
-            placement={isMobile ? 'bottom' : 'right'}
-            closable={false}
-            onClose={onClose}
-            open={isDrawer}
-            getContainer={false}
-        >
-            <div className={styles.wrapper}>
-                <div className={styles.header}>
-                    <div>Сравнить тарифы</div>
-                    <div onClick={onClose} data-test-id='modal-drawer-right-button-close'>
-                        <CloseIcon />
-                    </div>
-                </div>
-                <div className={styles.tariffs}>
-                    {tariffList?.map((item) => (
-                        <div className={item.name !== 'Pro' ? styles.tariff : styles.tariffPro}>
-                            {item.name.toUpperCase()}
+        <>
+            <Drawer
+                className={styles.drawer}
+                placement={isMobile ? 'bottom' : 'right'}
+                closable={false}
+                onClose={onClose}
+                open={isDrawer}
+                getContainer={false}
+            >
+                <div className={styles.wrapper}>
+                    <div className={styles.header}>
+                        <div>Сравнить тарифы</div>
+                        <div onClick={onClose} data-test-id='modal-drawer-right-button-close'>
+                            <CloseIcon />
                         </div>
-                    ))}
-                </div>
-                <div>
-                    <div className={styles.detailsWrapper}>
-                        {tariffDetails?.map((item, index) => (
-                            <div key={index}>
-                                <div className={styles.optionsWrapper}>
-                                    <div>{item.name}</div>
-                                    <div className={styles.options}>
-                                        <div className={styles.details}>
-                                            {item.free ? (
-                                                <img src={TrueIcon} />
-                                            ) : (
-                                                <img src={FalseIcon} />
-                                            )}
-                                        </div>
-                                        <div className={styles.details}>
-                                            {item.pro ? (
-                                                <img src={TrueIcon} />
-                                            ) : (
-                                                <img src={FalseIcon} />
-                                            )}
+                    </div>
+                    <div className={styles.tariffs}>
+                        {tariffList?.map((item) => (
+                            <div className={item.name !== 'Pro' ? styles.tariff : styles.tariffPro}>
+                                {item.name.toUpperCase()}
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        <div className={styles.detailsWrapper}>
+                            {tariffDetails?.map((item, index) => (
+                                <div key={index}>
+                                    <div className={styles.optionsWrapper}>
+                                        <div>{item.name}</div>
+                                        <div className={styles.options}>
+                                            <div className={styles.details}>
+                                                {item.free ? (
+                                                    <img src={TrueIcon} />
+                                                ) : (
+                                                    <img src={FalseIcon} />
+                                                )}
+                                            </div>
+                                            <div className={styles.details}>
+                                                {item.pro ? (
+                                                    <img src={TrueIcon} />
+                                                ) : (
+                                                    <img src={FalseIcon} />
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className={styles.message}>Стоимость тарифа</div>
+                    <div className={styles.detailsWrapper}>
+                        {tariffList?.[PRO_TARIFF_INDEX].periods?.map((item) => (
+                            <div className={styles.periods} key={item.days}>
+                                <div>{item.text}</div>
+                                <div className={styles.priceWrapper}>
+                                    <div className={styles.price}>{`${item.cost} $`}</div>
+                                    <Radio
+                                        value={item.days}
+                                        className={styles.price}
+                                        onChange={onChange}
+                                        checked={isCheckedTariff === item.days}
+                                    ></Radio>
                                 </div>
                             </div>
                         ))}
                     </div>
+                    <Button
+                        onClick={handlePostTariffRequest}
+                        className={styles.payButton}
+                        type='primary'
+                        size='large'
+                        block
+                        disabled={!isCheckedTariff}
+                    >
+                        Выбрать и оплатить
+                    </Button>
                 </div>
-                <div className={styles.message}>Стоимость тарифа</div>
-                <div className={styles.detailsWrapper}>
-                    {tariffList[1].periods?.map((item, index) => (
-                        <div className={styles.periods}>
-                            <div>{item.text}</div>
-                            <div className={styles.priceWrapper}>
-                                <div className={styles.price}>{`${item.cost} $`}</div>
-                                <Radio
-                                    value={index}
-                                    className={styles.price}
-                                    onChange={onChange}
-                                ></Radio>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <Button className={styles.payButton} type='primary' size='large' block disabled>
-                    Выбрать и оплатить
-                </Button>
-            </div>
-        </Drawer>
+            </Drawer>
+            {isPaymentCheckModal && <PaymentCheckModal handleCloseModal={handleCloseModal} />}
+        </>
     );
 };
