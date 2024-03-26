@@ -14,6 +14,8 @@ import { connectionProTariffRequest } from '@app/api/user';
 import { PaymentCheckModal } from '../payment-check-modal/payment-check-modal';
 import { DownCircleOutlined } from '@ant-design/icons';
 
+const PRO_TARIFF_INDEX = 1;
+
 type Props = {
     userActiveTariff?: {
         tariffId: string;
@@ -22,15 +24,13 @@ type Props = {
     dateActiveTariff: string;
 };
 
-const PRO_TARIFF_INDEX = 1;
-
 export const TariffDrawer = ({ userActiveTariff, dateActiveTariff }: Props) => {
     const dispatch = useDispatch();
+    const { width } = useWindowDimensions();
     const tariffList = useSelector(selectUserTariffList);
+    const isDrawer = useSelector(selectIsDrawer);
     const [isCheckedTariff, setIsCheckedTariff] = useState(0);
     const [isPaymentCheckModal, setIsPaymentCheckModal] = useState(false);
-    const isDrawer = useSelector(selectIsDrawer);
-    const { width } = useWindowDimensions();
     const isMobile = width <= 833;
 
     const tariffDetails = [
@@ -54,10 +54,6 @@ export const TariffDrawer = ({ userActiveTariff, dateActiveTariff }: Props) => {
     const handlePostTariffRequest = () => {
         connectionProTariffRequest(tariffList?.[PRO_TARIFF_INDEX]?._id, isCheckedTariff);
         setIsPaymentCheckModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsPaymentCheckModal(false);
     };
 
     return (
@@ -155,7 +151,7 @@ export const TariffDrawer = ({ userActiveTariff, dateActiveTariff }: Props) => {
                     )}
                 </div>
             </Drawer>
-            {isPaymentCheckModal && <PaymentCheckModal handleCloseModal={handleCloseModal} />}
+            {isPaymentCheckModal && <PaymentCheckModal />}
         </>
     );
 };

@@ -10,6 +10,16 @@ export const selectUserImageSrc = createSelector(
     (user) => user.profile?.imgSrc,
 );
 
+export const selectUserNotification = createSelector(
+    [selectUserProfileSlice],
+    (user) => user.profile?.sendNotification,
+);
+
+export const selectUserReadyForTraining = createSelector(
+    [selectUserProfileSlice],
+    (user) => user.profile?.readyForJointTraining,
+);
+
 export const selectUserEmail = createSelector(
     [selectUserProfileSlice],
     (user) => user.profile?.email,

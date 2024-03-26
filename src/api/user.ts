@@ -13,6 +13,10 @@ export const getUserActiveTariffRequest = (): Promise<TariffItem[]> => {
     return instance.get('/catalogs/tariff-list');
 };
 
+export const updateUserRequest = (profileData: Profile): Promise<Profile> => {
+    return instance.put(`/user`, profileData);
+};
+
 export const connectionProTariffRequest = (tariffId: string | undefined, days: number) => {
     return instance.post(
         '/tariff',

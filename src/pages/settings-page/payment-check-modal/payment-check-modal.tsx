@@ -5,17 +5,27 @@ import { SuccessBlueIcon } from '@app/assets/icons/close-icon/success-blue-icon.
 import { CloseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { selectUserEmail } from '@redux/user/selectors';
+import { useContext } from 'react';
+import { GlobalContext } from '@context/GlobalContext';
+import { removeTokenHelper } from '@utils/storage';
+import { PATH } from '@app/router';
+import { useNavigate } from 'react-router-dom';
 
-type Props = {
-    handleCloseModal: () => void;
-};
-
-export const PaymentCheckModal = ({ handleCloseModal }: Props) => {
+export const PaymentCheckModal = () => {
+    const navigate = useNavigate();
+    const { logOut } = useContext(GlobalContext);
     const userEmail = useSelector(selectUserEmail);
+
+    const handleLogOut = () => {
+        logOut();
+        removeTokenHelper();
+        navigate(PATH.AUTH);
+    };
+
     return (
         <ModalWrapper>
             <div className={styles.content}>
-                <CloseOutlined onClick={handleCloseModal} className={styles.closeButton} />
+                <CloseOutlined onClick={handleLogOut} className={styles.closeButton} />
                 <SuccessBlueIcon />
                 <div className={styles.title}>Чек для оплаты у вас на почте</div>
                 <div className={styles.message}>
