@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
@@ -6,10 +6,11 @@ import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 import styles from './user-photo.module.css';
 import { useSelector } from 'react-redux';
-import { selectUserImageSrc, selectUserProfile } from '@redux/user/selectors';
+import { selectUserImageSrc } from '@redux/user/selectors';
 
 type Props = {
     showErrorsizeModal: () => void;
+    handleSaveImage: (url: string) => void;
 };
 
 const getBase64 = (file: RcFile): Promise<string> =>
@@ -22,7 +23,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
         };
     });
 
-export const UserPhoto = ({ showErrorsizeModal }: Props) => {
+export const UserPhoto = ({ showErrorsizeModal, handleSaveImage }: Props) => {
     const userImageSrc = useSelector(selectUserImageSrc);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -39,11 +40,7 @@ export const UserPhoto = ({ showErrorsizeModal }: Props) => {
         url: userImageSrc,
     };
     const [fileList, setFileList] = useState<UploadFile[]>(userImageSrc ? [defaultFile] : []);
-    const [statusError, setStatusError] = useState(false);
 
-    const handleError = () => {
-        setStatusError(true);
-    };
     const handleCancel = () => setPreviewOpen(false);
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
@@ -65,7 +62,11 @@ export const UserPhoto = ({ showErrorsizeModal }: Props) => {
         return true; // Разрешаем загрузку файла
     };
 
-    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList, file }) => {
+        console.log('newFileList', newFileList, file);
+        if (file.status === 'done') {
+            handleSaveImage(`https://training-api.clevertec.ru${file.response.url}`);
+        }
         if ((newFileList[0]?.size || 0) < maxFileSize) {
             console.log(newFileList[0]?.size, newFileList[0]?.size || 0 < 400000);
             setFileList(newFileList);
@@ -92,17 +93,6 @@ export const UserPhoto = ({ showErrorsizeModal }: Props) => {
                 onPreview={handlePreview}
                 onChange={handleChange}
                 beforeUpload={handleBeforeUpload}
-                // beforeUpload={(file) => {
-                //     return new Promise((resolve, reject) => {
-                //         console.log(file);
-                //         if (file.size < 60000) {
-                //             reject('file size big');
-                //         } else {
-                //             handleError();
-                //             resolve('success');
-                //         }
-                //     });
-                // }}
             >
                 {fileList.length > 0 ? null : uploadButton}
             </Upload>
