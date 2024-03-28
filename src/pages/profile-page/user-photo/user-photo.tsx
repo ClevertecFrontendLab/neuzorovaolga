@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
-import { PlusOutlined } from '@ant-design/icons';
-import { Modal, Upload } from 'antd';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, Modal, Upload } from 'antd';
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 import styles from './user-photo.module.css';
@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux';
 import { selectUserImageSrc } from '@redux/user/selectors';
 
 type Props = {
-    showErrorsizeModal: () => void;
+    showErrorProfileModal: () => void;
     handleSaveImage: (url: string) => void;
+    isMobile: boolean;
 };
 
 const getBase64 = (file: RcFile): Promise<string> =>
@@ -23,7 +24,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
         };
     });
 
-export const UserPhoto = ({ showErrorsizeModal, handleSaveImage }: Props) => {
+export const UserPhoto = ({ showErrorProfileModal, handleSaveImage, isMobile }: Props) => {
     const userImageSrc = useSelector(selectUserImageSrc);
     const [previewOpen, setPreviewOpen] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -55,24 +56,19 @@ export const UserPhoto = ({ showErrorsizeModal, handleSaveImage }: Props) => {
 
     const handleBeforeUpload = (file: RcFile) => {
         if (file.size > maxFileSize) {
-            console.log(file.size);
             return false; // Отклоняем загрузку файла
         }
-        console.log(file.size);
         return true; // Разрешаем загрузку файла
     };
 
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList, file }) => {
-        console.log('newFileList', newFileList, file);
         if (file.status === 'done') {
             handleSaveImage(`https://training-api.clevertec.ru${file.response.url}`);
         }
         if ((newFileList[0]?.size || 0) < maxFileSize) {
-            console.log(newFileList[0]?.size, newFileList[0]?.size || 0 < 400000);
             setFileList(newFileList);
         } else {
-            console.log('newFileList');
-            showErrorsizeModal();
+            showErrorProfileModal();
             setFileList([errorFile]);
         }
     };
@@ -83,23 +79,35 @@ export const UserPhoto = ({ showErrorsizeModal, handleSaveImage }: Props) => {
             <div className={styles.photoText}>Загрузить фото профиля</div>
         </div>
     );
+
+    const mobileUploadButton = (
+        <div className={styles.upload}>
+            <div className={styles.uploadText}>Загрузить фото профиля:</div>
+            <Button className={styles.uploadButton} size='large' icon={<UploadOutlined />}>
+                Загрузить
+            </Button>
+        </div>
+    );
     return (
         <>
             <Upload
                 action='https://marathon-api.clevertec.ru/upload-image'
                 headers={{ Authorization: `Bearer ${token}` }}
-                listType='picture-card'
+                listType={isMobile ? 'picture' : 'picture-card'}
                 fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
                 beforeUpload={handleBeforeUpload}
             >
-                {fileList.length > 0 ? null : uploadButton}
+                {(fileList.length > 0 || isMobile ? null : uploadButton) ||
+                    (isMobile && fileList.length < 1 && mobileUploadButton)}
             </Upload>
 
-            <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
-                <img alt='example' style={{ width: '100%' }} src={previewImage} />
-            </Modal>
+            {!isMobile && (
+                <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
+                    <img alt='example' style={{ width: '100%' }} src={previewImage} />
+                </Modal>
+            )}
         </>
     );
 };

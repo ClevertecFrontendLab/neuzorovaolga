@@ -71,6 +71,7 @@
 }
 
 .wrapperContent {
+    position: relative;
     border-radius: 8px;
     padding: 24px;
     max-width: 100%;
@@ -93,6 +94,7 @@
 .userInfo {
     display: flex;
     margin-top: 24px;
+    margin-bottom: 18px;
 }
 
 .userData {
@@ -100,6 +102,82 @@
     width: 347px;
 }
 
+.firstName,
+.lastName {
+    margin-bottom: -10px;
+}
+
 .inputEmail {
     margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.inputConfirmPassword {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.alert {
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 395px;
+}
+
+@media (max-width: 1439px) {
+    .headerWrapper {
+        height: 96px;
+        padding: 16px 24px;
+        align-items: flex-start;
+    }
+    .headerTitle {
+        font-weight: 400;
+        font-size: 14px;
+    }
+    .settingsButtonWrapper {
+        margin-top: 30px;
+    }
+    .wrapperContent {
+        height: 1032px;
+    }
+}
+
+@media (max-width: 833px) {
+    .wrapper {
+        height: 100vh;
+        max-width: 360px;
+    }
+    .profileWrapper {
+        height: 550px;
+        max-width: 360px;
+    }
+    .userData {
+        margin-left: 0;
+        width: 312px;
+        /* margin-bottom: -35px; */
+    }
+    .wrapperContent {
+        border-radius: 0;
+        margin: 24px 0;
+    }
+    .userInfo {
+        flex-direction: column-reverse;
+    }
+    .firstName,
+    .inputEmail,
+    .inputConfirmPassword,
+    .inputPassword,
+    .lastName {
+        font-size: var(--font-14);
+    }
+    .submitButton {
+        width: 100%;
+    }
+
+    .alert {
+        position: absolute;
+        top: calc(100vh - 225px);
+        left: 24px;
+        margin-top: 0;
+        width: 312px;
+    }
 }

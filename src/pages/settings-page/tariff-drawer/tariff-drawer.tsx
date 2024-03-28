@@ -48,7 +48,6 @@ export const TariffDrawer = ({ userActiveTariff, dateActiveTariff }: Props) => {
     };
     const onChange = (e: RadioChangeEvent) => {
         setIsCheckedTariff(e.target.value);
-        console.log(isCheckedTariff);
     };
 
     const handlePostTariffRequest = () => {

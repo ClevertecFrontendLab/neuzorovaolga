@@ -1,13 +1,15 @@
 import { Button } from 'antd';
-import styles from './error-size-file-modal.module.css';
+import styles from './error-profile-modal.module.css';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { ModalWrapper } from '@components/modal-wrapper/modal-wrapper';
 
 type Props = {
     handleButton: () => void;
+    title: string;
+    message: string;
 };
 
-export const ErrorSizeFileModal = ({ handleButton }: Props) => {
+export const ErrorProfileModal = ({ handleButton, title, message }: Props) => {
     return (
         <ModalWrapper width={'384'}>
             <div className={styles.wrapper}>
@@ -15,8 +17,8 @@ export const ErrorSizeFileModal = ({ handleButton }: Props) => {
                     <div className={styles.info}>
                         <CloseCircleTwoTone twoToneColor='#eb2f96' style={{ fontSize: '24px' }} />
                         <div className={styles.content}>
-                            <div className={styles.title}>{`Файл слишком большой`}</div>
-                            <div className={styles.message}>Выберете файл размером до 5 МБ</div>
+                            <div className={styles.title}>{title}</div>
+                            <div className={styles.message}>{message}</div>
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,6 @@ export const CalendarCell = ({
     const date = value.format('DD.MM.yyyy');
     const today = moment().format('DD.MM.yyyy');
     const isToday = today === date;
-    console.log('isToday', date, isToday);
 
     const dateISO = value.toISOString();
     const isBlueDate = isMobile && !!listData.length;

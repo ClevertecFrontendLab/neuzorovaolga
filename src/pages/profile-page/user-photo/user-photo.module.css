@@ -7,3 +7,20 @@
     color: var(--character-light-secondary-45);
     padding: 0 8px;
 }
+
+.upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.uploadText {
+    font-size: 12px;
+}
+
+.uploadButton {
+    width: 140px;
+    font-size: var(--font-14);
+    margin-left: 22px;
+}

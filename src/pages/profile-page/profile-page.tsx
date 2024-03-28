@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Space } from 'antd';
+import { Alert, Button, DatePicker, Form, Input, Space } from 'antd';
 import moment from 'moment';
 import styles from './profile-page.module.css';
 import useWindowDimensions from '@hooks/useWindowDimensions';
@@ -8,7 +8,7 @@ import { UserPhoto } from './user-photo/user-photo';
 import { regexPasswordValidation } from '@utils/validation';
 
 import { useState } from 'react';
-import { ErrorSizeFileModal } from './error-size-file-modal/error-size-file-modal';
+import { ErrorProfileModal } from './error-profile-modal/error-profile-modal';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@app/router';
 import { getUserCatalogsTariffRequest, updateUserRequest } from '@app/api/user';
@@ -16,23 +16,20 @@ import { useDispatch } from 'react-redux';
 import { setUserTariffList } from '@redux/user/reducer';
 import { useSelector } from 'react-redux';
 import { selectUserProfile } from '@redux/user/selectors';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Profile } from '@models/user';
 
-dayjs.extend(customParseFormat);
-const dateFormat = 'DD.MM.YYYY';
-
 export const ProfilePage = () => {
-    const [isActive, setIsActive] = useState(false);
-    const [isValidation, setIsValidation] = useState(false);
-    const [imageUrl, setImageUrl] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isActive, setIsActive] = useState(false);
+    const [isValidation, setIsValidation] = useState(false);
+    const [isErrorSizeFile, setIsErrorSizeFile] = useState(false);
+    const [isErrorSaveProfile, setIsErrorSaveProfile] = useState(false);
+    const [isAlert, setIsAlert] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
     const userProfile = useSelector(selectUserProfile);
     const { width } = useWindowDimensions();
     const isMobile = width <= 833;
-    console.log(userProfile);
 
     const onFinish = (values: any) => {
         const newProfile: Profile = { ...userProfile } as Profile;
@@ -54,22 +51,31 @@ export const ProfilePage = () => {
         if (imageUrl) {
             newProfile.imgSrc = imageUrl;
         }
-        updateUserRequest(newProfile);
-        console.log(values);
+        updateUserRequest(newProfile)
+            .then(() => setIsAlert(true))
+            .catch(() => {
+                setIsErrorSaveProfile(true);
+            });
     };
-
-    const [isErrorSizeModal, setIsErrorSizeModal] = useState(false);
 
     const doValidation = () => {
         setIsValidation(true);
     };
 
-    const closeErrorsizeModal = () => {
-        setIsErrorSizeModal(false);
+    const closeErrorProfileModal = () => {
+        if (isErrorSizeFile) {
+            setIsErrorSizeFile(false);
+        } else {
+            setIsErrorSaveProfile(false);
+        }
     };
 
-    const showErrorsizeModal = () => {
-        setIsErrorSizeModal(true);
+    const showErrorProfileModal = () => {
+        if (!isErrorSizeFile) {
+            setIsErrorSizeFile(true);
+        } else {
+            setIsErrorSaveProfile(true);
+        }
     };
 
     const handleButtonSettings = () => {
@@ -81,14 +87,6 @@ export const ProfilePage = () => {
         setIsActive(true);
         setImageUrl(url);
     };
-
-    // const date = new Date(userProfile?.birthday || '');
-    // const birthdayDate = date.toLocaleDateString('ru-RU', {
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: 'numeric',
-    // });
-    // const defaultValue = userProfile?.lastName && dayjs(birthdayDate, dateFormat);
 
     return (
         <div className={styles.wrapper}>
@@ -125,30 +123,35 @@ export const ProfilePage = () => {
                         onChange={() => setIsActive(true)}
                     >
                         <div className={styles.userInfo}>
-                            <div>
-                                <UserPhoto
-                                    showErrorsizeModal={showErrorsizeModal}
-                                    handleSaveImage={handleSaveImage}
-                                />
-                            </div>
+                            <UserPhoto
+                                showErrorProfileModal={showErrorProfileModal}
+                                handleSaveImage={handleSaveImage}
+                                isMobile={isMobile}
+                            />
+
                             <div className={styles.userData}>
                                 <Form.Item name='firstName'>
                                     <Input
                                         placeholder='Имя'
                                         defaultValue={userProfile?.firstName}
+                                        className={styles.firstName}
+                                        size='large'
                                     />
                                 </Form.Item>
                                 <Form.Item name='lastName'>
                                     <Input
                                         placeholder='Фамилия'
                                         defaultValue={userProfile?.lastName}
+                                        className={styles.lastName}
+                                        size='large'
                                     />
                                 </Form.Item>
                                 <Form.Item name='birthday'>
                                     <DatePicker
-                                        style={{ width: 347 }}
+                                        style={{ width: isMobile ? 312 : 347 }}
                                         format={'DD.MM.YYYY'}
                                         placeholder='Дата рождения'
+                                        size='large'
                                         defaultValue={
                                             userProfile?.birthday
                                                 ? moment(userProfile?.birthday)
@@ -229,9 +232,31 @@ export const ProfilePage = () => {
                             </Button>
                         </Form.Item>
                     </Form>
+                    {isAlert && (
+                        <Alert
+                            message='Данные профиля успешно обновлены'
+                            type='success'
+                            showIcon
+                            closable
+                            className={styles.alert}
+                        />
+                    )}
                 </div>
             </div>
-            {isErrorSizeModal && <ErrorSizeFileModal handleButton={closeErrorsizeModal} />}
+            {isErrorSizeFile && (
+                <ErrorProfileModal
+                    handleButton={closeErrorProfileModal}
+                    title={`Файл слишком большой`}
+                    message={`Выберете файл размером до 5 МБ`}
+                />
+            )}
+            {isErrorSaveProfile && (
+                <ErrorProfileModal
+                    handleButton={closeErrorProfileModal}
+                    title={`При сохранении данных произошла ошибка`}
+                    message={`Придется попробовать еще раз`}
+                />
+            )}
         </div>
     );
 };

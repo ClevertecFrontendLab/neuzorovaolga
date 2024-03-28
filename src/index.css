@@ -161,4 +161,18 @@
     .ant-select-selection-item {
         flex: none;
     }
+    .ant-picker-large .ant-picker-input > input {
+        font-size: 14px;
+    }
+
+    .ant-upload-list-text-container,
+    .ant-upload-list-picture-container {
+        width: 312px;
+        margin-top: -10px;
+        margin-bottom: 30px;
+    }
+
+    .ant-input-lg {
+        font-size: 14px;
+    }
 }
